@@ -14,6 +14,12 @@ Use `problems/` quando tiver uma dúvida prática, como escolher prompt, agente,
 
 Use `examples/` para ver composições pequenas antes de pedir execução a um agente.
 
+Use `remediation/` para acompanhar fluxos humanos de correção derivados de auditorias.
+
+Use `../evals/` para validar regressão, comportamento esperado ou critérios de aceite.
+
+Use `templates/` para criar novos artefatos sem copiar arquivos grandes existentes.
+
 ## Problemas comuns
 
 - escolher prompt: `./problems/choosing-a-prompt.md`
@@ -28,6 +34,9 @@ Use `examples/` para ver composições pequenas antes de pedir execução a um a
 - usar modelos simples: `./problems/using-simple-models.md`
 - validar responsabilidade: `./problems/validating-responsibility.md`
 - resolver seleção de contexto: `./problems/troubleshooting-context-selection.md`
+- orquestrar remediações de auditoria: `./remediation/audit-remediation-orchestration.md`
+- validar regressões: `../evals/README.md`
+- criar artefato por template: `./templates/new-artifact.md`
 
 ## Regra prática
 
@@ -37,4 +46,4 @@ Comece pelo problema, encontre os arquivos operacionais indicados e aplique:
 find -> select -> inject
 ```
 
-Não carregue `docs/` como parte da composição padrão.
+Não carregue `docs/` nem `../evals/` como parte da composição padrão.

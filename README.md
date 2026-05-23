@@ -6,268 +6,210 @@ readme / discovery
 
 ## Finalidade
 
-O `agent-ops` centraliza, em arquivos `.md`, o contexto necessário para operação de agentes em engenharia de dados.
+`agent-ops` organiza contexto operacional para agentes de IA em engenharia de dados.
 
-Este diretório existe para permitir:
+O projeto nao e uma pasta de prompts. Ele e uma camada leve de governanca para selecionar, compor, executar e validar contexto com baixa ambiguidade.
 
-- descoberta clara de contexto
-- seleção modular
-- injeção previsível
-- aderência normativa
-- baixa duplicação
-- redução de alucinação
+`agent-ops` e a identidade oficial. Prompts sao uma categoria dentro do sistema.
 
-O `agent-ops` segue o modelo:
+O modelo oficial e:
 
-**find -> select -> inject**
+```txt
+find -> select -> inject
+```
 
-A norma de maior precedência deste diretório está em:
+A fonte normativa de maior precedencia e:
 
 - `./MANIFEST.md`
 
-Este README é um roteador de navegação. Ele orienta descoberta inicial, mas não substitui o contrato normativo de `./MANIFEST.md`.
-
 ---
 
-## Quando usar
+## Principio de uso
 
-Use este README quando precisar:
+Use apenas o contexto necessario.
 
-- entender rapidamente a finalidade do módulo
-- descobrir qual diretório consultar primeiro
-- aplicar o fluxo `find -> select -> inject`
-- confirmar que `docs/` não entra na composição padrão
-
----
-
-## Quando não usar
-
-Não use este README como fonte primária para:
-
-- norma estrutural do módulo
-- regras técnicas de output
-- skills operacionais
-- perfis de agente
-- prompts de tarefa
-
-Consulte, respectivamente:
-
-- `./MANIFEST.md`
-- `./rules/`
-- `./skills/`
-- `./agents/`
-- `./prompts/`
-
----
-
-## Dependências relacionadas
-
-- `./MANIFEST.md`
-- `./governance/composition/context-composition.md`
-
----
-
-## Como navegar
-
-O diretório está organizado por responsabilidade.
-
-### `./governance/`
-Regras sobre como o sistema `agent-ops` deve funcionar, crescer e se manter coerente.
-
-Use quando precisar entender:
-
-- estrutura do repositório
-- composição de contexto
-- critérios de criação e manutenção de arquivos
-- padrões de autoria e qualidade
-
-### `./agents/`
-Perfis de agentes especializados, com missão, escopo, limites e dependências contextuais.
-
-Use quando precisar escolher:
-
-- qual agente deve atuar
-- como ele pensa
-- quais `rules/` e `skills/` ele tende a consumir
-
-### `./rules/`
-Normas para a saída produzida pelos agentes.
-
-Use quando precisar garantir:
-
-- aderência arquitetural
-- convenções de implementação
-- padrões de modelagem
-- qualidade de output
-- guardrails de geração
-
-### `./skills/`
-Conhecimento operacional reutilizável.
-
-Use quando precisar enriquecer a execução com:
-
-- técnicas
-- heurísticas
-- procedimentos
-- capacidades especializadas
-
-### `./prompts/`
-Pontos de entrada para tarefas e fluxos.
-
-Use quando precisar:
-
-- iniciar uma tarefa
-- seguir um workflow
-- estruturar uma solicitação
-- conduzir revisão ou planejamento
-
-### `./prompts/hooks/`
-Checkpoints de validação durante fluxos.
-
-Use quando precisar:
-
-- validar aderência a `rules/`
-- validar aderência a `governance/`
-- revisar conformidade antes ou depois de executar
-
----
-
-## Ordem oficial de composição
-
-A ordem oficial de composição de contexto é:
+O agente deve descobrir artefatos, selecionar os relevantes e injetar o minimo suficiente para executar com seguranca.
 
 ```txt
 prompt -> governance -> agent -> rules -> skills
 ```
 
-### Interpretação rápida
-1. `prompt` inicia o trabalho
-2. `governance` injeta a base padrão
-3. `agent` define o perfil executor
-4. `rules` define restrições de output
-5. `skills` adiciona conhecimento operacional
+Hooks entram apenas como checkpoints relevantes ou obrigatorios por risco.
 
-`prompts/hooks/` pode ser acionado como checkpoint quando necessário.
+`docs/`, `evals/` e `LICENSE` nao entram na composicao padrao.
 
 ---
 
-## Estrutura atual
-
-A pasta `./docs/` foi adicionada à estrutura para documentação apenas para leitura humana. Veja a seção "Pasta `./docs/`" abaixo para mais detalhes.
+## Estrutura do repositorio
 
 ```txt
 agent-ops/
-├── LICENSE
 ├── MANIFEST.md
 ├── README.md
-├── docs/
+├── LICENSE
 ├── governance/
 ├── agents/
-│   └── agentops-growth-architect.md
 ├── rules/
-│   └── growth-artifact-quality.md
 ├── skills/
-│   └── grow-from-execution.md
-└── prompts/
-    ├── grow-from-execution.md
-    └── hooks/
-        └── validate-growth-proposal.md
+├── prompts/
+├── docs/
+└── evals/
 ```
 
-A estrutura detalhada e a árvore alvo v1 estão definidas em:
+## Dominio de cada area
 
-- `./MANIFEST.md`
+| Area | Por que existe | Quando consultar |
+|---|---|---|
+| `MANIFEST.md` | Define contrato estrutural, precedencia e taxonomia. | Quando houver duvida sobre onde algo pertence ou qual norma prevalece. |
+| `governance/` | Governa estrutura, composicao, autoria, qualidade e lifecycle do proprio `agent-ops`. | Quando for criar, alterar, mover, dividir ou validar artefatos do repositorio. |
+| `agents/` | Define perfis executores com missao, escopo, limites e dependencias. | Quando precisar escolher quem executa uma tarefa. |
+| `rules/` | Define normas de output, guardrails e restricoes de comportamento. | Quando precisar validar ou limitar a saida do agente. |
+| `skills/` | Define procedimentos e conhecimento operacional reutilizavel. | Quando a tarefa exigir tecnica especializada. |
+| `prompts/` | Define pontos de entrada para tarefas e fluxos. | Quando houver uma solicitacao concreta a executar. |
+| `prompts/hooks/` | Define checkpoints de validacao. | Quando houver risco, conclusao, conformidade ou gate de revisao. |
+| `docs/` | Explica o projeto para humanos. | Quando uma pessoa precisar aprender, operar ou auditar o repositorio. |
+| `evals/` | Valida comportamento esperado e regressao. | Quando precisar provar que prompts, rules ou fluxos continuam confiaveis. |
+
+---
+
+## Workflows principais
+
+### 1. Descobrir contexto
+
+Use quando a tarefa ainda nao deixa claro quais artefatos carregar.
+
+```txt
+prompts/discovery/discover-required-context.md
+-> governance/composition/context-composition.md
+-> roteadores de agents/rules/skills conforme necessidade
+```
+
+Saida esperada: lista de caminhos, motivo de selecao e lacunas.
+
+### 2. Planejar tarefa
+
+Use quando a execucao exige decomposicao antes de gerar ou alterar algo.
+
+```txt
+prompts/planning/plan-data-task.md
+-> governance/composition/context-composition.md
+-> agent/rules/skills candidatos
+```
+
+Saida esperada: plano sequencial, contexto obrigatorio, riscos e criterios de aceite.
+
+### 3. Gerar solucao
+
+Use quando houver objetivo, artefato esperado e contexto minimo.
+
+```txt
+prompts/generation/generate-data-solution.md
+-> governance/
+-> agent adequado
+-> rules relevantes
+-> skills necessarias
+```
+
+Se houver SQL, arquivos, dados sensiveis, execucao ou acao destrutiva, carregue:
+
+- `rules/generation/operational-safety-guardrails.md`
+- `prompts/hooks/validate-operational-safety.md`
+
+### 4. Revisar solucao
+
+Use quando ja existe artefato ou proposta a avaliar.
+
+```txt
+prompts/review/review-data-solution.md
+-> rules/quality/quality-rules.md
+-> rules especificas do artefato
+-> skills/review/ quando necessario
+```
+
+Saida esperada: achados com evidencia, impacto e recomendacao.
+
+### 5. Validar checkpoint
+
+Use antes de concluir, aprovar, aplicar grow ou executar tarefa de risco.
+
+```txt
+prompts/hooks/validate-context-and-output.md
+prompts/hooks/validate-growth-proposal.md
+prompts/hooks/validate-operational-safety.md
+prompts/hooks/validate-semantic-naming-conformance.md
+```
+
+Hooks nao substituem prompts principais; eles validam gates.
+
+### 6. Evoluir o repositorio com grow
+
+Use quando uma execucao anterior deve gerar conhecimento reutilizavel.
+
+```txt
+prompts/grow-from-execution.md
+-> agents/agentops-growth-architect.md
+-> rules/growth-artifact-quality.md
+-> skills/grow-from-execution.md
+-> prompts/hooks/validate-growth-proposal.md
+```
+
+Grow deve destilar conhecimento. Nao deve copiar historico bruto.
+
+### 7. Validar regressao
+
+Use antes de considerar uma mudanca pronta.
+
+```txt
+evals/manual-regression-suite.md
+```
+
+`evals/` valida comportamento; nao cria norma primaria.
+
+---
+
+## Diretórios nao oficiais em v1
+
+`tasks/`, `workflows/` e `policies/` nao sao diretorios oficiais da v1.
+
+Nesta versao:
+
+- tarefas ficam em `prompts/`
+- workflows sao composicoes de `prompts/`, `skills/` e `prompts/hooks/`
+- politicas estruturais ficam em `governance/`
+- guardrails e restricoes de output ficam em `rules/`
 
 ---
 
 ## Regras de uso
 
-- Todo conteúdo de contexto injetável deve ser `.md`
-- `docs/` contém documentação humana e não deve ser injetado por padrão
-- `LICENSE` é metadado do repositório e não faz parte da composição de contexto
-- Dependências devem ser referenciadas por caminho
-- Cada arquivo deve ter responsabilidade única
-- Conteúdo não deve ser duplicado entre diretórios
-- `governance/` governa o sistema de artefatos
-- `rules/` governa a saída produzida pelos agentes
+- Todo contexto injetavel deve ser Markdown.
+- Cada arquivo deve ter responsabilidade principal clara.
+- Dependencias devem ser referenciadas por caminho.
+- Conteudo duplicado deve ser extraido para fonte primaria.
+- `docs/` e `evals/` nao devem ser carregados por padrao.
+- O agente deve sinalizar lacunas antes de inventar contexto.
+- Operacoes de alto risco exigem guardrail operacional e checkpoint.
 
 ---
 
-## Ideologia arquitetural
+## Precedencia normativa
 
-O `agent-ops` aplica princípios equivalentes a SOLID e injeção de dependências em Markdown.
-
-Para detalhes, consulte:
-
-- `./governance/principles/core-principles.md`
-- `./governance/composition/context-composition.md`
-- `./governance/lifecycle/artifact-lifecycle-policy.md`
-
----
-
-## Limites
-
-Este README define navegação inicial e critérios de descoberta.
-
-Este README não define:
-
-- precedência normativa além da referência a `./MANIFEST.md`
-- regras técnicas de output
-- procedimentos operacionais especializados
-- conteúdo humano de `./docs/` como contexto padrão
-
----
-
-## Pasta `./docs/`
-
-A pasta `./docs/` contém documentação **apenas para leitura humana** sobre o projeto. Inclui guias práticos por problema e exemplos simples para desenvolvedores e operadores.
-
-**Importante para agentes:** Esta pasta **NÃO deve ser injetada por padrão** durante a execução de tarefas. O agente deve consultar `./docs/` apenas quando a tarefa for explicitamente sobre documentação humana, integração ou orientação operacional; para composição padrão, deve trabalhar com `governance/`, `agents/`, `rules/`, `skills/` e `prompts/`.
-
----
-
-## Quando consultar primeiro cada área
-
-### Comece por `./MANIFEST.md` quando:
-- precisar entender a norma geral do diretório
-- houver dúvida de precedência
-- precisar decidir onde um novo artefato pertence
-
-### Comece por `./prompts/` quando:
-- já houver uma tarefa ou solicitação concreta
-
-### Comece por `./agents/` quando:
-- precisar escolher o perfil executor adequado
-
-### Comece por `./rules/` quando:
-- precisar garantir aderência do output
-
-### Comece por `./skills/` quando:
-- precisar de capacidade operacional especializada
-
-### Comece por `./governance/` quando:
-- precisar manter, expandir ou revisar o próprio `agent-ops`
-
----
-
-## Precedência normativa
-
-Em caso de conflito interpretativo, a precedência é:
+Em caso de conflito:
 
 1. `./MANIFEST.md`
 2. `./governance/`
-3. diretório especializado aplicável
+3. diretorio especializado aplicavel
 4. `README.md`
 
 ---
 
-## Expectativa de comportamento do agente
+## Expectativa de comportamento
 
-Ao consumir este diretório, o agente deve:
+Ao consumir este repositorio, o agente deve:
 
-- atuar como defensor da norma
-- evitar duplicação
-- respeitar responsabilidade única
-- operar com composição seletiva
-- sinalizar lacunas em vez de inventar contexto
-- referenciar artefatos por caminho
+- preservar `find -> select -> inject`
+- evitar leitura indiscriminada
+- escolher contexto minimo suficiente
+- respeitar fonte primaria
+- aplicar guardrails em situacoes criticas
+- validar antes de concluir quando houver risco

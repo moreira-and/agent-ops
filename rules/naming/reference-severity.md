@@ -77,14 +77,12 @@ Consulte, respectivamente:
 - Formato incorreto (camelCase, maiúsculas, acentos)
 - Unidade faltante em valor mensurável
 - Abreviação proibida
-- Tipo codificado em nome
 - Data sem sufixo
 
 **Regras:**
 - `./rule-01-format.md` (formato)
 - `./rule-03-units.md` (unidades)
 - `./rule-04-abbreviations.md` (abreviações)
-- `./rule-05-no-types.md` (tipos)
 - `./rule-07-dates.md` (datas)
 
 **Procedimento:**

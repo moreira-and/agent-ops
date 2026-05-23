@@ -1,0 +1,123 @@
+# Orquestracao de remediacao da auditoria
+
+Este documento inicia o fluxo de orquestracao para as oportunidades e necessidades identificadas na auditoria severa do `agent-ops`.
+
+Este arquivo e documentacao humana de execucao. Ele nao e contexto injetavel por padrao e nao substitui `../MANIFEST.md`, `../governance/` ou os artefatos operacionais aplicaveis.
+
+## Objetivo
+
+Garantir que cada remediacao avance de forma controlada, revisada e rastreavel, sem transformar a auditoria em uma lista solta de melhorias.
+
+Cada item deve passar, nesta ordem, por:
+
+```txt
+implementacao do especialista
+-> revisor de governanca
+-> revisor de documentacao
+-> reajustes
+-> auditoria coletiva
+-> atualizacao das documentacoes
+```
+
+## Regra de execucao
+
+- Apenas um item deve ficar em execucao por vez.
+- Nenhum item deve pular etapa.
+- Nenhum item deve ser marcado como concluido sem evidencia de revisao.
+- Mudancas normativas devem citar a fonte primaria afetada.
+- Mudancas documentais devem atualizar os roteadores humanos quando necessario.
+- Mudancas em prompts, rules, agents, skills ou hooks devem preservar `find -> select -> inject`.
+
+## Definicao das etapas
+
+| Etapa | Responsavel sugerido | Entrada obrigatoria | Saida obrigatoria | Criterio de saida |
+|---|---|---|---|---|
+| Implementacao do especialista | Especialista do tema | Achado, escopo e arquivos provaveis | Alteracao proposta ou implementada | Resolve o problema sem ampliar escopo indevidamente |
+| Revisor de governanca | Maintainer de governanca | Diff ou proposta | Parecer PASS, FAIL ou CONDITIONAL | Preserva taxonomia, precedencia, fonte primaria e token economy |
+| Revisor de documentacao | Maintainer de docs | Diff ou proposta aprovada em governanca | Parecer documental | README, docs, exemplos ou guias afetados foram atualizados ou declarados como nao aplicaveis |
+| Reajustes | Especialista original | Pareceres de revisao | Ajustes aplicados | Todas as pendencias foram resolvidas ou justificadas |
+| Auditoria coletiva | Especialista + revisores | Mudanca ajustada | Decisao final | Nao ha bloqueio P0/P1 residual para o item |
+| Atualizacao das documentacoes | Maintainer de docs | Decisao final | Documentacao atualizada | Artefatos humanos refletem o estado novo |
+
+## Fila de remediacao
+
+| Ordem | ID | Origem | Necessidade ou oportunidade | Especialista sugerido | Arquivos provaveis | Status inicial |
+|---|---|---|---|---|---|---|
+| 1 | ORQ-01 | F01 | Criar suite minima de evals e casos de regressao | PromptOps / QA de IA | `evals/`, `docs/examples/` | PASS |
+| 2 | ORQ-02 | F04 | Definir guardrails minimos de seguranca operacional | Seguranca de IA | `rules/generation/`, `prompts/hooks/` | PASS |
+| 3 | ORQ-03 | F02 | Tornar checkpoints criticos obrigatorios nos fluxos de alto risco | Governanca de agentes | `prompts/hooks/`, `governance/composition/` | PASS |
+| 4 | ORQ-04 | F03 | Resolver ausencia ou ambiguidade de `tasks/`, `workflows/` e `policies/` | Arquiteto de informacao | `MANIFEST.md`, `README.md`, `governance/` | PASS |
+| 5 | ORQ-05 | F05 | Reforcar contratos dos prompts principais com entradas e saidas obrigatorias | Prompt engineer | `prompts/generation/`, `prompts/review/`, `prompts/planning/`, `prompts/discovery/` | PASS |
+| 6 | ORQ-06 | F06, F07 | Consolidar naming e remover contradicoes de severidade | Data governance | `rules/naming/`, `skills/review/`, `prompts/review/` | CONDITIONAL |
+| 7 | ORQ-07 | F08 | Reduzir carga de contexto movendo exemplos longos para docs ou evals | Context engineer | `prompts/`, `skills/`, `docs/examples/`, `evals/fixtures/` | CONDITIONAL |
+| 8 | ORQ-08 | F09 | Criar templates minimos para novos artefatos | DX / documentacao | `docs/templates/` | PASS |
+| 9 | ORQ-09 | F10 | Definir politica objetiva de versionamento e depreciacao | Maintainer | `governance/lifecycle/` | PASS |
+| 10 | ORQ-10 | F11 | Padronizar identidade `prompt-ops` versus `agent-ops` | Maintainer de produto | `README.md`, `MANIFEST.md` | PASS |
+| 11 | ORQ-11 | F12 | Resolver diretorios vazios nao governados | Maintainer | estrutura raiz local | PASS |
+| 12 | ORQ-12 | F12 complementar | Atualizar arvores e roteadores que nao refletem a estrutura real | Documentacao | `README.md`, `MANIFEST.md`, `docs/README.md` | PASS |
+
+## Registro de passagem por gates
+
+Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `PASS`, `FAIL`, `CONDITIONAL` ou `N/A`, sempre com evidencia no registro do item.
+
+| ID | Implementacao do especialista | Revisor de governanca | Revisor de documentacao | Reajustes | Auditoria coletiva | Atualizacao das documentacoes |
+|---|---|---|---|---|---|---|
+| ORQ-01 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-02 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-03 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-04 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-05 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-06 | CONDITIONAL | CONDITIONAL | PASS | PENDING | CONDITIONAL | PENDING |
+| ORQ-07 | CONDITIONAL | PASS | PASS | PENDING | CONDITIONAL | PENDING |
+| ORQ-08 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-09 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-10 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-11 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-12 | PASS | PASS | PASS | PASS | PASS | PASS |
+
+## Contrato de registro por item
+
+Cada item deve manter um registro no seguinte formato antes de avancar para a etapa seguinte:
+
+```txt
+ID:
+Etapa atual:
+Responsavel:
+Escopo:
+Arquivos avaliados:
+Arquivos alterados:
+Evidencia:
+Riscos:
+Pendencias:
+Decisao: PASS | FAIL | CONDITIONAL
+Proxima etapa:
+```
+
+## Registro consolidado desta execucao
+
+### Itens aprovados
+
+- ORQ-01: criado `../../evals/` com suite manual de regressao.
+- ORQ-02: criado `../../rules/generation/operational-safety-guardrails.md`.
+- ORQ-03: criado `../../prompts/hooks/validate-operational-safety.md` e regra de checkpoint obrigatorio por risco.
+- ORQ-04: `tasks/`, `workflows/` e `policies/` definidos como nao oficiais em v1.
+- ORQ-05: prompts principais reforcados com `MUST` e entradas/saidas minimas.
+- ORQ-08: criado template humano unico em `../templates/new-artifact.md`.
+- ORQ-09: lifecycle recebeu status e regra minima de depreciacao.
+- ORQ-10: identidade oficial `agent-ops` explicitada.
+- ORQ-11: diretorios vazios nao oficiais foram removidos da raiz local.
+- ORQ-12: `../../README.md` reescrito como mapa humano do sistema e workflows.
+
+### Itens condicionais
+
+ORQ-06 permanece CONDITIONAL porque a contradicao de severidade foi corrigida, mas a duplicidade de exemplos extensos em naming ainda existe.
+
+ORQ-07 permanece CONDITIONAL porque a regra de `evals/` fora da composicao padrao foi criada, mas exemplos longos ainda nao foram movidos de prompts/skills para docs ou evals.
+
+### Veredito do orquestrador
+
+Status geral: CONDITIONAL.
+
+O repositorio ficou mais alinhado para uso profissional, mas ainda nao deve ser chamado de pronto para producao sem resolver ORQ-06 e ORQ-07.
+
+Proxima execucao recomendada: reduzir duplicidade e peso cognitivo do conjunto de naming.

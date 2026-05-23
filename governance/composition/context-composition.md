@@ -138,6 +138,22 @@ Rules MUST declarar escopo e condição de aplicação.
 
 `../../LICENSE` MUST NOT ser tratado como contexto operacional.
 
+### 8. Validação fora da composição padrão
+`../../evals/` MUST NOT ser injetado por padrão.
+
+`../../evals/` MAY ser consultado apenas quando a tarefa for explicitamente sobre validação, regressão, auditoria ou critério de aceite.
+
+### 9. Checkpoints obrigatórios por risco
+Hooks continuam condicionais para tarefas comuns.
+
+Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
+
+- proposta de grow ou alteração estrutural do `agent-ops`
+- operação destrutiva, irreversível ou de amplo impacto
+- dados sensíveis, credenciais ou segredos
+- saída que declare conformidade, bloqueio ou aprovação
+- conflito entre artefatos normativos
+
 ---
 
 ## Regras de contenção de ruído
@@ -149,6 +165,7 @@ Rules MUST declarar escopo e condição de aplicação.
 - rules MUST NOT virar tutoriais operacionais
 - skills MUST NOT virar normas obrigatórias
 - documentação humana em `../../docs/` MUST NOT entrar na composição padrão
+- validações em `../../evals/` MUST NOT entrar na composição padrão
 
 ---
 
@@ -161,7 +178,7 @@ Uma composição de contexto é aceitável quando:
 - nenhum artefato é carregado apenas por hábito
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes
-- `../../docs/` e `../../LICENSE` ficam fora da composição padrão
+- `../../docs/`, `../../evals/` e `../../LICENSE` ficam fora da composição padrão
 
 ---
 

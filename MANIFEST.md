@@ -18,6 +18,10 @@ O `agent-ops` existe para organizar, em arquivos Markdown (`.md`), o contexto ne
 
 Este arquivo é a norma de maior precedência do diretório.
 
+`agent-ops` é a identidade oficial do sistema.
+
+Prompts são uma categoria operacional dentro do `agent-ops`, não o nome do sistema.
+
 ---
 
 ## Quando usar
@@ -68,6 +72,8 @@ Esses diretórios MUST conter apenas arquivos `.md` destinados à injeção sele
 O repositório MAY conter metadados essenciais fora do núcleo injetável, como `LICENSE`.
 
 O repositório MAY conter documentação humana em `docs/`, desde que ela não seja tratada como contexto injetável padrão.
+
+O repositório MAY conter validações em `evals/`, desde que elas não sejam tratadas como contexto injetável padrão.
 
 O núcleo injetável MUST NOT conter:
 
@@ -178,6 +184,8 @@ Se um arquivo não puder ser claramente classificado, ele SHOULD ser refatorado 
 
 Arquivos em `docs/` são documentação humana e não integram esta taxonomia de contexto injetável.
 
+Arquivos em `evals/` são validações de comportamento e não integram esta taxonomia de contexto injetável.
+
 ---
 
 ## 6. Estrutura oficial v1
@@ -188,6 +196,7 @@ agent-ops/
 ├── MANIFEST.md
 ├── README.md
 ├── docs/
+├── evals/
 ├── governance/
 │   ├── README.md
 │   ├── principles/
@@ -281,6 +290,23 @@ Define prompts de checkpoint e validação durante fluxos.
 `prompts/hooks/` MUST validar aderência a `governance/` e/ou `rules/` quando aplicável.
 
 `prompts/hooks/` MUST NOT conter hooks executáveis.
+
+### 7.9 `evals/`
+Define validações manuais ou automatizadas para comportamento esperado dos artefatos.
+
+`evals/` MUST NOT ser tratado como contexto injetável padrão.
+
+`evals/` MUST validar comportamento; não definir norma primária.
+
+### 7.10 Diretórios não oficiais em v1
+`tasks/`, `workflows/` e `policies/` não são diretórios oficiais da v1.
+
+Nesta versão:
+
+- tarefas pertencem a `prompts/`
+- workflows são compostos por `prompts/`, `skills/` e `prompts/hooks/`
+- políticas estruturais pertencem a `governance/`
+- restrições de output e guardrails pertencem a `rules/`
 
 ---
 

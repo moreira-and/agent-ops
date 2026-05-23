@@ -43,6 +43,7 @@ Consulte, nesses casos:
 
 - `../../MANIFEST.md`
 - `../../governance/composition/context-composition.md`
+- `../../rules/generation/operational-safety-guardrails.md`
 
 ---
 
@@ -66,6 +67,9 @@ Selecionar conforme o objetivo em:
 - `../../rules/quality/`
 - `../../rules/generation/`
 
+### Segurança
+Carregar `../../rules/generation/operational-safety-guardrails.md` quando houver execução, SQL, manipulação de arquivos, dados sensíveis ou ação destrutiva.
+
 ### Skills
 Selecionar apenas as necessárias em:
 - `../../skills/`
@@ -74,7 +78,7 @@ Selecionar apenas as necessárias em:
 
 ## Instrução operacional
 
-Ao usar este prompt, o agente SHOULD:
+Ao usar este prompt, o agente MUST:
 
 1. identificar o objetivo da geração
 2. selecionar o agente adequado
@@ -86,9 +90,23 @@ Ao usar este prompt, o agente SHOULD:
 
 ---
 
+## Entradas mínimas
+
+O agente MUST identificar antes de gerar:
+
+- objetivo
+- artefato esperado
+- contexto de domínio disponível
+- restrições operacionais ou de segurança
+- critérios mínimos de aceite
+
+Se uma entrada crítica faltar, o agente MUST declarar a lacuna antes de produzir a solução.
+
+---
+
 ## Saída esperada
 
-A saída SHOULD:
+A saída MUST:
 
 - atender ao objetivo declarado
 - respeitar a ordem oficial de composição

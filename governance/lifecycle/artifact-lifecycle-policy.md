@@ -153,6 +153,33 @@ Um artefato SHOULD ser removido quando:
 
 ---
 
+## Status de lifecycle
+
+Artefatos podem usar status quando isso reduzir ambiguidade operacional:
+
+- `active`: pronto para uso conforme seu escopo
+- `draft`: ainda em construcao ou revisao
+- `deprecated`: substituido ou mantido apenas por compatibilidade
+- `removed`: removido da composicao e mantido apenas em historico externo, quando existir
+
+### Regra de depreciacao
+
+Um artefato `deprecated` MUST declarar:
+
+- motivo da depreciacao
+- caminho do substituto, quando houver
+- condicao para remocao
+
+Artefato depreciado MUST NOT ser selecionado por padrao.
+
+### Regra de versao
+
+Mudancas devem preservar compatibilidade semantica sempre que possivel.
+
+Quando uma mudanca alterar contrato de uso, entrada, saida, gate ou precedencia, ela SHOULD registrar a decisao na documentacao humana ou no fluxo de remediacao aplicavel.
+
+---
+
 ## Regra de contenção
 
 Toda mudança estrutural SHOULD responder claramente:

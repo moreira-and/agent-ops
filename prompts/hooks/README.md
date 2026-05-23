@@ -63,6 +63,7 @@ Consulte, respectivamente:
 - `./validate-context-and-output.md`
 - `./validate-semantic-naming-conformance.md`
 - `./validate-growth-proposal.md`
+- `./validate-operational-safety.md`
 
 ---
 

@@ -44,6 +44,7 @@ Consulte, nesses casos:
 - `../../MANIFEST.md`
 - `../../governance/composition/context-composition.md`
 - `../../governance/quality/artifact-quality-standard.md`
+- `../../rules/generation/operational-safety-guardrails.md`
 
 ---
 
@@ -74,10 +75,11 @@ Ao usar este prompt, o agente SHOULD:
 2. validar se cada artefato carregado é relevante
 3. verificar lacunas críticas de contexto
 4. verificar excesso de contexto carregado
-5. verificar se `../../docs/` ou `../../LICENSE` foram carregados indevidamente
+5. verificar se `../../docs/`, `../../evals/` ou `../../LICENSE` foram carregados indevidamente
 6. verificar aderência da saída às regras aplicáveis
-7. explicitar conflitos, não conformidades e incertezas
-8. recomendar ajuste antes da conclusão, quando necessário
+7. verificar se risco operacional exige `./validate-operational-safety.md`
+8. explicitar conflitos, não conformidades e incertezas
+9. recomendar ajuste antes da conclusão, quando necessário
 
 ---
 
@@ -87,7 +89,7 @@ A saída SHOULD:
 
 - apontar conformidades e não conformidades
 - indicar contexto ausente ou excessivo
-- indicar uso indevido de documentação humana ou metadados, quando houver
+- indicar uso indevido de documentação humana, evals ou metadados, quando houver
 - diferenciar problema estrutural de problema de output
 - apoiar correção antes da etapa final
 

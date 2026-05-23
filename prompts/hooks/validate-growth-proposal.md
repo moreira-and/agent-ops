@@ -88,6 +88,7 @@ Validar:
 - [ ] `find -> select -> inject` foi preservado
 - [ ] ordem `prompt -> governance -> agent -> rules -> skills` foi respeitada
 - [ ] `../../docs/` não virou fonte normativa
+- [ ] `../../evals/` não virou fonte normativa
 - [ ] proposta é genérica para qualquer modelo de IA
 
 ---
@@ -116,6 +117,7 @@ A proposta deve ser reprovada quando:
 - exigir leitura indiscriminada do repositório
 - depender de vendor, modelo ou framework específico
 - transformar `../../docs/` em contexto injetável padrão
+- transformar `../../evals/` em contexto injetável padrão
 
 ---
 

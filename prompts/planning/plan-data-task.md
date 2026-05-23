@@ -62,7 +62,7 @@ Selecionar conforme a tarefa em:
 
 ## Instrução operacional
 
-Ao usar este prompt, o agente SHOULD:
+Ao usar este prompt, o agente MUST:
 
 1. explicitar o objetivo da tarefa
 2. decompor a tarefa em etapas coerentes
@@ -76,7 +76,7 @@ Ao usar este prompt, o agente SHOULD:
 
 ## Saída esperada
 
-A saída SHOULD:
+A saída MUST:
 
 - apresentar plano claro e sequencial
 - indicar contexto necessário por caminho

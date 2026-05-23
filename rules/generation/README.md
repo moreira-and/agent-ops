@@ -60,6 +60,11 @@ Consulte, respectivamente:
 
 - `./generation-guardrails.md`
 
+## Arquivos disponíveis
+
+- `./generation-guardrails.md`
+- `./operational-safety-guardrails.md`
+
 ---
 
 ## Responsabilidade desta pasta
@@ -74,4 +79,4 @@ Consulte, respectivamente:
 
 Este README roteia guardrails de geração.
 
-Este README não substitui `./generation-guardrails.md`.
+Este README não substitui guardrails específicos deste diretório.

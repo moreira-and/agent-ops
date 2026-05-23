@@ -63,7 +63,7 @@ Consulte, nesses casos:
 
 ## Instrução operacional
 
-Ao usar este prompt, o agente SHOULD:
+Ao usar este prompt, o agente MUST:
 
 1. identificar o objetivo da tarefa
 2. identificar se a tarefa é de geração, revisão, planejamento ou discovery
@@ -78,12 +78,12 @@ Ao usar este prompt, o agente SHOULD:
 
 ## Saída esperada
 
-A saída SHOULD:
+A saída MUST:
 
 - listar contexto recomendado por caminho
 - justificar a seleção
 - diferenciar base padrão de contexto condicional
-- indicar que `../../docs/` e `../../LICENSE` não foram selecionados, salvo tarefa explicitamente documental
+- indicar que `../../docs/`, `../../evals/` e `../../LICENSE` não foram selecionados, salvo tarefa explicitamente documental, de validação ou de metadado
 - reduzir ruído de injeção
 - preparar a próxima etapa com clareza
 

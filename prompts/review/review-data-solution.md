@@ -72,7 +72,7 @@ Selecionar quando necessário em:
 
 ## Instrução operacional
 
-Ao usar este prompt, o agente SHOULD:
+Ao usar este prompt, o agente MUST:
 
 1. identificar o tipo de artefato revisado
 2. selecionar o agente mais adequado para a revisão
@@ -83,12 +83,29 @@ Ao usar este prompt, o agente SHOULD:
 
 ---
 
+## Entradas mínimas
+
+O agente MUST identificar antes de revisar:
+
+- artefato revisado
+- objetivo da revisão
+- regras aplicáveis
+- critérios mínimos de aceite
+- riscos operacionais, quando houver
+
+Se o artefato ou objetivo não estiver claro, o agente MUST declarar a lacuna antes de emitir veredito.
+
+---
+
 ## Saída esperada
 
-A saída SHOULD:
+A saída MUST:
 
 - apontar achados relevantes
 - distinguir problema de sugestão
+- citar evidência concreta para achados
+- declarar impacto técnico
+- recomendar ação objetiva
 - referenciar regras e limites aplicáveis quando necessário
 - reduzir ambiguidade
 - apoiar decisão ou correção posterior
