@@ -34,9 +34,10 @@ Em caso de conflito, este indice perde para:
 2. Se o pedido humano estiver vago ou arriscado, iniciar por intake.
 3. Se a tarefa parecer grande demais, iniciar por sizing.
 4. Se o problema for redundancia, custo alto ou local incorreto, iniciar por Context Debt Audit.
-5. Escolher um roteador por caminho.
-6. Carregar apenas os artefatos necessarios.
-7. Descartar este indice quando o contexto especifico estiver escolhido.
+5. Se a resposta tiver bajulacao, falsa concordancia ou engajamento artificial, iniciar por Neutrality Governance.
+6. Escolher um roteador por caminho.
+7. Carregar apenas os artefatos necessarios.
+8. Descartar este indice quando o contexto especifico estiver escolhido.
 
 ---
 
@@ -83,6 +84,19 @@ Saidas oficiais: `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT`, `DEPRECATE`.
 
 ---
 
+## Neutrality Governance
+
+Use Neutrality Governance quando uma resposta ou artefato textual tiver bajulacao, concordancia performatica, falsa seguranca ou engajamento artificial.
+
+Use:
+
+- `./prompts/hooks/validate-neutrality-and-engagement.md` para validar o texto
+- `./rules/quality/neutral-technical-communication.md` para criterios
+
+Saidas oficiais: `PASS`, `TRIM_ENGAGEMENT`, `REMOVE_SYCOPHANCY`, `REWRITE_NEUTRAL`, `BLOCK_MISLEADING_AGREEMENT`.
+
+---
+
 ## Status de injecao
 
 - MAY ser carregado no inicio de discovery quando o roteador ainda nao esta claro.
@@ -100,6 +114,7 @@ Saidas oficiais: `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT`, `DEPRECATE`.
 | validar pedido humano vago ou arriscado | `./prompts/hooks/validate-user-intent.md` |
 | dimensionar tarefa grande ou delegacao | `./prompts/hooks/size-task-for-delegation.md` |
 | auditar divida de contexto | `./prompts/hooks/validate-context-debt.md` |
+| validar neutralidade e engajamento | `./prompts/hooks/validate-neutrality-and-engagement.md` |
 | consultar memoria governada sob demanda | `./_memory/README.md` |
 | sincronizar artefatos apos mudanca | `./governance/lifecycle/artifact-synchronization-policy.md` |
 | consultar sync targets | `./governance/authoring/artifact-registry.md` |

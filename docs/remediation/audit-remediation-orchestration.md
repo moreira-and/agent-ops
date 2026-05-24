@@ -62,6 +62,7 @@ implementacao do especialista
 | 17 | ORQ-17 | Small Model Execution Mode | Limitar modelos pequenos a execucao bounded e escalacao de governanca | Context engineer / Governanca | `INDEX.md`, `README.md`, `governance/composition/`, `evals/` | PASS |
 | 18 | ORQ-18 | Delegation Governance | Dimensionar tarefas grandes, decompor e delegar mantendo veredito no orquestrador | Orquestracao / Governanca | `prompts/hooks/`, `rules/architecture/`, `skills/orchestration/`, `governance/composition/`, `evals/` | PASS |
 | 19 | ORQ-19 | Context Debt Audit | Conter divida de arquitetura informacional, redundancia e custo cognitivo | Governanca / Review | `governance/quality/`, `prompts/hooks/`, `skills/review/`, `governance/composition/`, `evals/` | PASS |
+| 20 | ORQ-20 | Neutrality Governance | Remover bajulacao, concordancia performatica e engajamento artificial | Qualidade / PromptOps | `rules/quality/`, `prompts/hooks/`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -88,6 +89,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-17 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-18 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-19 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-20 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -207,6 +209,20 @@ Decisao: PASS
 Proxima etapa: Executar Context Debt Audit antes de novas features governadas amplas ou revisao de release.
 ```
 
+```txt
+ID: ORQ-20
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Qualidade
+Escopo: Implementar Neutrality Governance como guardrail de comunicacao neutra, anti-bajulacao e higiene de engajamento.
+Arquivos avaliados: docs/remediation/neutrality-governance-spec.md, docs/remediation/README.md, README.md, INDEX.md, governance/composition/context-composition.md, rules/quality/README.md, prompts/hooks/README.md, evals/manual-regression-suite.md
+Arquivos alterados: rules/quality/neutral-technical-communication.md, prompts/hooks/validate-neutrality-and-engagement.md, README.md, INDEX.md, governance/composition/context-composition.md, rules/README.md, rules/quality/README.md, prompts/README.md, prompts/hooks/README.md, evals/manual-regression-suite.md, evals/neutrality-governance-results.md, evals/README.md, docs/remediation/README.md, docs/remediation/audit-remediation-orchestration.md, governance/authoring/artifact-registry.md
+Evidencia: rule de comunicacao neutra criada; hook de validacao criado; context-composition reconhece checkpoint sob demanda; EVAL-018 registrado com PASS.
+Riscos: neutralidade virar grosseria ou bloquear pergunta necessaria.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Reavaliar quando prompts ou agents passarem a definir tom de resposta.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -228,6 +244,7 @@ Proxima etapa: Executar Context Debt Audit antes de novas features governadas am
 - ORQ-17: criado Small Model Execution Mode para execucao bounded por modelos pequenos com escalacao obrigatoria de governanca.
 - ORQ-18: criado Delegation Governance com sizing, limites de delegacao e orquestracao com veredito final do orquestrador.
 - ORQ-19: criado Context Debt Audit para conter redundancia, custo cognitivo e crescimento sem valor operacional.
+- ORQ-20: criado Neutrality Governance para remover bajulacao, falsa concordancia e engajamento artificial.
 
 ### Itens fechados nesta execucao
 

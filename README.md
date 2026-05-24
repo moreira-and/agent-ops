@@ -48,6 +48,7 @@ flowchart TD
     index -. "intake quando pedido e vago ou arriscado" .-> intake["validate-user-intent"]
     index -. "sizing quando tarefa e grande" .-> sizing["size-task-for-delegation"]
     index -. "context debt sob demanda" .-> debt["validate-context-debt"]
+    index -. "neutralidade quando resposta tem ruido social" .-> neutrality["validate-neutrality-and-engagement"]
     index -. "descoberta barata" .-> prompts["prompts/"]
     governance --> prompts
     prompts --> agents["agents/"]
@@ -57,6 +58,7 @@ flowchart TD
     hooks --> intake
     hooks --> sizing
     hooks --> debt
+    hooks --> neutrality
     memory["_memory/"] -. "memoria governada; sob demanda" .-> index
     docs["docs/"] -. "humano; fora do contexto padrao" .-> index
     evals["evals/"] -. "validacao; fora do contexto padrao" .-> index
@@ -117,6 +119,14 @@ Use quando um artefato, diretorio ou mudanca parecer redundante, caro, extenso, 
 A auditoria decide entre `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.
 
 Ela nao entra na composicao padrao e nao executa reestruturacao automaticamente.
+
+### Neutrality Governance
+
+Use quando uma resposta ou artefato textual tiver bajulacao, concordancia performatica, falsa seguranca ou engajamento artificial.
+
+A validacao decide entre `PASS`, `TRIM_ENGAGEMENT`, `REMOVE_SYCOPHANCY`, `REWRITE_NEUTRAL` ou `BLOCK_MISLEADING_AGREEMENT`.
+
+Ela nao cria persona, nao remove cordialidade minima e nao bloqueia pergunta necessaria.
 
 ### Small Model Execution Mode
 
@@ -207,6 +217,19 @@ prompts/hooks/validate-context-debt.md
 Saida esperada: `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.
 
 Esta auditoria recomenda; remocao, merge, move ou split exigem etapa posterior de implementacao e validacao.
+
+### 0.3. Validar neutralidade e engajamento
+
+Use antes de concluir resposta final quando houver risco de bajulacao, concordancia indevida, falsa seguranca ou pergunta final artificial.
+
+```txt
+prompts/hooks/validate-neutrality-and-engagement.md
+-> rules/quality/neutral-technical-communication.md
+```
+
+Saida esperada: `PASS`, `TRIM_ENGAGEMENT`, `REMOVE_SYCOPHANCY`, `REWRITE_NEUTRAL` ou `BLOCK_MISLEADING_AGREEMENT`.
+
+Esta validacao recomenda ajuste neutro; nao substitui safety, intake ou review tecnico.
 
 ### 1. Descobrir contexto
 
@@ -338,6 +361,7 @@ Nesta versao:
 - Tarefas grandes devem passar por sizing antes de delegacao.
 - Subagentes executam partes; o orquestrador mantem veredito final.
 - Artefatos devem provar valor operacional, responsabilidade unica, local correto e custo justificavel.
+- Respostas finais nao devem conter bajulacao, concordancia performatica ou engajamento artificial.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
 - O agente deve sinalizar lacunas antes de inventar contexto.
@@ -369,6 +393,7 @@ Ao consumir este repositorio, o agente deve:
 - dimensionar tarefas grandes antes de delegar
 - manter o veredito final com o orquestrador
 - auditar divida de contexto sob demanda quando houver redundancia ou custo injustificado
+- remover bajulacao, falsa concordancia e CTA artificial quando relevantes
 - validar intencao humana antes de agir quando houver ambiguidade ou risco
 - respeitar fonte primaria
 - aplicar guardrails em situacoes criticas

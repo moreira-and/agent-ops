@@ -209,6 +209,7 @@ Adiciona conhecimento operacional especializado.
 - intenção, ambiguidade e risco do pedido humano antes de `find`
 - tamanho da tarefa e necessidade de delegacao antes de `find`
 - divida de contexto, redundancia, custo alto ou local incorreto de artefatos
+- neutralidade, anti-bajulacao e higiene de engajamento em respostas finais
 - aderência a `governance/`
 - aderência a `rules/`
 - conformidade antes da conclusão
@@ -268,6 +269,20 @@ Context Debt Audit MUST terminar em uma das saidas:
 Context Debt Audit MUST NOT ser acionado por padrao para typo, mudanca local pequena ou tarefa com criterio de aceite local.
 
 Context Debt Audit MUST NOT executar remocao, merge, move ou split sem etapa posterior de implementacao e validacao.
+
+### 0.3. Neutrality Governance sob demanda
+
+`../../prompts/hooks/validate-neutrality-and-engagement.md` MAY ser usado antes de concluir resposta final ou artefato textual quando houver risco de bajulacao, concordancia indevida, falsa seguranca ou engajamento artificial.
+
+Neutrality Governance MUST terminar em uma das saidas:
+
+- `PASS`
+- `TRIM_ENGAGEMENT`
+- `REMOVE_SYCOPHANCY`
+- `REWRITE_NEUTRAL`
+- `BLOCK_MISLEADING_AGREEMENT`
+
+Neutrality Governance MUST NOT criar persona, remover cordialidade minima ou bloquear pergunta necessaria para desambiguar.
 
 ### 1. Índice raiz para discovery inicial
 `../../INDEX.md` MAY ser consultado no início de uma tarefa quando o agente ainda não souber qual roteador usar.
@@ -345,6 +360,8 @@ Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
 - delegacao MUST NOT ser usada para tarefa simples
 - subagentes MUST NOT receber contexto maior que o necessario para sua subtarefa
 - Context Debt Audit MUST NOT ser carregado por padrao
+- Neutrality Governance MUST NOT ser carregada por padrao
+- respostas finais MUST NOT usar bajulacao, concordancia performatica ou engajamento artificial
 - prompts MUST NOT embutir integralmente governança, regras ou skills
 - agents MUST referenciar dependências em vez de embuti-las
 - rules MUST NOT virar tutoriais operacionais
@@ -366,6 +383,7 @@ Uma composição de contexto é aceitável quando:
 - tarefas grandes passam por sizing antes de delegacao
 - subagentes recebem subtarefas verificaveis e o veredito permanece com o orquestrador
 - auditoria de divida de contexto e selecionada apenas sob demanda e nao executa reestruturacao automaticamente
+- neutralidade e validada sob demanda quando houver risco de bajulacao, falsa concordancia ou CTA artificial
 - pedidos humanos ambíguos ou arriscados passam por intake antes de `find`
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes

@@ -32,6 +32,7 @@ Consulte `hooks/` quando precisar:
 - validar intenção, ambiguidade e risco do pedido humano antes de discovery
 - dimensionar tarefa grande antes de delegacao
 - auditar divida de contexto quando houver redundancia, custo alto ou local incorreto
+- validar neutralidade e remover engajamento artificial
 - revisar conformidade antes de concluir
 - aplicar checkpoint de controle em geração ou revisão
 
@@ -67,6 +68,7 @@ Consulte, respectivamente:
 - `./validate-user-intent.md`
 - `./size-task-for-delegation.md`
 - `./validate-context-debt.md`
+- `./validate-neutrality-and-engagement.md`
 - `./validate-semantic-naming-conformance.md`
 - `./validate-growth-proposal.md`
 - `./validate-operational-safety.md`
@@ -101,7 +103,8 @@ flowchart TD
     current --> n5["validate-semantic-naming-conformance.md"]
     current --> n6["size-task-for-delegation.md"]
     current --> n7["validate-context-debt.md"]
-    current -. "governado por" .-> n8["../../MANIFEST.md"]
+    current --> n8["validate-neutrality-and-engagement.md"]
+    current -. "governado por" .-> n9["../../MANIFEST.md"]
 ```
 
 ## Status v0.1

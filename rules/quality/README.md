@@ -32,6 +32,7 @@ Consulte `quality/` quando precisar:
 - reforçar completude e consistência
 - revisar risco de ambiguidade
 - impor critérios mínimos de qualidade de entrega
+- remover bajulacao, concordancia performatica e engajamento artificial
 
 ---
 
@@ -59,6 +60,7 @@ Consulte, respectivamente:
 
 - `./quality-rules.md`
 - `./user-input-quality.md`
+- `./neutral-technical-communication.md`
 
 ---
 
@@ -74,7 +76,7 @@ Consulte, respectivamente:
 
 Este README roteia critérios de qualidade.
 
-Este README não substitui `./quality-rules.md` nem `./user-input-quality.md`.
+Este README não substitui `./quality-rules.md`, `./user-input-quality.md` nem `./neutral-technical-communication.md`.
 
 ## Status v0.1
 
