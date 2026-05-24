@@ -50,6 +50,7 @@ Em caso de conflito, este indice perde para:
 | resolver conflito estrutural | `./MANIFEST.md` |
 | entender uso humano geral | `./README.md` |
 | validar pedido humano vago ou arriscado | `./prompts/hooks/validate-user-intent.md` |
+| consultar memoria governada sob demanda | `./_memory/README.md` |
 | compor contexto | `./governance/composition/context-composition.md` |
 | escolher agente | `./agents/README.md` |
 | escolher rule | `./rules/README.md` |
@@ -80,6 +81,7 @@ Nao carregar por habito:
 
 - `./docs/`
 - `./evals/`
+- `./_memory/`
 - `./LICENSE`
 - `./INDEX.md` depois que o contexto especifico estiver selecionado
 
@@ -92,3 +94,5 @@ Este indice nao substitui normas, regras, prompts, skills, agentes, hooks ou REA
 Este indice nao lista todos os arquivos do repositorio.
 
 Este indice nao define governanca primaria.
+
+`./_memory/` nao e fonte normativa e nao deve ser carregado por padrao.

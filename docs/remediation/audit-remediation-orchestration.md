@@ -57,6 +57,7 @@ implementacao do especialista
 | 12 | ORQ-12 | F12 complementar | Atualizar arvores e roteadores que nao refletem a estrutura real | Documentacao | `README.md`, `MANIFEST.md`, `docs/README.md` | PASS |
 | 13 | ORQ-13 | Root index | Criar `INDEX.md` como roteador barato para discovery por LLM | Context engineer | `INDEX.md`, `README.md`, `MANIFEST.md`, `governance/composition/`, `evals/` | PASS |
 | 14 | ORQ-14 | Intake Governance | Criar camada barata de triagem antes de discovery | PromptOps / Governanca | `rules/quality/`, `prompts/hooks/`, `skills/orchestration/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
+| 15 | ORQ-15 | Governed Memory | Criar `_memory/` como memoria governada auxiliar e seletiva | Governanca / Context engineer | `_memory/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -78,6 +79,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-12 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-13 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-14 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-15 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -127,6 +129,20 @@ Decisao: PASS
 Proxima etapa: Executar regressao manual quando prompts de entrada forem alterados.
 ```
 
+```txt
+ID: ORQ-15
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Context engineer
+Escopo: Implementar Governed Memory como contexto auxiliar, seletivo e auditavel em `_memory/`.
+Arquivos avaliados: docs/remediation/governed-memory-spec.md, MANIFEST.md, README.md, INDEX.md, governance/composition/context-composition.md, evals/manual-regression-suite.md
+Arquivos alterados: _memory/README.md, _memory/project-decisions.md, _memory/stable-preferences.md, _memory/lessons-learned.md, MANIFEST.md, README.md, INDEX.md, governance/composition/context-composition.md, evals/manual-regression-suite.md, evals/governed-memory-results.md, evals/README.md
+Evidencia: `_memory/` criado com tres memories aprovadas, fonte rastreavel, limites explicitos e EVAL-013 registrado com PASS.
+Riscos: memory virar fonte normativa, historico bruto ou contexto carregado por padrao.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Revisar memories em 2026-08-24 ou quando fonte primaria mudar.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -143,6 +159,7 @@ Proxima etapa: Executar regressao manual quando prompts de entrada forem alterad
 - ORQ-12: `../../README.md` reescrito como mapa humano do sistema e workflows.
 - ORQ-13: criado `../../INDEX.md` como roteador barato de discovery inicial por LLM e registrado em manifesto, composicao e evals.
 - ORQ-14: criado Intake Governance com `../../rules/quality/user-input-quality.md`, `../../prompts/hooks/validate-user-intent.md` e `../../skills/orchestration/intake-governance.md`.
+- ORQ-15: criado `../../_memory/` como memoria governada auxiliar, seletiva e fora da composicao padrao.
 
 ### Itens fechados nesta execucao
 

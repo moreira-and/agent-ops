@@ -77,6 +77,8 @@ O repositório MAY conter documentação humana em `docs/`, desde que ela não s
 
 O repositório MAY conter validações em `evals/`, desde que elas não sejam tratadas como contexto injetável padrão.
 
+O repositório MAY conter `_memory/` como memória governada auxiliar, desde que ela seja tratada apenas como candidata em `find` e nunca como fonte normativa primária.
+
 O núcleo injetável MUST NOT conter:
 
 - executáveis
@@ -198,6 +200,8 @@ Arquivos em `evals/` são validações de comportamento e não integram esta tax
 
 `INDEX.md` é artefato raiz de discovery para orientação inicial de LLM e não integra a taxonomia do núcleo injetável.
 
+`_memory/` é diretório auxiliar de governed memory e não integra a taxonomia do núcleo injetável.
+
 ---
 
 ## 6. Estrutura oficial v0.1
@@ -208,6 +212,7 @@ agent-ops/
 ├── MANIFEST.md
 ├── INDEX.md
 ├── README.md
+├── _memory/
 ├── docs/
 ├── evals/
 ├── governance/
@@ -322,7 +327,18 @@ Define validações manuais ou automatizadas para comportamento esperado dos art
 
 `evals/` MUST validar comportamento; não definir norma primária.
 
-### 7.11 Diretórios não oficiais em v0.1
+### 7.11 `_memory/`
+Define memória governada auxiliar para fatos pequenos, estáveis, rastreáveis e reutilizáveis.
+
+`_memory/` MAY ser descoberta durante `find`.
+
+`_memory/` MUST NOT ser carregada antes de intake.
+
+`_memory/` MUST NOT ser tratada como contexto padrão.
+
+`_memory/` MUST NOT substituir `MANIFEST.md`, `governance/`, `rules/`, `prompts/`, `skills/`, `README.md` ou `INDEX.md`.
+
+### 7.12 Diretórios não oficiais em v0.1
 `tasks/`, `workflows/` e `policies/` não são diretórios oficiais da v0.1.
 
 Nesta versão:
@@ -526,6 +542,7 @@ Se houver conflito, a precedência normativa é:
 3. diretório especializado aplicável
 4. `README.md`
 5. `INDEX.md`
+6. `_memory/`
 
 Se faltar contexto crítico, o agente SHOULD explicitar a lacuna.
 
@@ -543,6 +560,8 @@ São proibidos:
 - agente autossuficiente por cópia
 - fragmentação excessiva
 - contexto especializado sempre carregado sem critério
+- memory carregada por padrão
+- memory tratada como fonte normativa
 - dependência contextual implícita
 - acoplamento forte entre artefatos `.md`
 - leitura indiscriminada do repositório como estratégia padrão

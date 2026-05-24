@@ -150,37 +150,49 @@ Intake MUST NOT carregar `../../docs/`, `../../evals/` ou contexto especializado
 ### 3. Relevância antes de injeção
 Nenhum artefato SHOULD ser injetado sem relevância clara para a tarefa.
 
-### 4. Especialização sob demanda
+### 4. Governed Memory sob demanda
+
+`../../_memory/` MAY ser considerada durante `find` quando a tarefa precisar de contexto pequeno, estavel e rastreavel de execucoes anteriores.
+
+`../../_memory/` MUST NOT ser carregada antes de intake.
+
+`../../_memory/` MUST NOT ser carregada por padrao.
+
+`../../_memory/` MUST perder para qualquer fonte primaria aplicavel.
+
+`../../_memory/` MUST ser descartada quando a fonte primaria especifica for carregada e suficiente.
+
+### 5. Especialização sob demanda
 `skills/` SHOULD ser carregado apenas quando a tarefa exigir capacidade especializada.
 
-### 5. Regras por tipo de output ou intake
+### 6. Regras por tipo de output ou intake
 `rules/` SHOULD ser selecionado conforme o tipo de saída esperada.
 
 `../../rules/quality/user-input-quality.md` SHOULD ser selecionado quando o intake precisar validar entrada humana.
 
-### 6. Prompts como entrada
+### 7. Prompts como entrada
 `prompts/` SHOULD iniciar a composição, e não substituir as fontes primárias das demais áreas.
 
-### 7. Dependências explícitas
+### 8. Dependências explícitas
 Prompts e agents MUST declarar quais tipos de artefatos precisam consumir.
 
 Skills MUST declarar quais rules ou governance afetam seu uso.
 
 Rules MUST declarar escopo e condição de aplicação.
 
-### 8. Documentação humana fora da composição padrão
+### 9. Documentação humana fora da composição padrão
 `../../docs/` MUST NOT ser injetado por padrão.
 
 `../../docs/` MAY ser consultado apenas quando a tarefa for explicitamente sobre documentação humana, integração ou orientação operacional.
 
 `../../LICENSE` MUST NOT ser tratado como contexto operacional.
 
-### 9. Validação fora da composição padrão
+### 10. Validação fora da composição padrão
 `../../evals/` MUST NOT ser injetado por padrão.
 
 `../../evals/` MAY ser consultado apenas quando a tarefa for explicitamente sobre validação, regressão, auditoria ou critério de aceite.
 
-### 10. Checkpoints obrigatórios por risco
+### 11. Checkpoints obrigatórios por risco
 Hooks continuam condicionais para tarefas comuns.
 
 Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
@@ -203,6 +215,7 @@ Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
 - skills MUST NOT virar normas obrigatórias
 - documentação humana em `../../docs/` MUST NOT entrar na composição padrão
 - validações em `../../evals/` MUST NOT entrar na composição padrão
+- governed memory em `../../_memory/` MUST NOT entrar na composição padrão
 
 ---
 
@@ -218,6 +231,7 @@ Uma composição de contexto é aceitável quando:
 - hooks são acionados apenas como checkpoints relevantes
 - `../../docs/`, `../../evals/` e `../../LICENSE` ficam fora da composição padrão
 - `../../INDEX.md` não permanece no contexto depois da seleção do roteador específico
+- `../../_memory/` é selecionada apenas sob demanda, com motivo explícito e sem substituir fonte primária
 
 ---
 

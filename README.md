@@ -44,6 +44,7 @@ flowchart TD
     prompts --> skills["skills/"]
     prompts --> hooks["prompts/hooks/"]
     hooks --> intake
+    memory["_memory/"] -. "memoria governada; sob demanda" .-> index
     docs["docs/"] -. "humano; fora do contexto padrao" .-> index
     evals["evals/"] -. "validacao; fora do contexto padrao" .-> index
 ```
@@ -58,6 +59,7 @@ Escopo aprovado:
 - prompts, agents, rules, skills e hooks em Markdown
 - guardrails de geracao, seguranca operacional, naming e crescimento
 - suite manual minima de regressao em `./evals/`
+- memoria governada auxiliar em `./_memory/`
 
 Restricao explicita: producao critica ainda requer controles externos de runtime, autorizacao, observabilidade, auditoria, segredo, isolamento e enforcement fora deste repositorio.
 
@@ -83,7 +85,7 @@ prompt -> governance -> agent -> rules -> skills
 
 Hooks entram apenas como checkpoints relevantes ou obrigatorios por risco.
 
-`docs/`, `evals/` e `LICENSE` nao entram na composicao padrao.
+`_memory/`, `docs/`, `evals/` e `LICENSE` nao entram na composicao padrao.
 
 ---
 
@@ -95,6 +97,7 @@ agent-ops/
 ├── INDEX.md
 ├── README.md
 ├── LICENSE
+├── _memory/
 ├── governance/
 ├── agents/
 ├── rules/
@@ -110,6 +113,7 @@ agent-ops/
 |---|---|---|
 | `MANIFEST.md` | Define contrato estrutural, precedencia e taxonomia. | Quando houver duvida sobre onde algo pertence ou qual norma prevalece. |
 | `INDEX.md` | Roteia descoberta inicial barata para LLM. | Quando o ponto de partida ainda nao estiver claro. |
+| `_memory/` | Guarda memoria governada, pequena, rastreavel e opcional. | Durante `find`, somente quando uma memory reduz contexto sem substituir fonte primaria. |
 | `governance/` | Governa estrutura, composicao, autoria, qualidade e lifecycle do proprio `agent-ops`. | Quando for criar, alterar, mover, dividir ou validar artefatos do repositorio. |
 | `agents/` | Define perfis executores com missao, escopo, limites e dependencias. | Quando precisar escolher quem executa uma tarefa. |
 | `rules/` | Define normas de output, qualidade de entrada humana, guardrails e restricoes de comportamento. | Quando precisar validar ou limitar entrada, saida ou risco do agente. |
@@ -251,6 +255,7 @@ Nesta versao:
 - Dependencias devem ser referenciadas por caminho.
 - Conteudo duplicado deve ser extraido para fonte primaria.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
+- `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
 - O agente deve sinalizar lacunas antes de inventar contexto.
 - Pedidos ambiguos ou arriscados passam por intake antes de discovery.
 - Operacoes de alto risco exigem guardrail operacional e checkpoint.
