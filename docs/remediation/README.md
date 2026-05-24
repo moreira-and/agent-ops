@@ -47,6 +47,7 @@ Consulte, respectivamente:
 
 - `./artifact-synchronization-spec.md`
 - `./audit-remediation-orchestration.md`
+- `./context-debt-audit-spec.md`
 - `./delegation-governance-spec.md`
 - `./governed-memory-spec.md`
 - `./intake-governance-spec.md`
@@ -71,14 +72,15 @@ flowchart TD
     current["docs/remediation/"]
     current --> n1["artifact-synchronization-spec.md"]
     current --> n2["audit-remediation-orchestration.md"]
-    current --> n3["delegation-governance-spec.md"]
-    current --> n4["governed-memory-spec.md"]
-    current --> n5["intake-governance-spec.md"]
-    current --> n6["root-index-spec.md"]
-    current --> n7["small-model-execution-mode-spec.md"]
-    current --> n8["v0.1-readiness-spec.md"]
-    current -. "governado por" .-> n9["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n10["../../governance/composition/context-composition.md"]
+    current --> n3["context-debt-audit-spec.md"]
+    current --> n4["delegation-governance-spec.md"]
+    current --> n5["governed-memory-spec.md"]
+    current --> n6["intake-governance-spec.md"]
+    current --> n7["root-index-spec.md"]
+    current --> n8["small-model-execution-mode-spec.md"]
+    current --> n9["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n10["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n11["../../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

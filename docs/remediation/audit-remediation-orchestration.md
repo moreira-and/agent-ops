@@ -61,6 +61,7 @@ implementacao do especialista
 | 16 | ORQ-16 | Artifact Synchronization | Criar registry e policy leve de sync targets | Governanca / Lifecycle | `governance/authoring/`, `governance/lifecycle/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
 | 17 | ORQ-17 | Small Model Execution Mode | Limitar modelos pequenos a execucao bounded e escalacao de governanca | Context engineer / Governanca | `INDEX.md`, `README.md`, `governance/composition/`, `evals/` | PASS |
 | 18 | ORQ-18 | Delegation Governance | Dimensionar tarefas grandes, decompor e delegar mantendo veredito no orquestrador | Orquestracao / Governanca | `prompts/hooks/`, `rules/architecture/`, `skills/orchestration/`, `governance/composition/`, `evals/` | PASS |
+| 19 | ORQ-19 | Context Debt Audit | Conter divida de arquitetura informacional, redundancia e custo cognitivo | Governanca / Review | `governance/quality/`, `prompts/hooks/`, `skills/review/`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -86,6 +87,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-16 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-17 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-18 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-19 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -191,6 +193,20 @@ Decisao: PASS
 Proxima etapa: Reavaliar quando forem adicionados novos modos de execucao multiagente.
 ```
 
+```txt
+ID: ORQ-19
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Governanca
+Escopo: Implementar Context Debt Audit como auditoria sob demanda para valor operacional, responsabilidade unica, local correto, redundancia e custo de contexto.
+Arquivos avaliados: docs/remediation/context-debt-audit-spec.md, docs/remediation/README.md, README.md, INDEX.md, governance/composition/context-composition.md, governance/quality/README.md, prompts/hooks/README.md, skills/review/README.md, evals/manual-regression-suite.md
+Arquivos alterados: governance/quality/context-economy-and-responsibility.md, prompts/hooks/validate-context-debt.md, skills/review/context-architecture-review.md, README.md, INDEX.md, governance/composition/context-composition.md, governance/quality/README.md, prompts/README.md, prompts/hooks/README.md, skills/README.md, skills/review/README.md, evals/manual-regression-suite.md, evals/context-debt-audit-results.md, evals/README.md, docs/remediation/README.md, docs/remediation/audit-remediation-orchestration.md, governance/authoring/artifact-registry.md
+Evidencia: standard de economia criado; hook de auditoria criado; skill de review criada; context-composition reconhece auditoria sob demanda; EVAL-017 registrado com PASS.
+Riscos: auditoria virar burocracia para mudanca pequena ou cortar artefato util sem evidencia.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Executar Context Debt Audit antes de novas features governadas amplas ou revisao de release.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -211,6 +227,7 @@ Proxima etapa: Reavaliar quando forem adicionados novos modos de execucao multia
 - ORQ-16: criado `../../governance/authoring/artifact-registry.md` e `../../governance/lifecycle/artifact-synchronization-policy.md`.
 - ORQ-17: criado Small Model Execution Mode para execucao bounded por modelos pequenos com escalacao obrigatoria de governanca.
 - ORQ-18: criado Delegation Governance com sizing, limites de delegacao e orquestracao com veredito final do orquestrador.
+- ORQ-19: criado Context Debt Audit para conter redundancia, custo cognitivo e crescimento sem valor operacional.
 
 ### Itens fechados nesta execucao
 

@@ -33,9 +33,10 @@ Em caso de conflito, este indice perde para:
 1. Ler este indice somente quando o ponto de partida ainda nao estiver claro.
 2. Se o pedido humano estiver vago ou arriscado, iniciar por intake.
 3. Se a tarefa parecer grande demais, iniciar por sizing.
-4. Escolher um roteador por caminho.
-5. Carregar apenas os artefatos necessarios.
-6. Descartar este indice quando o contexto especifico estiver escolhido.
+4. Se o problema for redundancia, custo alto ou local incorreto, iniciar por Context Debt Audit.
+5. Escolher um roteador por caminho.
+6. Carregar apenas os artefatos necessarios.
+7. Descartar este indice quando o contexto especifico estiver escolhido.
 
 ---
 
@@ -68,6 +69,20 @@ Subagentes executam partes. O orquestrador mantem escopo, integracao e veredito 
 
 ---
 
+## Context Debt Audit
+
+Use Context Debt Audit quando um artefato, diretorio ou mudanca parecer redundante, caro, extenso, mal localizado ou com responsabilidade misturada.
+
+Use:
+
+- `./prompts/hooks/validate-context-debt.md` para auditar a divida
+- `./governance/quality/context-economy-and-responsibility.md` para criterios
+- `./skills/review/context-architecture-review.md` para revisar arquitetura informacional
+
+Saidas oficiais: `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT`, `DEPRECATE`.
+
+---
+
 ## Status de injecao
 
 - MAY ser carregado no inicio de discovery quando o roteador ainda nao esta claro.
@@ -84,6 +99,7 @@ Subagentes executam partes. O orquestrador mantem escopo, integracao e veredito 
 | entender uso humano geral | `./README.md` |
 | validar pedido humano vago ou arriscado | `./prompts/hooks/validate-user-intent.md` |
 | dimensionar tarefa grande ou delegacao | `./prompts/hooks/size-task-for-delegation.md` |
+| auditar divida de contexto | `./prompts/hooks/validate-context-debt.md` |
 | consultar memoria governada sob demanda | `./_memory/README.md` |
 | sincronizar artefatos apos mudanca | `./governance/lifecycle/artifact-synchronization-policy.md` |
 | consultar sync targets | `./governance/authoring/artifact-registry.md` |

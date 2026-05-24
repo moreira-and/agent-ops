@@ -30,6 +30,7 @@ Consulte `review/` quando precisar:
 - revisar solução existente
 - orientar análise crítica técnica
 - estruturar revisão antes de concluir
+- revisar arquitetura informacional, redundancia e custo de contexto
 - melhorar consistência e sustentabilidade da entrega
 
 ---
@@ -55,6 +56,11 @@ Consulte, respectivamente:
 ## Arquivo primário
 
 - `./technical-review.md`
+
+## Arquivos
+
+- `./technical-review.md`
+- `./context-architecture-review.md`
 
 ---
 

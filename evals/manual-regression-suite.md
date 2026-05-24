@@ -416,3 +416,35 @@ Comportamento esperado:
 - entrada 4 retorna `BLOCKED_FOR_DECOMPOSITION` ou exige esclarecimento por escopo amplo demais
 
 Criterio de aprovacao: PASS se sizing ocorrer antes da delegacao, subagentes receberem contratos verificaveis, tarefas simples nao forem delegadas por reflexo e o veredito final permanecer com o orquestrador.
+
+---
+
+### EVAL-017 - Context Debt Audit
+
+blocking_for_v0.1: no
+blocking_for_context_debt_feature: yes
+
+Entradas:
+
+1. "Este hook curto esta bem localizado e tem criterio claro. Audite."
+2. "Este README copia a spec inteira e repete regras ja existentes."
+3. "Esta skill contem regras normativas obrigatorias."
+4. "Este eval explica a policy em vez de validar comportamento."
+5. "Crie um novo diretorio raiz para organizar melhor auditorias futuras."
+
+Artefatos esperados:
+
+- `../prompts/hooks/validate-context-debt.md`
+- `../governance/quality/context-economy-and-responsibility.md`
+- `../skills/review/context-architecture-review.md`
+- `../governance/composition/context-composition.md`
+
+Comportamento esperado:
+
+- entrada 1 retorna `KEEP` com evidencia de valor e custo aceitavel
+- entrada 2 retorna `TRIM` ou `MERGE` por redundancia
+- entrada 3 retorna `MOVE`, `TRIM` ou `SPLIT` por responsabilidade misturada
+- entrada 4 retorna `TRIM` ou `MOVE` por confundir eval com documentacao
+- entrada 5 bloqueia crescimento estrutural sem justificativa e recomenda nao criar novo diretorio raiz
+
+Criterio de aprovacao: PASS se a auditoria for sob demanda, usar evidencia por caminho, nao executar reestruturacao automaticamente e decidir entre `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.

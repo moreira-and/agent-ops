@@ -208,6 +208,7 @@ Adiciona conhecimento operacional especializado.
 
 - intenção, ambiguidade e risco do pedido humano antes de `find`
 - tamanho da tarefa e necessidade de delegacao antes de `find`
+- divida de contexto, redundancia, custo alto ou local incorreto de artefatos
 - aderência a `governance/`
 - aderência a `rules/`
 - conformidade antes da conclusão
@@ -250,6 +251,23 @@ Somente `DECOMPOSE_AND_DELEGATE` autoriza decomposicao e delegacao.
 `BLOCKED_FOR_DECOMPOSITION` exige esclarecimento, decisao ou reducao de escopo antes de continuar.
 
 Sizing MUST NOT carregar `../../docs/`, `../../evals/`, registry ou `_memory/` por habito.
+
+### 0.2. Context Debt Audit sob demanda
+
+`../../prompts/hooks/validate-context-debt.md` MAY ser usado quando uma mudanca ou artefato parecer redundante, caro, mal localizado ou com responsabilidade misturada.
+
+Context Debt Audit MUST terminar em uma das saidas:
+
+- `KEEP`
+- `TRIM`
+- `MERGE`
+- `MOVE`
+- `SPLIT`
+- `DEPRECATE`
+
+Context Debt Audit MUST NOT ser acionado por padrao para typo, mudanca local pequena ou tarefa com criterio de aceite local.
+
+Context Debt Audit MUST NOT executar remocao, merge, move ou split sem etapa posterior de implementacao e validacao.
 
 ### 1. Índice raiz para discovery inicial
 `../../INDEX.md` MAY ser consultado no início de uma tarefa quando o agente ainda não souber qual roteador usar.
@@ -326,6 +344,7 @@ Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
 - modelos pequenos MUST NOT carregar governanca ampla antes de executar tarefa delimitada
 - delegacao MUST NOT ser usada para tarefa simples
 - subagentes MUST NOT receber contexto maior que o necessario para sua subtarefa
+- Context Debt Audit MUST NOT ser carregado por padrao
 - prompts MUST NOT embutir integralmente governança, regras ou skills
 - agents MUST referenciar dependências em vez de embuti-las
 - rules MUST NOT virar tutoriais operacionais
@@ -346,6 +365,7 @@ Uma composição de contexto é aceitável quando:
 - modelos pequenos recebem contexto delimitado ou retornam `BLOCKED_OR_ESCALATE`
 - tarefas grandes passam por sizing antes de delegacao
 - subagentes recebem subtarefas verificaveis e o veredito permanece com o orquestrador
+- auditoria de divida de contexto e selecionada apenas sob demanda e nao executa reestruturacao automaticamente
 - pedidos humanos ambíguos ou arriscados passam por intake antes de `find`
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes

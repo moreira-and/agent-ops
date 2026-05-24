@@ -87,6 +87,7 @@ Acao recomendada:
 - `./artifact-synchronization-results.md`
 - `./small-model-execution-results.md`
 - `./delegation-governance-results.md`
+- `./context-debt-audit-results.md`
 - `./manual-regression-suite.md`
 - `./v0.1-manual-results.md`
 
@@ -111,10 +112,11 @@ flowchart TD
     current --> n4["artifact-synchronization-results.md"]
     current --> n5["small-model-execution-results.md"]
     current --> n6["delegation-governance-results.md"]
-    current --> n7["manual-regression-suite.md"]
-    current --> n8["v0.1-manual-results.md"]
-    current -. "governado por" .-> n9["../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n10["../governance/composition/context-composition.md"]
+    current --> n7["context-debt-audit-results.md"]
+    current --> n8["manual-regression-suite.md"]
+    current --> n9["v0.1-manual-results.md"]
+    current -. "governado por" .-> n10["../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n11["../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

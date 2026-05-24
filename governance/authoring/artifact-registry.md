@@ -70,6 +70,7 @@ Consulte, respectivamente:
 | `docs.artifact-synchronization-spec` | `../../docs/remediation/artifact-synchronization-spec.md` | human documentation / execution spec | `../../MANIFEST.md` | active | none | 2026-05-24 | `./artifact-registry.md`, `../lifecycle/artifact-synchronization-policy.md`, `../../docs/remediation/README.md` |
 | `docs.small-model-execution-mode-spec` | `../../docs/remediation/small-model-execution-mode-spec.md` | human documentation / execution spec | `../../MANIFEST.md` | active | none | 2026-05-24 | `../composition/context-composition.md`, `../../INDEX.md`, `../../README.md`, `../../evals/manual-regression-suite.md`, `../../docs/remediation/README.md` |
 | `docs.delegation-governance-spec` | `../../docs/remediation/delegation-governance-spec.md` | human documentation / execution spec | `../../MANIFEST.md` | active | none | 2026-05-24 | `../composition/context-composition.md`, `../../INDEX.md`, `../../README.md`, `../../prompts/hooks/README.md`, `../../rules/architecture/README.md`, `../../skills/orchestration/README.md`, `../../evals/manual-regression-suite.md`, `../../docs/remediation/README.md` |
+| `docs.context-debt-audit-spec` | `../../docs/remediation/context-debt-audit-spec.md` | human documentation / execution spec | `../../MANIFEST.md` | active | none | 2026-05-24 | `../composition/context-composition.md`, `../../INDEX.md`, `../../README.md`, `../quality/README.md`, `../../prompts/hooks/README.md`, `../../skills/review/README.md`, `../../evals/manual-regression-suite.md`, `../../docs/remediation/README.md` |
 
 ---
 

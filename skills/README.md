@@ -43,6 +43,7 @@ Consulte `skills/` quando precisar:
 - aplicar técnica reutilizável em múltiplos contextos
 - aplicar triagem de intake sem duplicar rules ou hooks
 - aplicar decomposicao de tarefa grande sem delegar veredito final
+- revisar arquitetura informacional e custo de contexto sob demanda
 - complementar a atuação de um agente com capacidade especializada
 
 ---
@@ -122,6 +123,8 @@ Conhecimento reutilizável sobre testes e validação.
 
 ### `review/`
 Conhecimento reutilizável sobre revisão técnica.
+
+Inclui revisão de arquitetura informacional e divida de contexto.
 
 ---
 

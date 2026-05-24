@@ -19,6 +19,7 @@ Este diretório deve concentrar artefatos como:
 - prompts de planejamento
 - checkpoints de intake antes de discovery
 - checkpoints de sizing antes de delegacao
+- checkpoints de divida de contexto sob demanda
 - checkpoints de validação em `./hooks/`
 
 A norma de maior precedência continua sendo:
@@ -46,6 +47,7 @@ Consulte `prompts/` quando precisar:
 - executar checkpoint de validação
 - validar entrada humana antes de discovery quando houver ambiguidade ou risco
 - dimensionar tarefa grande antes de decompor e delegar
+- auditar redundancia, custo de contexto ou local incorreto de artefatos
 
 ---
 
@@ -167,6 +169,7 @@ Esses artefatos devem ser usados para:
 
 - validar intenção, ambiguidade e risco da entrada humana antes de discovery
 - dimensionar tarefa grande antes de delegacao
+- auditar divida de contexto sob demanda
 - validar aderência a `../governance/`
 - validar aderência a `../rules/`
 - revisar conformidade antes ou depois de execução

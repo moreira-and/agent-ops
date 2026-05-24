@@ -32,6 +32,7 @@ Consulte `quality/` quando precisar:
 - identificar ambiguidade
 - verificar rastreabilidade
 - avaliar se um arquivo está pronto para uso em contexto
+- avaliar divida de arquitetura informacional, redundancia e custo de contexto
 
 ---
 
@@ -57,6 +58,11 @@ Consulte, respectivamente:
 
 - `./artifact-quality-standard.md`
 
+## Arquivos
+
+- `./artifact-quality-standard.md`
+- `./context-economy-and-responsibility.md`
+
 ---
 
 ## Responsabilidade desta pasta
@@ -71,7 +77,7 @@ Consulte, respectivamente:
 
 Este README roteia padrões de qualidade de artefato.
 
-Este README não substitui `./artifact-quality-standard.md`.
+Este README não substitui `./artifact-quality-standard.md` nem `./context-economy-and-responsibility.md`.
 
 ## Status v0.1
 

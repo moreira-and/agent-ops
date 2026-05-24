@@ -47,6 +47,7 @@ flowchart TD
     manifest --> governance["governance/"]
     index -. "intake quando pedido e vago ou arriscado" .-> intake["validate-user-intent"]
     index -. "sizing quando tarefa e grande" .-> sizing["size-task-for-delegation"]
+    index -. "context debt sob demanda" .-> debt["validate-context-debt"]
     index -. "descoberta barata" .-> prompts["prompts/"]
     governance --> prompts
     prompts --> agents["agents/"]
@@ -55,6 +56,7 @@ flowchart TD
     prompts --> hooks["prompts/hooks/"]
     hooks --> intake
     hooks --> sizing
+    hooks --> debt
     memory["_memory/"] -. "memoria governada; sob demanda" .-> index
     docs["docs/"] -. "humano; fora do contexto padrao" .-> index
     evals["evals/"] -. "validacao; fora do contexto padrao" .-> index
@@ -107,6 +109,14 @@ Use delegacao apenas quando a tarefa nao couber em execucao direta e puder ser q
 Subagentes podem executar partes. O orquestrador mantem escopo, integracao, revisao e veredito final.
 
 Saidas oficiais: `EXECUTE_DIRECT`, `DECOMPOSE_AND_DELEGATE` ou `BLOCKED_FOR_DECOMPOSITION`.
+
+### Context Debt Audit
+
+Use quando um artefato, diretorio ou mudanca parecer redundante, caro, extenso, mal localizado ou com responsabilidade misturada.
+
+A auditoria decide entre `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.
+
+Ela nao entra na composicao padrao e nao executa reestruturacao automaticamente.
 
 ### Small Model Execution Mode
 
@@ -183,6 +193,20 @@ prompts/hooks/size-task-for-delegation.md
 Saida esperada: `EXECUTE_DIRECT`, `DECOMPOSE_AND_DELEGATE` ou `BLOCKED_FOR_DECOMPOSITION`.
 
 Somente `DECOMPOSE_AND_DELEGATE` autoriza subtarefas delegadas. O veredito final continua com o orquestrador.
+
+### 0.2. Auditar divida de contexto
+
+Use quando houver suspeita de redundancia, custo alto, local incorreto ou responsabilidade misturada.
+
+```txt
+prompts/hooks/validate-context-debt.md
+-> governance/quality/context-economy-and-responsibility.md
+-> skills/review/context-architecture-review.md
+```
+
+Saida esperada: `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.
+
+Esta auditoria recomenda; remocao, merge, move ou split exigem etapa posterior de implementacao e validacao.
 
 ### 1. Descobrir contexto
 
@@ -313,6 +337,7 @@ Nesta versao:
 - Modelos pequenos executam apenas tarefas delimitadas e devem escalar governanca.
 - Tarefas grandes devem passar por sizing antes de delegacao.
 - Subagentes executam partes; o orquestrador mantem veredito final.
+- Artefatos devem provar valor operacional, responsabilidade unica, local correto e custo justificavel.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
 - O agente deve sinalizar lacunas antes de inventar contexto.
@@ -343,6 +368,7 @@ Ao consumir este repositorio, o agente deve:
 - limitar modelos pequenos a execucao bounded e low-risk
 - dimensionar tarefas grandes antes de delegar
 - manter o veredito final com o orquestrador
+- auditar divida de contexto sob demanda quando houver redundancia ou custo injustificado
 - validar intencao humana antes de agir quando houver ambiguidade ou risco
 - respeitar fonte primaria
 - aplicar guardrails em situacoes criticas
