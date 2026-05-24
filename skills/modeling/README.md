@@ -72,17 +72,6 @@ Este README roteia skills de modelagem.
 
 Este README não substitui `./data-modeling.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["skills/modeling/"]
-    current --> n1["data-modeling.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

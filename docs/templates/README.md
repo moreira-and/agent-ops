@@ -55,27 +55,6 @@ Eles nao substituem manifesto, governance ou rules.
 
 ---
 
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["docs/templates/"]
-    current --> n1["new-artifact.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n3["../../governance/composition/context-composition.md"]
-```
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["docs/templates/"]
-    current --> n1["new-artifact.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n3["../../governance/composition/context-composition.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

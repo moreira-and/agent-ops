@@ -73,17 +73,6 @@ Este README roteia padrões de autoria.
 
 Este README não substitui `./markdown-authoring-standard.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["governance/authoring/"]
-    current --> n1["markdown-authoring-standard.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

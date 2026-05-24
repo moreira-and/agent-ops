@@ -22,21 +22,28 @@ A fonte normativa de maior precedencia e:
 
 - `./MANIFEST.md`
 
----
+Para descoberta inicial barata por LLM, use:
 
+- `./INDEX.md`
+
+`README.md` e o guia humano principal. `INDEX.md` e apenas um roteador compacto para escolher o primeiro arquivo operacional.
+
+---
 
 ## Diagrama
 
 ```mermaid
 flowchart TD
-    manifest["MANIFEST.md"] --> governance["governance/"]
-    governance --> prompts["prompts/"]
+    manifest["MANIFEST.md"] --> index["INDEX.md"]
+    manifest --> governance["governance/"]
+    index -. "descoberta barata" .-> prompts["prompts/"]
+    governance --> prompts
     prompts --> agents["agents/"]
     prompts --> rules["rules/"]
     prompts --> skills["skills/"]
     prompts --> hooks["prompts/hooks/"]
-    docs["docs/"] -. "humano; fora do contexto padrao" .-> prompts
-    evals["evals/"] -. "validacao; fora do contexto padrao" .-> prompts
+    docs["docs/"] -. "humano; fora do contexto padrao" .-> index
+    evals["evals/"] -. "validacao; fora do contexto padrao" .-> index
 ```
 
 ## Status v0.1
@@ -77,6 +84,7 @@ Hooks entram apenas como checkpoints relevantes ou obrigatorios por risco.
 ```txt
 agent-ops/
 ├── MANIFEST.md
+├── INDEX.md
 ├── README.md
 ├── LICENSE
 ├── governance/
@@ -93,6 +101,7 @@ agent-ops/
 | Area | Por que existe | Quando consultar |
 |---|---|---|
 | `MANIFEST.md` | Define contrato estrutural, precedencia e taxonomia. | Quando houver duvida sobre onde algo pertence ou qual norma prevalece. |
+| `INDEX.md` | Roteia descoberta inicial barata para LLM. | Quando o ponto de partida ainda nao estiver claro. |
 | `governance/` | Governa estrutura, composicao, autoria, qualidade e lifecycle do proprio `agent-ops`. | Quando for criar, alterar, mover, dividir ou validar artefatos do repositorio. |
 | `agents/` | Define perfis executores com missao, escopo, limites e dependencias. | Quando precisar escolher quem executa uma tarefa. |
 | `rules/` | Define normas de output, guardrails e restricoes de comportamento. | Quando precisar validar ou limitar a saida do agente. |
@@ -232,6 +241,7 @@ Em caso de conflito:
 2. `./governance/`
 3. diretorio especializado aplicavel
 4. `README.md`
+5. `INDEX.md`
 
 ---
 

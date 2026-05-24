@@ -72,17 +72,6 @@ Este README roteia skills de orquestração.
 
 Este README não substitui `./orchestration-design.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["skills/orchestration/"]
-    current --> n1["orchestration-design.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

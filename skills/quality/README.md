@@ -72,17 +72,6 @@ Este README roteia skills de qualidade.
 
 Este README não substitui `./data-quality-review.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["skills/quality/"]
-    current --> n1["data-quality-review.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

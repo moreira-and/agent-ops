@@ -72,18 +72,6 @@ Este README roteia prompts de revisão.
 
 Este README não substitui prompts específicos deste diretório.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["prompts/review/"]
-    current --> n1["enforce-semantic-naming.md"]
-    current --> n2["review-data-solution.md"]
-    current -. "governado por" .-> n3["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

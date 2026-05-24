@@ -109,6 +109,13 @@ Adiciona conhecimento operacional especializado.
 
 ## Regras de seleção
 
+### 0. Índice raiz para discovery inicial
+`../../INDEX.md` MAY ser consultado no início de uma tarefa quando o agente ainda não souber qual roteador usar.
+
+`../../INDEX.md` MUST ser descartado depois que o ponto de partida específico for escolhido.
+
+`../../INDEX.md` MUST NOT substituir `../../MANIFEST.md`, roteadores locais, rules, skills, agents ou prompts.
+
 ### 1. Base padrão
 `governance/` é a base padrão do ecossistema.
 
@@ -179,6 +186,7 @@ Uma composição de contexto é aceitável quando:
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes
 - `../../docs/`, `../../evals/` e `../../LICENSE` ficam fora da composição padrão
+- `../../INDEX.md` não permanece no contexto depois da seleção do roteador específico
 
 ---
 

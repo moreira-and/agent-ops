@@ -71,6 +71,8 @@ Esses diretórios MUST conter apenas arquivos `.md` destinados à injeção sele
 
 O repositório MAY conter metadados essenciais fora do núcleo injetável, como `LICENSE`.
 
+O repositório MAY conter `INDEX.md` como roteador raiz de descoberta barata, desde que ele não seja tratado como fonte normativa primária.
+
 O repositório MAY conter documentação humana em `docs/`, desde que ela não seja tratada como contexto injetável padrão.
 
 O repositório MAY conter validações em `evals/`, desde que elas não sejam tratadas como contexto injetável padrão.
@@ -186,14 +188,17 @@ Arquivos em `docs/` são documentação humana e não integram esta taxonomia de
 
 Arquivos em `evals/` são validações de comportamento e não integram esta taxonomia de contexto injetável.
 
+`INDEX.md` é artefato raiz de discovery para orientação inicial de LLM e não integra a taxonomia do núcleo injetável.
+
 ---
 
-## 6. Estrutura oficial v1
+## 6. Estrutura oficial v0.1
 
 ```txt
 agent-ops/
 ├── LICENSE
 ├── MANIFEST.md
+├── INDEX.md
 ├── README.md
 ├── docs/
 ├── evals/
@@ -249,57 +254,66 @@ Define a norma-mãe do `agent-ops`.
 ### 7.2 `README.md`
 Atua como roteador principal de navegação.
 
-### 7.3 `governance/`
+### 7.3 `INDEX.md`
+Atua como roteador barato de descoberta inicial para LLM.
+
+`INDEX.md` MAY ser consultado no início de discovery quando o ponto de partida ainda não estiver claro.
+
+`INDEX.md` MUST NOT substituir `MANIFEST.md`, `README.md`, `governance/`, rules, skills, agents ou prompts.
+
+`INDEX.md` MUST NOT ser carregado por padrão depois que o contexto específico estiver selecionado.
+
+### 7.4 `governance/`
 Define regras sobre estrutura, evolução, composição, autoria, qualidade e lifecycle do `agent-ops`.
 
 `governance/` MUST governar o sistema de artefatos.
 
 `governance/` MUST NOT definir regra técnica primária de saída.
 
-### 7.4 `agents/`
+### 7.5 `agents/`
 Define perfis de agentes, seu escopo, limites, forma de atuação e dependências contextuais.
 
 `agents/` MUST referenciar `rules/` e `skills/` por caminho quando aplicável.
 
 `agents/` MUST NOT duplicar `rules/` ou `skills/`.
 
-### 7.5 `rules/`
+### 7.6 `rules/`
 Define normas para a saída produzida pelos agentes.
 
 `rules/` MUST governar output.
 
 `rules/` MUST NOT governar a estrutura do `agent-ops`.
 
-### 7.6 `skills/`
+### 7.7 `skills/`
 Define conhecimento operacional reutilizável.
 
 `skills/` MUST conter capacidade reaproveitável.
 
 `skills/` MUST NOT conter persona, workflow primário ou governança estrutural.
 
-### 7.7 `prompts/`
+### 7.8 `prompts/`
 Define pontos de entrada para tarefas, fluxos e solicitações.
 
 `prompts/` MUST iniciar ou conduzir trabalho.
 
 `prompts/` MUST NOT virar repositório genérico de contexto sem classificação.
 
-### 7.8 `prompts/hooks/`
+### 7.9 `prompts/hooks/`
 Define prompts de checkpoint e validação durante fluxos.
 
 `prompts/hooks/` MUST validar aderência a `governance/` e/ou `rules/` quando aplicável.
 
 `prompts/hooks/` MUST NOT conter hooks executáveis.
 
-### 7.9 `evals/`
+### 7.10 `evals/`
 Define validações manuais ou automatizadas para comportamento esperado dos artefatos.
 
 `evals/` MUST NOT ser tratado como contexto injetável padrão.
 
 `evals/` MUST validar comportamento; não definir norma primária.
 
-### 7.10 Diretórios não oficiais em v1
-`tasks/`, `workflows/` e `policies/` não são diretórios oficiais da v1.
+### 7.11 Diretórios não oficiais em v0.1
+`tasks/`, `workflows/` e `policies/` não são diretórios oficiais da v0.1.
 
 Nesta versão:
 
@@ -489,6 +503,7 @@ Se houver conflito, a precedência normativa é:
 2. `governance/`
 3. diretório especializado aplicável
 4. `README.md`
+5. `INDEX.md`
 
 Se faltar contexto crítico, o agente SHOULD explicitar a lacuna.
 

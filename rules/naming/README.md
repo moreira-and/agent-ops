@@ -156,28 +156,6 @@ Este README nao substitui:
 
 ---
 
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["rules/naming/"]
-    current --> n1["_core-pattern.md"]
-    current --> n2["reference-severity.md"]
-    current --> n3["reference-units.md"]
-    current --> n4["rule-01-format.md"]
-    current --> n5["rule-02-consistency.md"]
-    current --> n6["rule-03-units.md"]
-    current --> n7["rule-04-abbreviations.md"]
-    current --> n8["rule-05-no-types.md"]
-    current --> n9["rule-06-booleans.md"]
-    current --> n10["rule-07-dates.md"]
-    current --> n11["rule-08-foreign-keys.md"]
-    current --> n12["rule-09-composition-order.md"]
-    current --> n13["rule-10-avoid-generic.md"]
-    current -. "governado por" .-> n14["../../MANIFEST.md"]
-```
-
 ## Diagrama
 
 ```mermaid

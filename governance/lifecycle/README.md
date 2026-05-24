@@ -73,17 +73,6 @@ Este README roteia política de lifecycle.
 
 Este README não substitui `./artifact-lifecycle-policy.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["governance/lifecycle/"]
-    current --> n1["artifact-lifecycle-policy.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

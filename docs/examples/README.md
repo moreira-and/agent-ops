@@ -56,31 +56,6 @@ Exemplos explicam uso. Eles nao definem governanca.
 
 ---
 
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["docs/examples/"]
-    current --> n1["grow-from-execution-example.md"]
-    current --> n2["minimal-context-composition.md"]
-    current --> n3["semantic-naming-examples.md"]
-    current -. "governado por" .-> n4["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n5["../../governance/composition/context-composition.md"]
-```
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["docs/examples/"]
-    current --> n1["grow-from-execution-example.md"]
-    current --> n2["minimal-context-composition.md"]
-    current --> n3["semantic-naming-examples.md"]
-    current -. "governado por" .-> n4["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n5["../../governance/composition/context-composition.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

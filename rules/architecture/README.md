@@ -74,17 +74,6 @@ Este README roteia normas arquiteturais.
 
 Este README não substitui `./architecture-rules.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["rules/architecture/"]
-    current --> n1["architecture-rules.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

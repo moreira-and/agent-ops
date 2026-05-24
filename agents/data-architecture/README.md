@@ -81,17 +81,6 @@ Este README roteia perfis de arquitetura de dados.
 
 Este README não substitui os arquivos de agente deste diretório nem as regras em `../../rules/`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["agents/data-architecture/"]
-    current --> n1["solid-data-architect.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

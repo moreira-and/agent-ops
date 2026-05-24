@@ -55,6 +55,7 @@ implementacao do especialista
 | 10 | ORQ-10 | F11 | Padronizar identidade `prompt-ops` versus `agent-ops` | Maintainer de produto | `README.md`, `MANIFEST.md` | PASS |
 | 11 | ORQ-11 | F12 | Resolver diretorios vazios nao governados | Maintainer | estrutura raiz local | PASS |
 | 12 | ORQ-12 | F12 complementar | Atualizar arvores e roteadores que nao refletem a estrutura real | Documentacao | `README.md`, `MANIFEST.md`, `docs/README.md` | PASS |
+| 13 | ORQ-13 | Root index | Criar `INDEX.md` como roteador barato para discovery por LLM | Context engineer | `INDEX.md`, `README.md`, `MANIFEST.md`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -74,6 +75,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-10 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-11 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-12 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-13 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -93,6 +95,22 @@ Decisao: PASS | FAIL | CONDITIONAL
 Proxima etapa:
 ```
 
+## Registro por item desta feature
+
+```txt
+ID: ORQ-13
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Context engineer
+Escopo: Criar e governar INDEX.md como roteador barato de discovery inicial por LLM.
+Arquivos avaliados: INDEX.md, README.md, MANIFEST.md, governance/composition/context-composition.md, evals/manual-regression-suite.md
+Arquivos alterados: INDEX.md, README.md, MANIFEST.md, governance/composition/context-composition.md, evals/manual-regression-suite.md, evals/index-feature-results.md
+Evidencia: INDEX.md existe, tem menos de 120 linhas, referencia apenas caminhos existentes e esta registrado em manifesto, composicao e evals.
+Riscos: INDEX.md virar fonte normativa ou contexto carregado por habito.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Manter sincronizado apenas quando roteadores raiz mudarem.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -100,13 +118,14 @@ Proxima etapa:
 - ORQ-01: criado `../../evals/` com suite manual de regressao.
 - ORQ-02: criado `../../rules/generation/operational-safety-guardrails.md`.
 - ORQ-03: criado `../../prompts/hooks/validate-operational-safety.md` e regra de checkpoint obrigatorio por risco.
-- ORQ-04: `tasks/`, `workflows/` e `policies/` definidos como nao oficiais em v1.
+- ORQ-04: `tasks/`, `workflows/` e `policies/` definidos como nao oficiais em v0.1.
 - ORQ-05: prompts principais reforcados com `MUST` e entradas/saidas minimas.
 - ORQ-08: criado template humano unico em `../templates/new-artifact.md`.
 - ORQ-09: lifecycle recebeu status e regra minima de depreciacao.
 - ORQ-10: identidade oficial `agent-ops` explicitada.
 - ORQ-11: diretorios vazios nao oficiais foram removidos da raiz local.
 - ORQ-12: `../../README.md` reescrito como mapa humano do sistema e workflows.
+- ORQ-13: criado `../../INDEX.md` como roteador barato de discovery inicial por LLM e registrado em manifesto, composicao e evals.
 
 ### Itens fechados nesta execucao
 

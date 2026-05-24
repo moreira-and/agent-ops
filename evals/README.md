@@ -81,6 +81,7 @@ Acao recomendada:
 
 ## Suite inicial
 
+- `./index-feature-results.md`
 - `./manual-regression-suite.md`
 - `./v0.1-manual-results.md`
 
@@ -94,27 +95,16 @@ Automacao so deve ser adicionada quando reduzir ambiguidade sem introduzir depen
 
 ---
 
-
 ## Diagrama
 
 ```mermaid
 flowchart TD
     current["evals/"]
-    current --> n1["manual-regression-suite.md"]
-    current --> n2["v0.1-manual-results.md"]
-    current -. "governado por" .-> n3["../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n4["../governance/composition/context-composition.md"]
-```
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["evals/"]
-    current --> n1["manual-regression-suite.md"]
-    current --> n2["v0.1-manual-results.md"]
-    current -. "governado por" .-> n3["../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n4["../governance/composition/context-composition.md"]
+    current --> n1["index-feature-results.md"]
+    current --> n2["manual-regression-suite.md"]
+    current --> n3["v0.1-manual-results.md"]
+    current -. "governado por" .-> n4["../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n5["../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

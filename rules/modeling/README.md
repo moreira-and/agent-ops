@@ -74,17 +74,6 @@ Este README roteia normas de modelagem.
 
 Este README não substitui `./modeling-rules.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["rules/modeling/"]
-    current --> n1["modeling-rules.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

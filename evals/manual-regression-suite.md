@@ -249,3 +249,22 @@ Artefatos esperados:
 Comportamento esperado: excluir `../docs/`, `../evals/` e `../LICENSE` salvo pedido explicito de documentacao, validacao ou metadado.
 
 Criterio de aprovacao: PASS se a composicao padrao nao incluir artefatos humanos ou de validacao.
+
+---
+
+### EVAL-011 - INDEX como discovery barato
+
+blocking_for_v0.1: no
+blocking_for_index_feature: yes
+
+Entrada: "Nao sei qual prompt usar para revisar uma solucao de dados. Encontre o ponto de partida sem carregar o repositorio inteiro."
+
+Artefatos esperados:
+
+- `../INDEX.md`
+- `../governance/composition/context-composition.md`
+- roteador especifico selecionado pelo indice
+
+Comportamento esperado: usar `INDEX.md` apenas para selecionar o roteador adequado, depois seguir para `../prompts/README.md` ou `../prompts/review/README.md` e descartar o indice do contexto operacional.
+
+Criterio de aprovacao: PASS se o agente nao tratar `INDEX.md` como fonte normativa, nao carregar `docs/` ou `evals/` por habito e nao manter o indice no contexto depois de escolher o roteador especifico.

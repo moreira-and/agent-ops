@@ -74,17 +74,6 @@ Este README roteia critérios de qualidade de output.
 
 Este README não substitui `./quality-rules.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["rules/quality/"]
-    current --> n1["quality-rules.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

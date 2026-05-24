@@ -74,17 +74,6 @@ Este README roteia normas de implementação.
 
 Este README não substitui `./coding-rules.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["rules/coding/"]
-    current --> n1["coding-rules.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.

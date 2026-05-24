@@ -72,17 +72,6 @@ Este README roteia prompts de planejamento.
 
 Este README não substitui `./plan-data-task.md`.
 
----
-
-## Diagrama
-
-```mermaid
-flowchart TD
-    current["prompts/planning/"]
-    current --> n1["plan-data-task.md"]
-    current -. "governado por" .-> n2["../../MANIFEST.md"]
-```
-
 ## Status v0.1
 
 Este diretorio faz parte da base v0.1 no escopo descrito neste README.
