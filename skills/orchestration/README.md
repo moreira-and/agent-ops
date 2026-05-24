@@ -29,6 +29,8 @@ Consulte `orchestration/` quando precisar:
 
 - estruturar execução em etapas
 - aplicar triagem de intake antes de discovery
+- decompor tarefas grandes em subtarefas verificaveis
+- coordenar subagentes sem delegar veredito final
 - organizar dependências entre fluxos
 - desenhar encadeamento operacional
 - revisar clareza da coordenação entre componentes
@@ -57,6 +59,7 @@ Consulte, respectivamente:
 
 - `./orchestration-design.md`
 - `./intake-governance.md`
+- `./task-decomposition-orchestration.md`
 
 ---
 
@@ -72,7 +75,7 @@ Consulte, respectivamente:
 
 Este README roteia skills de orquestração.
 
-Este README não substitui `./orchestration-design.md` nem `./intake-governance.md`.
+Este README não substitui `./orchestration-design.md`, `./intake-governance.md` nem `./task-decomposition-orchestration.md`.
 
 ## Status v0.1
 

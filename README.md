@@ -21,6 +21,12 @@ O modelo oficial e:
 intake -> find -> select -> inject -> execute
 ```
 
+Quando a tarefa parecer grande demais, o fluxo pode incluir sizing depois de intake:
+
+```txt
+intake -> sizing -> find -> select -> inject -> execute
+```
+
 A fonte normativa de maior precedencia e:
 
 - `./MANIFEST.md`
@@ -40,6 +46,7 @@ flowchart TD
     manifest["MANIFEST.md"] --> index["INDEX.md"]
     manifest --> governance["governance/"]
     index -. "intake quando pedido e vago ou arriscado" .-> intake["validate-user-intent"]
+    index -. "sizing quando tarefa e grande" .-> sizing["size-task-for-delegation"]
     index -. "descoberta barata" .-> prompts["prompts/"]
     governance --> prompts
     prompts --> agents["agents/"]
@@ -47,6 +54,7 @@ flowchart TD
     prompts --> skills["skills/"]
     prompts --> hooks["prompts/hooks/"]
     hooks --> intake
+    hooks --> sizing
     memory["_memory/"] -. "memoria governada; sob demanda" .-> index
     docs["docs/"] -. "humano; fora do contexto padrao" .-> index
     evals["evals/"] -. "validacao; fora do contexto padrao" .-> index
@@ -89,6 +97,16 @@ prompt -> governance -> agent -> rules -> skills
 Hooks entram apenas como checkpoints relevantes ou obrigatorios por risco.
 
 `_memory/`, `docs/`, `evals/` e `LICENSE` nao entram na composicao padrao.
+
+### Delegation Governance
+
+Tarefas grandes passam por sizing antes de delegacao.
+
+Use delegacao apenas quando a tarefa nao couber em execucao direta e puder ser quebrada em subtarefas pequenas, verificaveis e com arquivos delimitados.
+
+Subagentes podem executar partes. O orquestrador mantem escopo, integracao, revisao e veredito final.
+
+Saidas oficiais: `EXECUTE_DIRECT`, `DECOMPOSE_AND_DELEGATE` ou `BLOCKED_FOR_DECOMPOSITION`.
 
 ### Small Model Execution Mode
 
@@ -151,6 +169,20 @@ prompts/hooks/validate-user-intent.md
 Saida esperada: `READY_TO_FIND`, `NEEDS_CLARIFICATION`, `NEEDS_APPROVAL` ou `REFUSE_OR_REDIRECT`.
 
 Somente `READY_TO_FIND` libera `find -> select -> inject -> execute`.
+
+### 0.1. Dimensionar e delegar tarefa grande
+
+Use quando a tarefa parecer ampla, multi-dominio, longa demais para uma unica execucao ou quando houver pedido explicito de subagentes.
+
+```txt
+prompts/hooks/size-task-for-delegation.md
+-> rules/architecture/delegation-boundaries.md
+-> skills/orchestration/task-decomposition-orchestration.md
+```
+
+Saida esperada: `EXECUTE_DIRECT`, `DECOMPOSE_AND_DELEGATE` ou `BLOCKED_FOR_DECOMPOSITION`.
+
+Somente `DECOMPOSE_AND_DELEGATE` autoriza subtarefas delegadas. O veredito final continua com o orquestrador.
 
 ### 1. Descobrir contexto
 
@@ -279,6 +311,8 @@ Nesta versao:
 - Conteudo duplicado deve ser extraido para fonte primaria.
 - Mudancas relevantes devem classificar impacto e revisar sync targets.
 - Modelos pequenos executam apenas tarefas delimitadas e devem escalar governanca.
+- Tarefas grandes devem passar por sizing antes de delegacao.
+- Subagentes executam partes; o orquestrador mantem veredito final.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
 - O agente deve sinalizar lacunas antes de inventar contexto.
@@ -307,6 +341,8 @@ Ao consumir este repositorio, o agente deve:
 - evitar leitura indiscriminada
 - escolher contexto minimo suficiente
 - limitar modelos pequenos a execucao bounded e low-risk
+- dimensionar tarefas grandes antes de delegar
+- manter o veredito final com o orquestrador
 - validar intencao humana antes de agir quando houver ambiguidade ou risco
 - respeitar fonte primaria
 - aplicar guardrails em situacoes criticas

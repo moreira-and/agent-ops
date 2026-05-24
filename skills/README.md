@@ -15,6 +15,7 @@ Este diretório deve concentrar conteúdos como:
 - procedimentos transversais de evolução do `agent-ops`
 - procedimentos
 - triagem operacional de intake
+- decomposicao e orquestracao de tarefas grandes
 - heurísticas
 - estratégias
 - técnicas reutilizáveis
@@ -41,6 +42,7 @@ Consulte `skills/` quando precisar:
 - orientar como realizar um tipo de trabalho
 - aplicar técnica reutilizável em múltiplos contextos
 - aplicar triagem de intake sem duplicar rules ou hooks
+- aplicar decomposicao de tarefa grande sem delegar veredito final
 - complementar a atuação de um agente com capacidade especializada
 
 ---
@@ -109,6 +111,8 @@ Conhecimento reutilizável sobre transformação.
 
 ### `orchestration/`
 Conhecimento reutilizável sobre orquestração.
+
+Inclui intake governance e decomposicao/orquestracao de tarefas grandes.
 
 ### `modeling/`
 Conhecimento reutilizável sobre modelagem.

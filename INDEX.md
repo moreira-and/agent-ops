@@ -32,9 +32,10 @@ Em caso de conflito, este indice perde para:
 
 1. Ler este indice somente quando o ponto de partida ainda nao estiver claro.
 2. Se o pedido humano estiver vago ou arriscado, iniciar por intake.
-3. Escolher um roteador por caminho.
-4. Carregar apenas os artefatos necessarios.
-5. Descartar este indice quando o contexto especifico estiver escolhido.
+3. Se a tarefa parecer grande demais, iniciar por sizing.
+4. Escolher um roteador por caminho.
+5. Carregar apenas os artefatos necessarios.
+6. Descartar este indice quando o contexto especifico estiver escolhido.
 
 ---
 
@@ -53,6 +54,20 @@ Se a tarefa exceder esse limite, retorne `BLOCKED_OR_ESCALATE`.
 
 ---
 
+## Delegation Governance
+
+Tarefas grandes devem passar por sizing antes de delegacao.
+
+Use:
+
+- `./prompts/hooks/size-task-for-delegation.md` para decidir entre executar, delegar ou bloquear
+- `./rules/architecture/delegation-boundaries.md` para limites normativos
+- `./skills/orchestration/task-decomposition-orchestration.md` para decompor, revisar, integrar e emitir veredito
+
+Subagentes executam partes. O orquestrador mantem escopo, integracao e veredito final.
+
+---
+
 ## Status de injecao
 
 - MAY ser carregado no inicio de discovery quando o roteador ainda nao esta claro.
@@ -68,6 +83,7 @@ Se a tarefa exceder esse limite, retorne `BLOCKED_OR_ESCALATE`.
 | resolver conflito estrutural | `./MANIFEST.md` |
 | entender uso humano geral | `./README.md` |
 | validar pedido humano vago ou arriscado | `./prompts/hooks/validate-user-intent.md` |
+| dimensionar tarefa grande ou delegacao | `./prompts/hooks/size-task-for-delegation.md` |
 | consultar memoria governada sob demanda | `./_memory/README.md` |
 | sincronizar artefatos apos mudanca | `./governance/lifecycle/artifact-synchronization-policy.md` |
 | consultar sync targets | `./governance/authoring/artifact-registry.md` |

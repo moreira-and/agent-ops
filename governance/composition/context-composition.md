@@ -79,6 +79,12 @@ O agente MUST montar contexto por arquivos declarados e selecionados, não por l
 
 `intake` MUST NOT ser usado como justificativa para carregar mais contexto antes de `find`.
 
+`sizing` MAY ocorrer depois de intake quando a tarefa parecer grande demais para execucao direta ou quando houver pedido explicito de subagentes.
+
+`sizing` MUST decidir entre `EXECUTE_DIRECT`, `DECOMPOSE_AND_DELEGATE` e `BLOCKED_FOR_DECOMPOSITION`.
+
+`sizing` MUST NOT substituir intake, find, select, inject ou execute.
+
 ---
 
 ## Small Model Execution Mode
@@ -132,6 +138,41 @@ Suggested escalation:
 
 ---
 
+## Delegation Governance
+
+Delegation Governance MAY ser acionada quando uma tarefa exceder execucao direta segura.
+
+O orquestrador MUST manter responsabilidade por escopo, integracao e veredito final.
+
+Subagentes MAY executar partes delimitadas, mas MUST NOT decidir governanca final, arquitetura final ou veredito final.
+
+### Saidas oficiais de sizing
+
+```txt
+EXECUTE_DIRECT
+DECOMPOSE_AND_DELEGATE
+BLOCKED_FOR_DECOMPOSITION
+```
+
+### Contexto para delegacao
+
+O contexto compartilhado para subtarefas SHOULD ser menor que o contexto total da tarefa.
+
+Cada subtarefa delegada MUST declarar:
+
+- objetivo
+- escopo permitido
+- arquivos permitidos
+- arquivos proibidos
+- entrada obrigatoria
+- saida esperada
+- criterio de aceite
+- limites
+
+Se a subtarefa nao puder ser descrita nesses termos, a delegacao MUST NOT ocorrer.
+
+---
+
 ## Ordem oficial de composição
 
 A ordem oficial é:
@@ -166,6 +207,7 @@ Adiciona conhecimento operacional especializado.
 `../../prompts/hooks/` MAY ser acionado em pontos específicos do fluxo para validar:
 
 - intenção, ambiguidade e risco do pedido humano antes de `find`
+- tamanho da tarefa e necessidade de delegacao antes de `find`
 - aderência a `governance/`
 - aderência a `rules/`
 - conformidade antes da conclusão
@@ -190,6 +232,24 @@ O intake MUST terminar em uma das saídas:
 Somente `READY_TO_FIND` libera o fluxo normal de `find -> select -> inject -> execute`.
 
 Intake MUST NOT carregar `../../docs/`, `../../evals/` ou contexto especializado por hábito.
+
+### 0.1. Sizing antes de delegacao
+
+`../../prompts/hooks/size-task-for-delegation.md` MAY ser usado depois de intake quando a tarefa parecer ampla, longa, multi-dominio ou quando o usuario pedir subagentes.
+
+O sizing MUST terminar em uma das saidas:
+
+- `EXECUTE_DIRECT`
+- `DECOMPOSE_AND_DELEGATE`
+- `BLOCKED_FOR_DECOMPOSITION`
+
+Somente `DECOMPOSE_AND_DELEGATE` autoriza decomposicao e delegacao.
+
+`EXECUTE_DIRECT` segue para `find -> select -> inject -> execute`.
+
+`BLOCKED_FOR_DECOMPOSITION` exige esclarecimento, decisao ou reducao de escopo antes de continuar.
+
+Sizing MUST NOT carregar `../../docs/`, `../../evals/`, registry ou `_memory/` por habito.
 
 ### 1. Índice raiz para discovery inicial
 `../../INDEX.md` MAY ser consultado no início de uma tarefa quando o agente ainda não souber qual roteador usar.
@@ -264,6 +324,8 @@ Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
 - contexto opcional MUST NOT ser carregado por hábito
 - múltiplas skills MUST NOT ser carregadas sem necessidade
 - modelos pequenos MUST NOT carregar governanca ampla antes de executar tarefa delimitada
+- delegacao MUST NOT ser usada para tarefa simples
+- subagentes MUST NOT receber contexto maior que o necessario para sua subtarefa
 - prompts MUST NOT embutir integralmente governança, regras ou skills
 - agents MUST referenciar dependências em vez de embuti-las
 - rules MUST NOT virar tutoriais operacionais
@@ -282,6 +344,8 @@ Uma composição de contexto é aceitável quando:
 - cada dependência crítica está declarada por caminho
 - nenhum artefato é carregado apenas por hábito
 - modelos pequenos recebem contexto delimitado ou retornam `BLOCKED_OR_ESCALATE`
+- tarefas grandes passam por sizing antes de delegacao
+- subagentes recebem subtarefas verificaveis e o veredito permanece com o orquestrador
 - pedidos humanos ambíguos ou arriscados passam por intake antes de `find`
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes

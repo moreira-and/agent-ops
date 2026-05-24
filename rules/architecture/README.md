@@ -29,6 +29,7 @@ Consulte `architecture/` quando precisar:
 
 - definir ou revisar arquitetura de soluções de dados
 - validar separação de responsabilidades
+- limitar decomposicao e delegacao de tarefas grandes
 - estruturar componentes e interfaces
 - orientar decisões arquiteturais de geração
 
@@ -58,6 +59,11 @@ Consulte, respectivamente:
 
 - `./architecture-rules.md`
 
+## Arquivos
+
+- `./architecture-rules.md`
+- `./delegation-boundaries.md`
+
 ---
 
 ## Responsabilidade desta pasta
@@ -72,7 +78,7 @@ Consulte, respectivamente:
 
 Este README roteia normas arquiteturais.
 
-Este README não substitui `./architecture-rules.md`.
+Este README não substitui `./architecture-rules.md` nem `./delegation-boundaries.md`.
 
 ## Status v0.1
 

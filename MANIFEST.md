@@ -116,6 +116,18 @@ Onde:
 
 Quando `intake` liberar a tarefa, o fluxo de composição continua por `find -> select -> inject`.
 
+`sizing` MAY ocorrer depois de `intake` quando a tarefa parecer grande demais para execucao direta ou quando houver pedido explicito de subagentes.
+
+`sizing` MUST decidir entre:
+
+- `EXECUTE_DIRECT`
+- `DECOMPOSE_AND_DELEGATE`
+- `BLOCKED_FOR_DECOMPOSITION`
+
+Delegacao MUST NOT substituir `find -> select -> inject -> execute`.
+
+Subagentes podem executar partes delimitadas; o orquestrador mantem responsabilidade por escopo, integracao e veredito final.
+
 O `agent-ops` MUST ser projetado para injeção seletiva.
 
 O `agent-ops` MUST NOT depender de carregamento massivo por padrão.
@@ -325,6 +337,8 @@ Define prompts de checkpoint e validação durante fluxos.
 
 `prompts/hooks/` MUST validar aderência a `governance/` e/ou `rules/` quando aplicável.
 
+`prompts/hooks/` MAY dimensionar tarefa grande antes de delegacao quando o checkpoint for explicitamente sobre sizing.
+
 `prompts/hooks/` MUST NOT conter hooks executáveis.
 
 ### 7.10 `evals/`
@@ -386,6 +400,8 @@ Interpretação:
 `prompts/hooks/` MAY ser acionado como checkpoint ao longo do fluxo.
 
 `prompts/hooks/validate-user-intent.md` MAY ser acionado antes de `find` quando o pedido humano estiver ambíguo, arriscado ou incompleto.
+
+`prompts/hooks/size-task-for-delegation.md` MAY ser acionado depois de intake quando a tarefa parecer grande demais para execucao direta.
 
 `prompts/hooks/` NÃO integra a base obrigatória padrão.
 

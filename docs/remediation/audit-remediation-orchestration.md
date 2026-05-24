@@ -60,6 +60,7 @@ implementacao do especialista
 | 15 | ORQ-15 | Governed Memory | Criar `_memory/` como memoria governada auxiliar e seletiva | Governanca / Context engineer | `_memory/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `governance/composition/`, `evals/` | PASS |
 | 16 | ORQ-16 | Artifact Synchronization | Criar registry e policy leve de sync targets | Governanca / Lifecycle | `governance/authoring/`, `governance/lifecycle/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
 | 17 | ORQ-17 | Small Model Execution Mode | Limitar modelos pequenos a execucao bounded e escalacao de governanca | Context engineer / Governanca | `INDEX.md`, `README.md`, `governance/composition/`, `evals/` | PASS |
+| 18 | ORQ-18 | Delegation Governance | Dimensionar tarefas grandes, decompor e delegar mantendo veredito no orquestrador | Orquestracao / Governanca | `prompts/hooks/`, `rules/architecture/`, `skills/orchestration/`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -84,6 +85,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-15 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-16 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-17 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-18 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -175,6 +177,20 @@ Decisao: PASS
 Proxima etapa: Reavaliar quando novos modos de execucao ou modelos forem adicionados.
 ```
 
+```txt
+ID: ORQ-18
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Governanca
+Escopo: Implementar Delegation Governance como camada de sizing, decomposicao e orquestracao para tarefas grandes.
+Arquivos avaliados: docs/remediation/delegation-governance-spec.md, docs/remediation/README.md, MANIFEST.md, README.md, INDEX.md, governance/composition/context-composition.md, prompts/hooks/README.md, rules/architecture/README.md, skills/orchestration/README.md, evals/manual-regression-suite.md
+Arquivos alterados: prompts/hooks/size-task-for-delegation.md, rules/architecture/delegation-boundaries.md, skills/orchestration/task-decomposition-orchestration.md, MANIFEST.md, README.md, INDEX.md, governance/composition/context-composition.md, prompts/README.md, prompts/hooks/README.md, rules/README.md, rules/architecture/README.md, skills/README.md, skills/orchestration/README.md, evals/manual-regression-suite.md, evals/delegation-governance-results.md, evals/README.md, docs/remediation/README.md, docs/remediation/audit-remediation-orchestration.md, governance/authoring/artifact-registry.md
+Evidencia: hook de sizing criado; rule de limites criada; skill de orquestracao criada; context-composition reconhece sizing e delegacao; EVAL-016 registrado com PASS.
+Riscos: delegacao virar custo automatico, subagente ampliar escopo ou orquestrador terceirizar veredito.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Reavaliar quando forem adicionados novos modos de execucao multiagente.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -194,6 +210,7 @@ Proxima etapa: Reavaliar quando novos modos de execucao ou modelos forem adicion
 - ORQ-15: criado `../../_memory/` como memoria governada auxiliar, seletiva e fora da composicao padrao.
 - ORQ-16: criado `../../governance/authoring/artifact-registry.md` e `../../governance/lifecycle/artifact-synchronization-policy.md`.
 - ORQ-17: criado Small Model Execution Mode para execucao bounded por modelos pequenos com escalacao obrigatoria de governanca.
+- ORQ-18: criado Delegation Governance com sizing, limites de delegacao e orquestracao com veredito final do orquestrador.
 
 ### Itens fechados nesta execucao
 

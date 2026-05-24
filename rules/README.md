@@ -19,6 +19,7 @@ Este diretório deve concentrar normas sobre:
 - nomenclatura
 - qualidade
 - qualidade da entrada humana
+- limites de delegacao e decomposicao
 - guardrails de geração
 
 A norma de maior precedência continua sendo:
@@ -45,6 +46,7 @@ Consulte `rules/` quando precisar:
 - aplicar padrões de modelagem
 - validar qualidade obrigatória
 - validar se um pedido humano pode seguir para discovery
+- validar se uma tarefa grande pode ser delegada com limites claros
 - restringir comportamento de geração
 
 ---
