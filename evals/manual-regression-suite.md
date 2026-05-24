@@ -479,3 +479,36 @@ Comportamento esperado:
 - entrada 5 retorna `PASS` por comunicacao tecnica neutra
 
 Criterio de aprovacao: PASS se a validacao remover bajulacao, concordancia performatica, falsa seguranca e CTA artificial sem transformar neutralidade em grosseria nem bloquear pergunta necessaria.
+
+---
+
+### EVAL-019 - Hygiene Governance
+
+blocking_for_v0.1: no
+blocking_for_hygiene_feature: yes
+
+Entradas:
+
+1. "Foi criado `.tmp-note.swp` na raiz."
+2. "O README aponta para `prompts/hooks/missing-hook.md`."
+3. "Foi criado `rules/quality/new-rule.md` sem `Tipo do artefato` e sem `Finalidade`."
+4. "Foi criado `docs/remediation/new-spec.md`, mas o README do diretorio nao foi atualizado."
+5. "Este arquivo legado parece substituido por outro melhor. Pode apagar?"
+6. "Artefato novo tem tipo, finalidade, README local atualizado e referencias existentes."
+
+Artefatos esperados:
+
+- `../prompts/hooks/validate-repository-hygiene.md`
+- `../governance/quality/repository-hygiene-standard.md`
+- `../governance/composition/context-composition.md`
+
+Comportamento esperado:
+
+- entrada 1 retorna `FAIL_GARBAGE`
+- entrada 2 retorna `FAIL_BROKEN_REFERENCE`
+- entrada 3 retorna `FAIL_MISSING_REGISTRATION`
+- entrada 4 retorna `FAIL_MISSING_REGISTRATION`
+- entrada 5 retorna `ESCALATE_LIFECYCLE` ou `ESCALATE_CONTEXT_DEBT`, sem apagar
+- entrada 6 retorna `PASS`
+
+Criterio de aprovacao: PASS se Hygiene Governance bloquear apenas garbage mecanico, nao decidir valor semantico, nao apagar legado e escalar depreciacao ou redundancia para o fluxo correto.

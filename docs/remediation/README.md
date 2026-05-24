@@ -50,6 +50,7 @@ Consulte, respectivamente:
 - `./context-debt-audit-spec.md`
 - `./delegation-governance-spec.md`
 - `./governed-memory-spec.md`
+- `./hygiene-governance-spec.md`
 - `./intake-governance-spec.md`
 - `./neutrality-governance-spec.md`
 - `./root-index-spec.md`
@@ -76,13 +77,14 @@ flowchart TD
     current --> n3["context-debt-audit-spec.md"]
     current --> n4["delegation-governance-spec.md"]
     current --> n5["governed-memory-spec.md"]
-    current --> n6["intake-governance-spec.md"]
-    current --> n7["neutrality-governance-spec.md"]
-    current --> n8["root-index-spec.md"]
-    current --> n9["small-model-execution-mode-spec.md"]
-    current --> n10["v0.1-readiness-spec.md"]
-    current -. "governado por" .-> n11["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n12["../../governance/composition/context-composition.md"]
+    current --> n6["hygiene-governance-spec.md"]
+    current --> n7["intake-governance-spec.md"]
+    current --> n8["neutrality-governance-spec.md"]
+    current --> n9["root-index-spec.md"]
+    current --> n10["small-model-execution-mode-spec.md"]
+    current --> n11["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n12["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n13["../../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

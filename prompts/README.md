@@ -20,6 +20,7 @@ Este diretório deve concentrar artefatos como:
 - checkpoints de intake antes de discovery
 - checkpoints de sizing antes de delegacao
 - checkpoints de divida de contexto sob demanda
+- checkpoints de higiene mecanica do repositorio
 - checkpoints de neutralidade e higiene de engajamento
 - checkpoints de validação em `./hooks/`
 
@@ -49,6 +50,7 @@ Consulte `prompts/` quando precisar:
 - validar entrada humana antes de discovery quando houver ambiguidade ou risco
 - dimensionar tarefa grande antes de decompor e delegar
 - auditar redundancia, custo de contexto ou local incorreto de artefatos
+- validar garbage mecanico, referencias quebradas e registros ausentes
 - validar resposta neutra, sem bajulacao ou CTA artificial
 
 ---
@@ -172,6 +174,7 @@ Esses artefatos devem ser usados para:
 - validar intenção, ambiguidade e risco da entrada humana antes de discovery
 - dimensionar tarefa grande antes de delegacao
 - auditar divida de contexto sob demanda
+- validar higiene mecanica do repositorio
 - validar neutralidade e higiene de engajamento
 - validar aderência a `../governance/`
 - validar aderência a `../rules/`

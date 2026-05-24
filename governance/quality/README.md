@@ -33,6 +33,7 @@ Consulte `quality/` quando precisar:
 - verificar rastreabilidade
 - avaliar se um arquivo está pronto para uso em contexto
 - avaliar divida de arquitetura informacional, redundancia e custo de contexto
+- validar higiene mecanica do repositorio
 
 ---
 
@@ -62,6 +63,7 @@ Consulte, respectivamente:
 
 - `./artifact-quality-standard.md`
 - `./context-economy-and-responsibility.md`
+- `./repository-hygiene-standard.md`
 
 ---
 
@@ -77,7 +79,7 @@ Consulte, respectivamente:
 
 Este README roteia padrões de qualidade de artefato.
 
-Este README não substitui `./artifact-quality-standard.md` nem `./context-economy-and-responsibility.md`.
+Este README não substitui `./artifact-quality-standard.md`, `./context-economy-and-responsibility.md` nem `./repository-hygiene-standard.md`.
 
 ## Status v0.1
 

@@ -48,6 +48,7 @@ flowchart TD
     index -. "intake quando pedido e vago ou arriscado" .-> intake["validate-user-intent"]
     index -. "sizing quando tarefa e grande" .-> sizing["size-task-for-delegation"]
     index -. "context debt sob demanda" .-> debt["validate-context-debt"]
+    index -. "hygiene quando ha garbage mecanico" .-> hygiene["validate-repository-hygiene"]
     index -. "neutralidade quando resposta tem ruido social" .-> neutrality["validate-neutrality-and-engagement"]
     index -. "descoberta barata" .-> prompts["prompts/"]
     governance --> prompts
@@ -58,6 +59,7 @@ flowchart TD
     hooks --> intake
     hooks --> sizing
     hooks --> debt
+    hooks --> hygiene
     hooks --> neutrality
     memory["_memory/"] -. "memoria governada; sob demanda" .-> index
     docs["docs/"] -. "humano; fora do contexto padrao" .-> index
@@ -119,6 +121,14 @@ Use quando um artefato, diretorio ou mudanca parecer redundante, caro, extenso, 
 A auditoria decide entre `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.
 
 Ela nao entra na composicao padrao e nao executa reestruturacao automaticamente.
+
+### Hygiene Governance
+
+Use quando houver garbage mecanico, referencia quebrada ou registro basico ausente.
+
+A validacao decide entre `PASS`, `FAIL_GARBAGE`, `FAIL_BROKEN_REFERENCE`, `FAIL_MISSING_REGISTRATION`, `ESCALATE_CONTEXT_DEBT` ou `ESCALATE_LIFECYCLE`.
+
+Ela nao apaga legado, nao decide valor semantico e nao substitui Context Debt Audit ou Artifact Lifecycle.
 
 ### Neutrality Governance
 
@@ -218,7 +228,20 @@ Saida esperada: `KEEP`, `TRIM`, `MERGE`, `MOVE`, `SPLIT` ou `DEPRECATE`.
 
 Esta auditoria recomenda; remocao, merge, move ou split exigem etapa posterior de implementacao e validacao.
 
-### 0.3. Validar neutralidade e engajamento
+### 0.3. Validar higiene do repositorio
+
+Use quando houver suspeita de arquivo temporario, referencia quebrada, artefato novo sem registro ou garbage mecanico.
+
+```txt
+prompts/hooks/validate-repository-hygiene.md
+-> governance/quality/repository-hygiene-standard.md
+```
+
+Saida esperada: `PASS`, `FAIL_GARBAGE`, `FAIL_BROKEN_REFERENCE`, `FAIL_MISSING_REGISTRATION`, `ESCALATE_CONTEXT_DEBT` ou `ESCALATE_LIFECYCLE`.
+
+Esta validacao nao apaga legado nem decide valor semantico.
+
+### 0.4. Validar neutralidade e engajamento
 
 Use antes de concluir resposta final quando houver risco de bajulacao, concordancia indevida, falsa seguranca ou pergunta final artificial.
 
@@ -361,6 +384,7 @@ Nesta versao:
 - Tarefas grandes devem passar por sizing antes de delegacao.
 - Subagentes executam partes; o orquestrador mantem veredito final.
 - Artefatos devem provar valor operacional, responsabilidade unica, local correto e custo justificavel.
+- Garbage mecanico deve ser bloqueado cedo; julgamento semantico deve escalar.
 - Respostas finais nao devem conter bajulacao, concordancia performatica ou engajamento artificial.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
@@ -393,6 +417,7 @@ Ao consumir este repositorio, o agente deve:
 - dimensionar tarefas grandes antes de delegar
 - manter o veredito final com o orquestrador
 - auditar divida de contexto sob demanda quando houver redundancia ou custo injustificado
+- validar higiene mecanica antes que garbage vire divida
 - remover bajulacao, falsa concordancia e CTA artificial quando relevantes
 - validar intencao humana antes de agir quando houver ambiguidade ou risco
 - respeitar fonte primaria

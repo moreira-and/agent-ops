@@ -63,6 +63,7 @@ implementacao do especialista
 | 18 | ORQ-18 | Delegation Governance | Dimensionar tarefas grandes, decompor e delegar mantendo veredito no orquestrador | Orquestracao / Governanca | `prompts/hooks/`, `rules/architecture/`, `skills/orchestration/`, `governance/composition/`, `evals/` | PASS |
 | 19 | ORQ-19 | Context Debt Audit | Conter divida de arquitetura informacional, redundancia e custo cognitivo | Governanca / Review | `governance/quality/`, `prompts/hooks/`, `skills/review/`, `governance/composition/`, `evals/` | PASS |
 | 20 | ORQ-20 | Neutrality Governance | Remover bajulacao, concordancia performatica e engajamento artificial | Qualidade / PromptOps | `rules/quality/`, `prompts/hooks/`, `governance/composition/`, `evals/` | PASS |
+| 21 | ORQ-21 | Hygiene Governance | Bloquear garbage mecanico, referencias quebradas e registros basicos ausentes | Governanca / PromptOps | `governance/quality/`, `prompts/hooks/`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -90,6 +91,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-18 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-19 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-20 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-21 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -223,6 +225,20 @@ Decisao: PASS
 Proxima etapa: Reavaliar quando prompts ou agents passarem a definir tom de resposta.
 ```
 
+```txt
+ID: ORQ-21
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Governanca
+Escopo: Implementar Hygiene Governance como gate mecanico barato para garbage, referencias quebradas e registros basicos ausentes.
+Arquivos avaliados: docs/remediation/hygiene-governance-spec.md, docs/remediation/README.md, README.md, INDEX.md, governance/composition/context-composition.md, governance/quality/README.md, prompts/hooks/README.md, evals/manual-regression-suite.md
+Arquivos alterados: governance/quality/repository-hygiene-standard.md, prompts/hooks/validate-repository-hygiene.md, README.md, INDEX.md, governance/composition/context-composition.md, governance/quality/README.md, prompts/README.md, prompts/hooks/README.md, evals/manual-regression-suite.md, evals/hygiene-governance-results.md, evals/README.md, docs/remediation/README.md, docs/remediation/audit-remediation-orchestration.md, governance/authoring/artifact-registry.md
+Evidencia: standard de hygiene criado; hook de validacao criado; context-composition reconhece checkpoint sob demanda; EVAL-019 registrado com PASS.
+Riscos: gate virar burocracia ou tentar apagar legado por heuristica mecanica.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Reavaliar quando houver automacao real de pre-commit.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -245,6 +261,7 @@ Proxima etapa: Reavaliar quando prompts ou agents passarem a definir tom de resp
 - ORQ-18: criado Delegation Governance com sizing, limites de delegacao e orquestracao com veredito final do orquestrador.
 - ORQ-19: criado Context Debt Audit para conter redundancia, custo cognitivo e crescimento sem valor operacional.
 - ORQ-20: criado Neutrality Governance para remover bajulacao, falsa concordancia e engajamento artificial.
+- ORQ-21: criado Hygiene Governance para bloquear garbage mecanico, referencias quebradas e registros basicos ausentes sem apagar legado.
 
 ### Itens fechados nesta execucao
 
