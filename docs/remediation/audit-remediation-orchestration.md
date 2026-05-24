@@ -59,6 +59,7 @@ implementacao do especialista
 | 14 | ORQ-14 | Intake Governance | Criar camada barata de triagem antes de discovery | PromptOps / Governanca | `rules/quality/`, `prompts/hooks/`, `skills/orchestration/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
 | 15 | ORQ-15 | Governed Memory | Criar `_memory/` como memoria governada auxiliar e seletiva | Governanca / Context engineer | `_memory/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `governance/composition/`, `evals/` | PASS |
 | 16 | ORQ-16 | Artifact Synchronization | Criar registry e policy leve de sync targets | Governanca / Lifecycle | `governance/authoring/`, `governance/lifecycle/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
+| 17 | ORQ-17 | Small Model Execution Mode | Limitar modelos pequenos a execucao bounded e escalacao de governanca | Context engineer / Governanca | `INDEX.md`, `README.md`, `governance/composition/`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -82,6 +83,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-14 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-15 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-16 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-17 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -159,6 +161,20 @@ Decisao: PASS
 Proxima etapa: Revisar registry trimestralmente e quando artefato critico mudar.
 ```
 
+```txt
+ID: ORQ-17
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Governanca
+Escopo: Implementar Small Model Execution Mode como modo barato para execucao delimitada por modelos pequenos.
+Arquivos avaliados: docs/remediation/small-model-execution-mode-spec.md, INDEX.md, README.md, governance/composition/context-composition.md, evals/manual-regression-suite.md
+Arquivos alterados: INDEX.md, README.md, governance/composition/context-composition.md, evals/manual-regression-suite.md, evals/small-model-execution-results.md, evals/README.md, docs/remediation/audit-remediation-orchestration.md, governance/authoring/artifact-registry.md
+Evidencia: INDEX e context-composition limitam contexto para modelos pequenos; formato BLOCKED_OR_ESCALATE definido; EVAL-015 e evals/small-model-execution-results.md registrados com PASS; registry e sync targets revisados.
+Riscos: modelo pequeno tentar governar ou carregar metagovernanca demais.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Reavaliar quando novos modos de execucao ou modelos forem adicionados.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -177,6 +193,7 @@ Proxima etapa: Revisar registry trimestralmente e quando artefato critico mudar.
 - ORQ-14: criado Intake Governance com `../../rules/quality/user-input-quality.md`, `../../prompts/hooks/validate-user-intent.md` e `../../skills/orchestration/intake-governance.md`.
 - ORQ-15: criado `../../_memory/` como memoria governada auxiliar, seletiva e fora da composicao padrao.
 - ORQ-16: criado `../../governance/authoring/artifact-registry.md` e `../../governance/lifecycle/artifact-synchronization-policy.md`.
+- ORQ-17: criado Small Model Execution Mode para execucao bounded por modelos pequenos com escalacao obrigatoria de governanca.
 
 ### Itens fechados nesta execucao
 

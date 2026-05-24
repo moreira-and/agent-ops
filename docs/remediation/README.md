@@ -50,6 +50,7 @@ Consulte, respectivamente:
 - `./governed-memory-spec.md`
 - `./intake-governance-spec.md`
 - `./root-index-spec.md`
+- `./small-model-execution-mode-spec.md`
 - `./v0.1-readiness-spec.md`
 
 ---
@@ -72,9 +73,10 @@ flowchart TD
     current --> n3["governed-memory-spec.md"]
     current --> n4["intake-governance-spec.md"]
     current --> n5["root-index-spec.md"]
-    current --> n6["v0.1-readiness-spec.md"]
-    current -. "governado por" .-> n7["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n8["../../governance/composition/context-composition.md"]
+    current --> n6["small-model-execution-mode-spec.md"]
+    current --> n7["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n8["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n9["../../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

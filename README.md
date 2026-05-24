@@ -90,6 +90,14 @@ Hooks entram apenas como checkpoints relevantes ou obrigatorios por risco.
 
 `_memory/`, `docs/`, `evals/` e `LICENSE` nao entram na composicao padrao.
 
+### Small Model Execution Mode
+
+Modelos pequenos executam tarefas delimitadas; nao governam, nao redesenham, nao aprovam e nao expandem o sistema.
+
+Use modelos pequenos apenas quando a tarefa for clara, pequena, baixo risco e baseada em contexto explicitamente selecionado.
+
+Se houver governanca, arquitetura, taxonomia, grow, auditoria, seguranca operacional, dados sensiveis ou mudanca estrutural, o modelo pequeno deve retornar `BLOCKED_OR_ESCALATE`.
+
 ---
 
 ## Estrutura do repositorio
@@ -270,6 +278,7 @@ Nesta versao:
 - Dependencias devem ser referenciadas por caminho.
 - Conteudo duplicado deve ser extraido para fonte primaria.
 - Mudancas relevantes devem classificar impacto e revisar sync targets.
+- Modelos pequenos executam apenas tarefas delimitadas e devem escalar governanca.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
 - O agente deve sinalizar lacunas antes de inventar contexto.
@@ -297,6 +306,7 @@ Ao consumir este repositorio, o agente deve:
 - preservar `intake -> find -> select -> inject -> execute`
 - evitar leitura indiscriminada
 - escolher contexto minimo suficiente
+- limitar modelos pequenos a execucao bounded e low-risk
 - validar intencao humana antes de agir quando houver ambiguidade ou risco
 - respeitar fonte primaria
 - aplicar guardrails em situacoes criticas

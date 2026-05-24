@@ -38,6 +38,21 @@ Em caso de conflito, este indice perde para:
 
 ---
 
+## Small Model Execution Mode
+
+Modelos pequenos devem executar tarefas delimitadas, nao governar o sistema.
+
+Para modelos pequenos:
+
+- comece pelo menor roteador possivel;
+- carregue no maximo um prompt, uma rule principal e uma skill principal inicialmente;
+- nao carregue `./_memory/`, registry, remediation ou evals por padrao;
+- escale governanca, arquitetura, taxonomia, seguranca, grow, auditoria e mudancas em manifesto.
+
+Se a tarefa exceder esse limite, retorne `BLOCKED_OR_ESCALATE`.
+
+---
+
 ## Status de injecao
 
 - MAY ser carregado no inicio de discovery quando o roteador ainda nao esta claro.

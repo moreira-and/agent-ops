@@ -81,6 +81,57 @@ O agente MUST montar contexto por arquivos declarados e selecionados, não por l
 
 ---
 
+## Small Model Execution Mode
+
+Modelos pequenos MUST executar apenas tarefas delimitadas, claras, baixo risco e com contexto explicitamente selecionado.
+
+Modelos pequenos MUST NOT governar, redesenhar, aprovar ou expandir o sistema.
+
+### Contexto inicial
+
+Para modelos pequenos, a composicao inicial SHOULD conter no maximo:
+
+- 1 prompt
+- 1 rule principal
+- 1 skill principal
+- input da tarefa
+- formato de saida esperado
+
+`../../_memory/`, registry, remediation, evals e docs MUST NOT ser carregados por padrao nesse modo.
+
+### Escalacao obrigatoria
+
+Modelo pequeno MUST retornar `BLOCKED_OR_ESCALATE` quando a tarefa envolver:
+
+- alteracao de `../../MANIFEST.md`
+- alteracao em `../../governance/`
+- alteracao em `../../docs/remediation/`
+- alteracao em `../../evals/`
+- criacao ou aprovacao de rule, skill, agent, prompt ou hook
+- arquitetura
+- mudanca estrutural
+- decisao de taxonomia
+- grow
+- auditoria ampla
+- conflito normativo
+- seguranca operacional ou dados sensiveis
+- acao destrutiva, irreversivel ou de amplo impacto
+
+Formato obrigatorio:
+
+```txt
+BLOCKED_OR_ESCALATE
+Reason:
+Missing context:
+Risk:
+Suggested next artifact:
+Suggested escalation:
+```
+
+`Suggested next artifact` SHOULD apontar no maximo um caminho inicial.
+
+---
+
 ## Ordem oficial de composição
 
 A ordem oficial é:
@@ -212,6 +263,7 @@ Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
 
 - contexto opcional MUST NOT ser carregado por hábito
 - múltiplas skills MUST NOT ser carregadas sem necessidade
+- modelos pequenos MUST NOT carregar governanca ampla antes de executar tarefa delimitada
 - prompts MUST NOT embutir integralmente governança, regras ou skills
 - agents MUST referenciar dependências em vez de embuti-las
 - rules MUST NOT virar tutoriais operacionais
@@ -229,6 +281,7 @@ Uma composição de contexto é aceitável quando:
 - cada artefato carregado tem motivo explícito
 - cada dependência crítica está declarada por caminho
 - nenhum artefato é carregado apenas por hábito
+- modelos pequenos recebem contexto delimitado ou retornam `BLOCKED_OR_ESCALATE`
 - pedidos humanos ambíguos ou arriscados passam por intake antes de `find`
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes
