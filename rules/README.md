@@ -157,3 +157,26 @@ Ao consumir `rules/`, o agente deve:
 - distinguir obrigação de recomendação
 - não reinterpretar regra estrutural como skill
 - não copiar regras para outros artefatos quando uma referência por caminho for suficiente
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["rules/"]
+    current --> n1["architecture/"]
+    current --> n2["coding/"]
+    current --> n3["generation/"]
+    current --> n4["modeling/"]
+    current --> n5["naming/"]
+    current --> n6["quality/"]
+    current --> n7["growth-artifact-quality.md"]
+    current -. "governado por" .-> n8["../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

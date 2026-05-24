@@ -6,7 +6,9 @@ rule
 
 ## Finalidade
 
-Definir padrão obrigatório para nomes de chaves estrangeiras.
+Definir o padrao obrigatorio para nomes de chaves estrangeiras.
+
+Esta regra define a obrigacao. A severidade e a acao bloqueante sao consultadas em `./reference-severity.md`.
 
 ---
 
@@ -15,283 +17,104 @@ Definir padrão obrigatório para nomes de chaves estrangeiras.
 Use esta regra quando precisar:
 
 - nomear colunas de chave estrangeira
-- validar conformidade de chaves
-- revisar nomes de referências
+- validar referencias entre entidades
+- revisar risco de join, linhagem ou contrato externo
 - implementar linter de chaves
 
 ---
 
-## Quando não usar
+## Quando nao usar
 
-Não use esta regra como fonte primária para:
+Nao use esta regra como fonte primaria para:
 
-- padrão fundamental
-- formato de nomes
-- consistência semântica
-- unidades
-- abreviações
+- padrao fundamental de todos os nomes
+- consistencia semantica geral
+- severidade
+- procedimento de auto-fix
 
-Consulte, respectivamente:
+Consulte:
 
 - `./_core-pattern.md`
-- `./rule-01-format.md`
 - `./rule-02-consistency.md`
-- `./rule-03-units.md`
-- `./rule-04-abbreviations.md`
-
----
-
-## Dependências relacionadas
-
-- `./_core-pattern.md`
+- `./reference-severity.md`
+- `../../skills/review/semantic-naming-autofix.md`
 
 ---
 
 ## Regra
 
-**Princípio:** Chaves estrangeiras devem usar padrão semântico, não técnico.
+Chaves estrangeiras MUST usar o padrao:
 
-### Aplicação
+```txt
+<referenced_entity>_id
+```
 
-Colunas de chave estrangeira MUST usar padrão `<referenced_entity>_id`.
+O nome deve representar a entidade referenciada, nao o mecanismo tecnico da chave.
 
 ---
 
-## Padrão
+## Padroes proibidos
 
-### `<referenced_entity>_id`
-
-Use o nome da entidade referenciada seguido de `_id`.
-
-**Exemplos:**
-```
-customer_id         (referencia tabela customers)
-product_id          (referencia tabela products)
-order_id            (referencia tabela orders)
-invoice_id          (referencia tabela invoices)
-employee_id         (referencia tabela employees)
-department_id       (referencia tabela departments)
-```
+| Padrao proibido | Motivo |
+|---|---|
+| `fk_<entity>` | prefixo tecnico |
+| `id_<entity>` | ordem invertida |
+| `<entity>_fk` | sufixo tecnico |
+| `<entity>_key` | sufixo tecnico |
+| `<abbreviation>_id` | abreviacao ambigua |
 
 ---
 
-## Exemplos de conformidade
+## Criterio de conformidade
 
-### Exemplo 1: Correto
+Um nome esta conforme quando:
 
-**Nome:** `customer_id`
+- identifica a entidade referenciada
+- usa `<referenced_entity>_id`
+- e consistente com a tabela ou entidade de referencia
+- nao codifica mecanismo tecnico (`fk`, `key`, `ref`)
 
-```sql
-CREATE TABLE orders (
-    order_id INT PRIMARY KEY,
-    customer_id INT,
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
-);
-```
+Um nome nao esta conforme quando:
 
-**Validação:**
-- É chave estrangeira? ✅
-- Segue padrão <entity>_id? ✅
-- Referencia entidade correta? ✅
-
-**Resultado:** ✅ VÁLIDO
-
----
-
-### Exemplo 2: Incorreto (prefixo técnico)
-
-**Nome:** `fk_customer`
-
-```sql
-CREATE TABLE orders (
-    order_id INT PRIMARY KEY,
-    fk_customer INT,
-    FOREIGN KEY (fk_customer) REFERENCES customers(customer_id)
-);
-```
-
-**Validação:**
-- É chave estrangeira? ✅
-- Segue padrão <entity>_id? ❌ (usa prefixo fk_)
-- Usa prefixo técnico? ✅
-
-**Resultado:** ❌ VIOLAÇÃO
-
-**Sugestão:** customer_id
-
----
-
-### Exemplo 3: Incorreto (ordem invertida)
-
-**Nome:** `id_customer`
-
-```sql
-CREATE TABLE orders (
-    order_id INT PRIMARY KEY,
-    id_customer INT,
-    FOREIGN KEY (id_customer) REFERENCES customers(customer_id)
-);
-```
-
-**Validação:**
-- É chave estrangeira? ✅
-- Segue padrão <entity>_id? ❌ (ordem invertida)
-- Ordem é entity_id? ❌
-
-**Resultado:** ❌ VIOLAÇÃO
-
-**Sugestão:** customer_id
-
----
-
-### Exemplo 4: Incorreto (abreviação)
-
-**Nome:** `cust_id`
-
-```sql
-CREATE TABLE orders (
-    order_id INT PRIMARY KEY,
-    cust_id INT,
-    FOREIGN KEY (cust_id) REFERENCES customers(customer_id)
-);
-```
-
-**Validação:**
-- É chave estrangeira? ✅
-- Segue padrão <entity>_id? ❌ (abreviação)
-- Usa abreviação? ✅ (cust)
-
-**Resultado:** ❌ VIOLAÇÃO
-
-**Sugestão:** customer_id
+- usa prefixo ou sufixo tecnico
+- inverte a ordem da entidade e do identificador
+- usa abreviacao para a entidade referenciada
+- cria inconsistencia entre tabelas ou contratos
 
 ---
 
 ## Severidade
 
-**Severidade:** HIGH
+A severidade desta regra MUST ser consultada em `./reference-severity.md`.
 
-Chaves estrangeiras com padrão técnico causam:
-- Inconsistência semântica
-- Dificuldade de linhagem
-- Erros de join
-- Confusão em análises
+`./reference-severity.md` mapeia violacao desta regra como `CRITICAL`.
 
 ---
 
-## Auto-fix bloqueado
+## Auto-fix
 
-Renomear chaves estrangeiras é BLOQUEADO.
+Renomear chave estrangeira MUST ser bloqueado por padrao.
 
-**Razão:** Pode quebrar referências externas, queries em produção, documentação.
+Motivo: pode quebrar queries em producao, APIs, linagem, documentacao, migracoes ou contratos externos.
 
-**Procedimento:**
-1. Detectar violação
-2. Sinalizar para revisão humana
-3. Sugerir alternativa
-4. Solicitar confirmação
+Procedimento de decisao: `../../skills/review/semantic-naming-autofix.md`.
 
 ---
 
-## Procedimento de validação
+## Saida minima esperada em validacao
 
-### Passo 1: Identificar chaves estrangeiras
-
-Listar todas as colunas que são chaves estrangeiras:
-
-```sql
-SELECT column_name, referenced_table_name
-FROM information_schema.key_column_usage
-WHERE referenced_table_name IS NOT NULL
+```txt
+name:
+rule: rule-08-foreign-keys.md
+expected_pattern: <referenced_entity>_id
+severity_source: ./reference-severity.md
+decision: BLOCKED | REQUIRES_REVIEW | PASS
+evidence:
+rationale:
 ```
-
----
-
-### Passo 2: Para cada chave, verificar padrão
-
-```
-Chaves estrangeiras:
-- customer_id: segue padrão? ✅
-- fk_customer: segue padrão? ❌
-- id_customer: segue padrão? ❌
-- cust_id: segue padrão? ❌
-```
-
----
-
-### Passo 3: Se não segue padrão, sinalizar
-
-```
-Violações encontradas:
-1. fk_customer (deveria ser customer_id)
-2. id_customer (deveria ser customer_id)
-3. cust_id (deveria ser customer_id)
-```
-
----
-
-## Exemplo de detecção
-
-### Input
-
-```sql
-CREATE TABLE orders (
-    order_id INT PRIMARY KEY,
-    fk_customer INT,
-    id_product INT,
-    cust_invoice INT,
-    FOREIGN KEY (fk_customer) REFERENCES customers(customer_id),
-    FOREIGN KEY (id_product) REFERENCES products(product_id),
-    FOREIGN KEY (cust_invoice) REFERENCES invoices(invoice_id)
-);
-```
-
-### Detecção
-
-```
-Chaves estrangeiras com padrão incorreto:
-1. fk_customer (deveria ser customer_id)
-2. id_product (deveria ser product_id)
-3. cust_invoice (deveria ser invoice_id)
-
-Severidade: HIGH
-Ação: BLOQUEIA MERGE
-Razão: Pode quebrar referências externas
-```
-
----
-
-## Padrões proibidos
-
-| Proibido | Correto | Razão |
-|----------|---------|-------|
-| fk_customer | customer_id | Prefixo técnico |
-| id_customer | customer_id | Ordem invertida |
-| cust_id | customer_id | Abreviação |
-| customer_fk | customer_id | Sufixo técnico |
-| customer_key | customer_id | Sufixo técnico |
-| customer_ref | customer_id | Abreviação |
 
 ---
 
 ## Limites
 
-Esta regra governa nomes de chaves estrangeiras.
-
-Esta regra não governa:
-
-- padrão fundamental
-- formato de nomes
-- consistência semântica
-- unidades
-- abreviações
-- tipos
-
----
-
-## Relação com demais artefatos
-
-- referencia `./_core-pattern.md`
-- é validada por `../../skills/review/semantic-naming-validation.md`
-- é detectada por `../../skills/review/semantic-naming-detection.md` (padrão 7)
-- é bloqueada por `../../skills/review/semantic-naming-autofix.md` (não auto-fix)
+Esta regra governa chaves estrangeiras. Ela nao governa formato geral, unidades, abreviacoes gerais, tipos, booleanos ou nomes genericos.

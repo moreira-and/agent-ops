@@ -153,3 +153,26 @@ Ao consumir `skills/`, o agente deve:
 - respeitar as regras relacionadas
 - não transformar heurística em norma sem base explícita
 - preferir skills reutilizáveis em vez de embutir conhecimento técnico dentro de agentes ou prompts
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["skills/"]
+    current --> n1["ingestion/"]
+    current --> n2["modeling/"]
+    current --> n3["orchestration/"]
+    current --> n4["quality/"]
+    current --> n5["review/"]
+    current --> n6["transformation/"]
+    current --> n7["grow-from-execution.md"]
+    current -. "governado por" .-> n8["../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

@@ -71,3 +71,23 @@ Consulte, respectivamente:
 Este README roteia skills de revisão.
 
 Este README não substitui skills específicas deste diretório.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["skills/review/"]
+    current --> n1["semantic-naming-autofix.md"]
+    current --> n2["semantic-naming-detection.md"]
+    current --> n3["semantic-naming-validation.md"]
+    current --> n4["technical-review.md"]
+    current -. "governado por" .-> n5["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

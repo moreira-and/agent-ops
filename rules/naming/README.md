@@ -6,21 +6,13 @@ discovery
 
 ## Finalidade
 
-O diretório `naming/` define convenções de nomenclatura semântica para artefatos produzidos por agentes em ambientes de engenharia de dados.
+O diretorio `naming/` define convencoes de nomenclatura semantica para artefatos produzidos por agentes em ambientes de engenharia de dados.
 
-`naming/` é a fonte primária para padrões de naming semântico.
+Este README e o roteador compacto do conjunto de naming. Ele ajuda o agente a encontrar a regra correta sem carregar todos os arquivos por habito.
 
-A norma de maior precedência continua sendo:
-
-- `../../MANIFEST.md`
-
----
-
-## Dependências relacionadas
+A norma de maior precedencia continua sendo:
 
 - `../../MANIFEST.md`
-- `../README.md`
-- `../../governance/composition/semantic-naming-governance.md`
 
 ---
 
@@ -28,24 +20,24 @@ A norma de maior precedência continua sendo:
 
 Consulte `naming/` quando precisar:
 
-- nomear artefatos (colunas, variáveis, aliases, etc.)
-- revisar consistência de nomenclatura
-- reduzir ambiguidade por nomes
-- padronizar identificadores relevantes
+- nomear colunas, variaveis, aliases ou campos
+- revisar consistencia de nomenclatura
+- reduzir ambiguidade em identificadores
 - validar conformidade de naming
+- selecionar regras de naming para um prompt, hook ou skill
 
 ---
 
-## Quando não usar
+## Quando nao usar
 
-Não use `naming/` como fonte primária para:
+Nao use `naming/` como fonte primaria para:
 
-- governança estrutural
+- governanca estrutural
 - arquitetura
-- implementação
+- implementacao
 - modelagem
 - qualidade geral
-- política de naming
+- politica de naming
 
 Consulte, respectivamente:
 
@@ -62,142 +54,153 @@ Consulte, respectivamente:
 
 ```txt
 naming/
-├── README.md
-├── _core-pattern.md
-├── rule-01-format.md
-├── rule-02-consistency.md
-├── rule-03-units.md
-├── rule-04-abbreviations.md
-├── rule-05-no-types.md
-├── rule-06-booleans.md
-├── rule-07-dates.md
-├── rule-08-foreign-keys.md
-├── rule-09-composition-order.md
-├── rule-10-avoid-generic.md
-├── reference-units.md
-└── reference-severity.md
+  README.md
+  _core-pattern.md
+  rule-01-format.md
+  rule-02-consistency.md
+  rule-03-units.md
+  rule-04-abbreviations.md
+  rule-05-no-types.md
+  rule-06-booleans.md
+  rule-07-dates.md
+  rule-08-foreign-keys.md
+  rule-09-composition-order.md
+  rule-10-avoid-generic.md
+  reference-units.md
+  reference-severity.md
 ```
 
 ---
 
-## Arquivos principais
+## Fontes primarias
 
-### `./_core-pattern.md`
-Define o padrão fundamental: `entity_detail_property_unit`
-
-**Quando usar:** Entender base de todas as regras
-
----
-
-### Regras (10 arquivos)
-
-| Arquivo | Severidade | Auto-fix | Descrição |
-|---------|-----------|----------|-----------|
-| rule-01-format.md | HIGH | SIM | Formato (snake_case, lowercase, sem acentos) |
-| rule-02-consistency.md | CRITICAL | NÃO | Consistência semântica |
-| rule-03-units.md | HIGH | NÃO | Unidades obrigatórias |
-| rule-04-abbreviations.md | HIGH | SIM | Abreviações permitidas |
-| rule-05-no-types.md | MEDIUM | SIM | Sem tipos em nomes |
-| rule-06-booleans.md | MEDIUM | CONDICIONAL | Padrão is_/has_ |
-| rule-07-dates.md | HIGH | CONDICIONAL | Padrão _date/_at |
-| rule-08-foreign-keys.md | CRITICAL | NÃO | Padrão <entity>_id |
-| rule-09-composition-order.md | MEDIUM | SIM | Ordem de componentes |
-| rule-10-avoid-generic.md | LOW | NÃO | Sem nomes genéricos |
+| Conceito | Fonte primaria |
+|---|---|
+| Padrao fundamental | `./_core-pattern.md` |
+| Obrigacoes de naming | `./rule-01-format.md` a `./rule-10-avoid-generic.md` |
+| Severidade e acao por violacao | `./reference-severity.md` |
+| Unidades validas | `./reference-units.md` |
+| Deteccao operacional | `../../skills/review/semantic-naming-detection.md` |
+| Validacao operacional | `../../skills/review/semantic-naming-validation.md` |
+| Auto-fix operacional | `../../skills/review/semantic-naming-autofix.md` |
 
 ---
 
-### Referências
+## Regras
 
-#### `./reference-units.md`
-Tabela de unidades válidas por conceito (peso, volume, temperatura, moeda, etc.)
+| Arquivo | Responsabilidade |
+|---|---|
+| `rule-01-format.md` | Formato lexical obrigatorio |
+| `rule-02-consistency.md` | Consistencia semantica |
+| `rule-03-units.md` | Obrigacao de unidade explicita |
+| `rule-04-abbreviations.md` | Abreviacoes proibidas ou permitidas |
+| `rule-05-no-types.md` | Proibicao de tipos tecnicos em nomes |
+| `rule-06-booleans.md` | Padrao `is_`/`has_` para booleanos |
+| `rule-07-dates.md` | Padrao `_date`/`_at` para datas |
+| `rule-08-foreign-keys.md` | Padrao `<referenced_entity>_id` |
+| `rule-09-composition-order.md` | Ordem `entity_detail_property_unit` |
+| `rule-10-avoid-generic.md` | Proibicao de nomes genericos |
 
-#### `./reference-severity.md`
-Tabela de severidade e ações por tipo de violação
+Severidade deve ser consultada em `./reference-severity.md`.
 
----
-
-## Responsabilidade desta pasta
-
-`naming/` MUST definir convenções de nomenclatura.
-
-`naming/` MUST NOT absorver regras arquiteturais, de implementação ou de qualidade.
-
----
-
-## Limites
-
-Este README é o roteador compacto do conjunto de naming.
-
-Este README não substitui:
-
-- `./_core-pattern.md`
-- regras específicas `./rule-01-format.md` a `./rule-10-avoid-generic.md`
-- `./reference-units.md`
-- `./reference-severity.md`
+Decisao de auto-fix deve seguir `../../skills/review/semantic-naming-autofix.md`.
 
 ---
 
-## Fronteiras
+## Referencias
 
-### Pode conter
-- convenções de naming
-- padrões de nomenclatura
-- regras de formato
-- regras de semântica
-- exemplos válidos e inválidos
-- severidade de violações
-- tabelas de referência
+### `./reference-units.md`
 
-### Não pode conter
-- governança estrutural
-- política de naming
-- procedimentos de validação
-- procedimentos de detecção
-- procedimentos de auto-fix
-- prompts de enforcement
+Tabela de unidades validas por conceito.
 
----
+### `./reference-severity.md`
 
-## Relação com os demais diretórios
-
-- é governado por `../../governance/composition/semantic-naming-governance.md`
-- é validado por `../../skills/review/semantic-naming-validation.md`
-- é detectado por `../../skills/review/semantic-naming-detection.md`
-- é corrigido por `../../skills/review/semantic-naming-autofix.md`
-- é enforçado por `../../prompts/review/enforce-semantic-naming.md`
-- é validado por `../../prompts/hooks/validate-semantic-naming-conformance.md`
+Tabela de severidade e acao por tipo de violacao.
 
 ---
 
 ## Ordem de leitura recomendada
 
-1. **Começar por:** `./_core-pattern.md` (entender base)
-2. **Depois:** `./rule-01-format.md` (formato obrigatório)
-3. **Depois:** `./rule-02-consistency.md` (consistência crítica)
-4. **Depois:** Outras regras conforme necessidade
-5. **Referência:** `./reference-units.md` e `./reference-severity.md`
+1. Comecar por `./_core-pattern.md`.
+2. Selecionar regras especificas pelo escopo.
+3. Consultar `./reference-severity.md` para acao e bloqueio.
+4. Consultar `./reference-units.md` apenas quando houver valores mensuraveis.
+5. Usar skills de review somente quando houver execucao de validacao, deteccao ou auto-fix.
 
 ---
 
 ## Uso pelo agente
 
-Ao consumir `naming/`, o agente deve:
+Ao consumir `naming/`, o agente MUST:
 
-- começar por `./_core-pattern.md`
-- carregar apenas regras necessárias
-- tratar normas como restrições obrigatórias
-- distinguir obrigação de recomendação
-- respeitar severidade de violações
-- usar tabelas de referência para validação
+- carregar apenas regras necessarias
+- tratar normas como restricoes obrigatorias
+- distinguir regra, referencia, skill e prompt
+- usar `reference-severity.md` como fonte unica de severidade
+- usar `reference-units.md` como fonte unica de unidades validas
+- nao carregar `../../docs/` ou `../../evals/` por padrao
 
 ---
 
-## Composição das regras
+## Limites
 
-As regras de naming estão decompostas em:
+Este README nao substitui:
 
-- 1 arquivo de padrão core
-- 10 arquivos de regras individuais
-- 2 arquivos de referência
+- `./_core-pattern.md`
+- regras especificas
+- `./reference-units.md`
+- `./reference-severity.md`
+- skills de validacao, deteccao ou auto-fix
 
-Essa decomposição preserva responsabilidade única e permite que o agente carregue apenas o necessário para a tarefa.
+`naming/` MUST NOT absorver regras arquiteturais, de implementacao, modelagem ou qualidade geral.
+
+---
+
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["rules/naming/"]
+    current --> n1["_core-pattern.md"]
+    current --> n2["reference-severity.md"]
+    current --> n3["reference-units.md"]
+    current --> n4["rule-01-format.md"]
+    current --> n5["rule-02-consistency.md"]
+    current --> n6["rule-03-units.md"]
+    current --> n7["rule-04-abbreviations.md"]
+    current --> n8["rule-05-no-types.md"]
+    current --> n9["rule-06-booleans.md"]
+    current --> n10["rule-07-dates.md"]
+    current --> n11["rule-08-foreign-keys.md"]
+    current --> n12["rule-09-composition-order.md"]
+    current --> n13["rule-10-avoid-generic.md"]
+    current -. "governado por" .-> n14["../../MANIFEST.md"]
+```
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["rules/naming/"]
+    current --> n1["_core-pattern.md"]
+    current --> n2["reference-severity.md"]
+    current --> n3["reference-units.md"]
+    current --> n4["rule-01-format.md"]
+    current --> n5["rule-02-consistency.md"]
+    current --> n6["rule-03-units.md"]
+    current --> n7["rule-04-abbreviations.md"]
+    current --> n8["rule-05-no-types.md"]
+    current --> n9["rule-06-booleans.md"]
+    current --> n10["rule-07-dates.md"]
+    current --> n11["rule-08-foreign-keys.md"]
+    current --> n12["rule-09-composition-order.md"]
+    current --> n13["rule-10-avoid-generic.md"]
+    current -. "governado por" .-> n14["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

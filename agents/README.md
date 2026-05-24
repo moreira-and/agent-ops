@@ -152,3 +152,22 @@ Ao consumir um perfil em `agents/`, o agente deve:
 - respeitar os limites declarados
 - carregar regras e skills referenciadas
 - não extrapolar sua missão sem sinalização explícita
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["agents/"]
+    current --> n1["data-architecture/"]
+    current --> n2["data-engineering/"]
+    current --> n3["agentops-growth-architect.md"]
+    current -. "governado por" .-> n4["../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

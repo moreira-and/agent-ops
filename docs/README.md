@@ -47,3 +47,24 @@ find -> select -> inject
 ```
 
 Não carregue `docs/` nem `../evals/` como parte da composição padrão.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["docs/"]
+    current --> n1["examples/"]
+    current --> n2["problems/"]
+    current --> n3["remediation/"]
+    current --> n4["templates/"]
+    current -. "governado por" .-> n5["../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n6["../governance/composition/context-composition.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

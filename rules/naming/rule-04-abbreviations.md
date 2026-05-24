@@ -6,7 +6,9 @@ rule
 
 ## Finalidade
 
-Definir quais abreviações são permitidas e quais são proibidas em nomes semânticos.
+Definir quando abreviacoes sao proibidas ou permitidas em nomes semanticos.
+
+Esta regra define a obrigacao. Decisao de auto-fix pertence a `../../skills/review/semantic-naming-autofix.md`.
 
 ---
 
@@ -14,286 +16,127 @@ Definir quais abreviações são permitidas e quais são proibidas em nomes sem�
 
 Use esta regra quando precisar:
 
-- validar se um nome usa abreviações permitidas
-- identificar abreviações proibidas
-- revisar conformidade de nomenclatura
-- implementar linter de abreviações
+- validar se um nome usa abreviacao ambigua
+- revisar legibilidade de identificadores
+- diferenciar abreviacao tecnica aceitavel de nome semantico ruim
+- implementar linter de abreviacoes
 
 ---
 
-## Quando não usar
+## Quando nao usar
 
-Não use esta regra como fonte primária para:
+Nao use esta regra como fonte primaria para:
 
-- padrão fundamental
-- formato de nomes
-- consistência semântica
-- unidades
+- padrao fundamental
+- formato lexical
+- consistencia semantica
+- unidades validas
+- decisao de auto-fix
 
-Consulte, respectivamente:
+Consulte:
 
 - `./_core-pattern.md`
 - `./rule-01-format.md`
 - `./rule-02-consistency.md`
-- `./rule-03-units.md`
-
----
-
-## Dependências relacionadas
-
-- `./_core-pattern.md`
+- `./reference-units.md`
+- `../../skills/review/semantic-naming-autofix.md`
 
 ---
 
 ## Regra
 
-**Princípio:** Abreviações reduzem legibilidade e aumentam ambiguidade. Apenas abreviações universalmente reconhecidas são permitidas.
+Nomes semanticos MUST NOT usar abreviacoes ambiguas.
+
+Apenas abreviacoes universalmente reconhecidas ou codigos padronizados de dominio podem ser usados, desde que nao escondam significado de negocio.
 
 ---
 
-## Abreviações proibidas
+## Abreviacoes proibidas em nomes semanticos
 
-| Proibido | Correto | Razão |
-|----------|---------|-------|
-| dt | date | Ambíguo (data? datetime?) |
-| vlr | amount | Ambíguo (valor? volume?) |
-| cod | code | Ambíguo (código? codificação?) |
-| qtd | quantity | Ambíguo (quantidade? qualidade?) |
-| desc | description | Ambíguo (descrição? desconto?) |
-| cust | customer | Ambíguo (cliente? customização?) |
-| prod | product | Ambíguo (produto? produção?) |
-| inv | invoice | Ambíguo (fatura? inventário?) |
-| addr | address | Ambíguo (endereço? addressee?) |
-| tel | phone | Ambíguo (telefone? telemetria?) |
-| doc | document | Ambíguo (documento? docking?) |
-| ref | reference | Ambíguo (referência? refund?) |
-| val | value | Ambíguo (valor? validação?) |
-| num | number | Ambíguo (número? numérico?) |
-| seq | sequence | Ambíguo (sequência? sequencial?) |
-| max | maximum | Ambíguo (máximo? maximal?) |
-| min | minimum | Ambíguo (mínimo? minimal?) |
-| avg | average | Ambíguo (média? averaging?) |
-| cnt | count | Ambíguo (contagem? contador?) |
-| pct | percent | Use percent ou percentage |
-| amt | amount | Use amount |
+| Proibido | Motivo |
+|---|---|
+| `dt` | ambiguo entre data, datetime ou detalhe |
+| `vlr` | ambiguo entre valor, volume ou outro conceito local |
+| `cod` | ambiguo entre codigo, codificacao ou convencao legada |
+| `qtd` | ambiguo e dependente de idioma |
+| `desc` | ambiguo entre descricao e desconto |
+| `cust` | ambiguo entre customer e custom |
+| `prod` | ambiguo entre product e production |
+| `inv` | ambiguo entre invoice e inventory |
+| `addr` | abreviacao desnecessaria de address |
+| `tel` | ambiguo entre telefone e telemetria |
+| `doc` | ambiguo entre document e outros dominios |
+| `ref` | ambiguo entre reference, refund ou referral |
+| `val` | ambiguo entre value e validation |
+| `num` | ambiguo e geralmente redundante |
+| `seq` | ambiguo e dependente de convencao local |
+| `avg`, `cnt`, `amt` | abreviacoes tecnicas; prefira nome completo salvo contrato explicito |
 
 ---
 
-## Abreviações permitidas
+## Abreviacoes permitidas
 
-Apenas quando universalmente reconhecidas:
+Permitidas quando fazem parte de padrao amplamente reconhecido:
 
-### Identificadores
-```
-id      (identifier - universalmente reconhecido)
-```
-
-**Uso permitido:**
-```
-customer_id         ✅
-product_id          ✅
-order_id            ✅
-```
+- `id` em identificadores semanticos, como `customer_id`
+- moedas ISO 4217, como `brl`, `usd`, `eur`
+- unidades reconhecidas em `./reference-units.md`, como `kg`, `km`, `ml`
+- `fk` e `pk` apenas em nomes de constraints tecnicas, nao em nomes semanticos de colunas
 
 ---
 
-### Chaves (apenas em contexto de schema)
-```
-fk      (foreign key - apenas em contexto técnico)
-pk      (primary key - apenas em contexto técnico)
-```
+## Criterio de conformidade
 
-**Uso permitido:**
-```
--- Em contexto de schema/DDL:
-CONSTRAINT fk_customer FOREIGN KEY (customer_id)
-PRIMARY KEY pk_orders (order_id)
-```
+Um nome esta conforme quando:
 
-**Uso NÃO permitido em nomes semânticos:**
-```
-fk_customer         ❌ (use customer_id)
-pk_order            ❌ (use order_id)
-```
+- nao usa abreviacao ambigua;
+- usa abreviacao permitida apenas no contexto autorizado;
+- preserva significado semantico legivel;
+- nao mistura idioma ou convencao local sem contrato explicito.
 
----
+Um nome nao esta conforme quando:
 
-### Moedas (ISO 4217)
-```
-brl     (Real Brasileiro)
-usd     (Dólar Americano)
-eur     (Euro)
-gbp     (Libra Esterlina)
-jpy     (Iene Japonês)
-cad     (Dólar Canadense)
-aud     (Dólar Australiano)
-```
-
-**Uso permitido:**
-```
-amount_brl          ✅
-price_usd           ✅
-cost_eur            ✅
-```
-
----
-
-### Unidades SI
-```
-kg      (quilograma)
-g       (grama)
-m       (metro)
-km      (quilômetro)
-cm      (centímetro)
-l       (litro)
-ml      (mililitro)
-```
-
-**Uso permitido:**
-```
-weight_kg           ✅
-distance_m          ✅
-volume_l            ✅
-```
+- depende de conhecimento tribal para ser entendido;
+- usa abreviacao proibida;
+- usa `fk`/`pk` como nome semantico de coluna;
+- tenta corrigir abreviacao sem resolver unidade, moeda, entidade ou significado.
 
 ---
 
 ## Severidade
 
-**Severidade:** HIGH
-
-Abreviações ambíguas causam:
-- Redução de legibilidade
-- Aumento de ambiguidade
-- Dificuldade de manutenção
-- Erros de interpretação
+A severidade desta regra MUST ser consultada em `./reference-severity.md`.
 
 ---
 
-## Auto-fix permitido
+## Auto-fix
 
-Transformações automáticas permitidas:
+Abreviacao proibida MUST NOT autorizar auto-fix isolado quando houver ambiguidade de unidade, moeda, entidade, idioma ou contrato.
 
-- dt → date
-- vlr → amount
-- cod → code
-- qtd → quantity
-- desc → description
-- cust → customer
-- prod → product
-- inv → invoice
-- addr → address
-- tel → phone
-- doc → document
-- ref → reference
+Auto-fix so pode ser considerado quando:
+
+- a expansao e inequivoca no contexto fornecido;
+- nenhuma regra de unidade, chave, consistencia ou contrato fica pendente;
+- o procedimento em `../../skills/review/semantic-naming-autofix.md` classifica a mudanca como segura ou condicional atendida.
+
+Caso contrario, a decisao MUST ser `REQUIRES_REVIEW` ou `BLOCKED`.
 
 ---
 
-## Procedimento de validação
+## Saida minima esperada em validacao
 
-### Passo 1: Extrair componentes do nome
-
-```
-Nome: cod_cliente_endereco
-
-Componentes:
-- cod (abreviação)
-- cliente (palavra completa)
-- endereco (palavra completa)
-```
-
----
-
-### Passo 2: Para cada componente, verificar se é abreviação
-
-```
-Validação:
-- cod: é abreviação? ✅ (proibida)
-- cliente: é abreviação? ❌
-- endereco: é abreviação? ❌
-```
-
----
-
-### Passo 3: Se houver abreviação proibida, sinalizar
-
-```
-Violações encontradas:
-1. cod (deveria ser code)
-
-Sugestão: code_customer_address
-```
-
----
-
-## Exemplo de detecção
-
-### Input
-
-```sql
-CREATE TABLE customers (
-    cod_cliente INT,
-    desc_cliente VARCHAR(255),
-    tel_cliente VARCHAR(20),
-    addr_cliente VARCHAR(255)
-);
-```
-
-### Detecção
-
-```
-Abreviações proibidas encontradas:
-1. cod_cliente (deveria ser code_customer ou customer_code)
-2. desc_cliente (deveria ser description_customer ou customer_description)
-3. tel_cliente (deveria ser phone_customer ou customer_phone)
-4. addr_cliente (deveria ser address_customer ou customer_address)
-
-Severidade: HIGH
-Ação: REQUER REVISÃO
-```
-
----
-
-## Exemplo de auto-fix
-
-### Input
-
-```
-dt_criacao
-vlr_total
-cod_produto
-qtd_items
-```
-
-### Auto-fix
-
-```
-dt_criacao → created_at (ou created_date)
-vlr_total → total_amount
-cod_produto → product_code
-qtd_items → item_quantity
+```txt
+name:
+rule: rule-04-abbreviations.md
+abbreviation:
+severity_source: ./reference-severity.md
+decision: PASS | REQUIRES_REVIEW | BLOCKED
+evidence:
+rationale:
 ```
 
 ---
 
 ## Limites
 
-Esta regra governa abreviações.
-
-Esta regra não governa:
-
-- padrão fundamental
-- formato de nomes
-- consistência semântica
-- unidades
-- tipos
-- casos especiais
-
----
-
-## Relação com demais artefatos
-
-- referencia `./_core-pattern.md`
-- é validada por `../../skills/review/semantic-naming-validation.md`
-- é detectada por `../../skills/review/semantic-naming-detection.md` (padrão 2)
-- é corrigida por `../../skills/review/semantic-naming-autofix.md` (transformação 4)
+Esta regra governa abreviacoes. Ela nao governa formato geral, unidades, tipos, booleanos, datas, chaves estrangeiras ou nomes genericos.

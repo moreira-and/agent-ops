@@ -6,7 +6,9 @@ prompt
 
 ## Finalidade
 
-Definir ponto de entrada para enforcement semântico de convenções de naming em schemas, SQL models, DataFrames e transformações de dados.
+Definir o ponto de entrada para enforcement de naming semantico em schemas, SQL models, DataFrames, aliases e transformacoes de dados.
+
+Este prompt e um orquestrador. Ele nao define regra primaria, matriz de severidade, catalogo de unidades nem tutorial de auto-fix.
 
 ---
 
@@ -14,381 +16,161 @@ Definir ponto de entrada para enforcement semântico de convenções de naming e
 
 Use este prompt quando precisar:
 
-- validar conformidade de naming em schema
-- detectar violações de naming em código
-- corrigir automaticamente violações óbvias
-- revisar e sugerir renomeações
-- auditar consistência semântica
-- estruturar governance de naming em pipeline
+- validar nomes contra o conjunto `rules/naming/`
+- detectar violacoes semanticas de naming
+- separar auto-fix seguro de revisao humana
+- gerar relatorio auditavel de naming
+- preparar uma revisao antes de merge, deploy ou conclusao de tarefa
 
 ---
 
-## Quando não usar
+## Quando nao usar
 
-Não use este prompt quando:
+Nao use este prompt para:
 
-- a tarefa exigir desenho arquitetural
-- a tarefa exigir implementação de transformação
-- a tarefa exigir decisão de negócio
+- desenhar arquitetura de dados
+- implementar transformacao de dados
+- decidir significado de negocio ausente
+- carregar exemplos humanos como contexto padrao
 
-Consulte, nesses casos:
+Consulte, conforme o caso:
 
 - `../../agents/data-architecture/solid-data-architect.md`
 - `../../agents/data-engineering/solid-data-engineer.md`
+- `../../docs/examples/semantic-naming-examples.md` apenas quando o usuario pedir exemplo humano
 
 ---
 
-## Dependências relacionadas
-
-- `../../governance/composition/semantic-naming-governance.md`
-- `../../agents/data-engineering/semantic-naming-enforcement-agent.md`
-- `../../rules/naming/README.md`
-- `../../skills/review/semantic-naming-validation.md`
-- `../../skills/review/semantic-naming-detection.md`
-- `../../skills/review/semantic-naming-autofix.md`
-
----
-
-## Composição recomendada
+## Composicao recomendada
 
 ### Base
+
 - `../../MANIFEST.md`
 - `../../governance/principles/core-principles.md`
 - `../../governance/composition/context-composition.md`
 
-### Governance
+### Naming
+
 - `../../governance/composition/semantic-naming-governance.md`
-
-### Agent
 - `../../agents/data-engineering/semantic-naming-enforcement-agent.md`
-
-### Rules
-- `../../rules/naming/README.md` (roteador do conjunto de naming)
-- `../../rules/naming/reference-units.md` (tabela de unidades)
-- `../../rules/naming/reference-severity.md` (tabela de severidade)
+- `../../rules/naming/README.md`
+- `../../rules/naming/_core-pattern.md`
+- regras especificas selecionadas por `../../rules/naming/README.md`
+- `../../rules/naming/reference-severity.md`
+- `../../rules/naming/reference-units.md` quando houver valores mensuraveis
 
 ### Skills
+
 - `../../skills/review/semantic-naming-validation.md`
 - `../../skills/review/semantic-naming-detection.md`
 - `../../skills/review/semantic-naming-autofix.md`
 
 ---
 
-## Instrução operacional
+## Entradas obrigatorias
 
-Ao usar este prompt, o agente SHOULD:
+O agente MUST receber ou solicitar:
 
-1. Carregar composição recomendada
-2. Atuar como agente de enforcement semântico
-3. Executar detecção de violações
-4. Classificar por severidade
-5. Separar auto-fix de revisão humana
-6. Documentar racional técnico
-7. Gerar relatório estruturado
+- `artifact`: schema, SQL, DataFrame schema, codigo ou lista de nomes
+- `scope`: quais nomes validar
+- `semantic_context`: dominio, entidades, relacionamentos e contratos conhecidos
+- `constraints`: restricoes de compatibilidade, contratos externos, linagem ou migracao
 
----
-
-## Entradas esperadas
-
-O agente MUST receber:
-
-- **schema**: SQL DDL, DataFrame schema, ou definição de modelo
-- **scope**: Quais artefatos validar (colunas, variáveis, aliases, etc.)
-- **context**: Contexto semântico (domínio, entidades, relacionamentos)
-
-### Exemplo de entrada
-
-```
-Schema:
-CREATE TABLE customers (
-    cod_cliente INT,
-    nome VARCHAR(255),
-    peso DECIMAL(10,2),
-    dt_criacao TIMESTAMP,
-    ativo BOOLEAN
-);
-
-Scope: Todas as colunas
-
-Contexto: Tabela de clientes em domínio de e-commerce
-```
+Se `semantic_context` ou `constraints` forem insuficientes para uma decisao segura, o agente MUST retornar `CONDITIONAL` ou solicitar esclarecimento. Nao invente significado.
 
 ---
 
-## Saídas esperadas
+## Instrucao operacional
 
-O agente MUST produzir:
+Ao executar este prompt, o agente MUST:
 
-1. **Detecção:** Lista de todas as violações encontradas
-2. **Análise:** Classificação por tipo, severidade e risco
-3. **Correção:** Auto-fixes aplicados + casos pendentes
-4. **Relatório:** Estruturado e auditável
+1. Carregar o roteador `../../rules/naming/README.md`.
+2. Selecionar somente as regras aplicaveis ao escopo.
+3. Usar `../../rules/naming/reference-severity.md` como unica fonte primaria de severidade.
+4. Usar `../../rules/naming/reference-units.md` como unica fonte primaria de unidades validas.
+5. Detectar violacoes com `../../skills/review/semantic-naming-detection.md`.
+6. Validar conformidade com `../../skills/review/semantic-naming-validation.md`.
+7. Decidir auto-fix com `../../skills/review/semantic-naming-autofix.md`.
+8. Separar cada achado em `AUTO_FIXABLE`, `REQUIRES_REVIEW` ou `BLOCKED`.
+9. Documentar evidencia, impacto e acao para cada achado.
 
-### Exemplo de saída
+---
 
-```json
-{
-  "violations_detected": 4,
-  "auto_fixed": 2,
-  "requires_review": 2,
-  "blocked": 0,
-  "details": [
-    {
-      "name": "cod_cliente",
-      "violation": "format + abbreviation",
-      "severity": "HIGH",
-      "suggestion": "customer_id",
-      "status": "AUTO_FIXED"
-    },
-    {
-      "name": "peso",
-      "violation": "missing_unit",
-      "severity": "HIGH",
-      "suggestion": "weight_kg (ou weight_lb?)",
-      "status": "REQUIRES_REVIEW",
-      "reason": "Unidade é ambígua"
-    }
-  ]
-}
+## Regras de decisao
+
+- Violacao `CRITICAL` MUST bloquear merge/conclusao ate resolucao ou decisao humana explicita.
+- Violacao `HIGH` nao bloqueia automaticamente, mas MUST ter racional e acao documentados.
+- Ambiguidade de unidade, entidade, tipo ou contrato externo MUST impedir auto-fix silencioso.
+- Rename que pode quebrar query, API, linagem, contrato externo ou documentacao operacional MUST ser `BLOCKED`.
+- Auto-fix so e permitido quando a transformacao for deterministica, local e de baixo risco.
+
+---
+
+## Saida esperada
+
+O agente MUST produzir saida estruturada com estes campos:
+
+```txt
+semantic_naming_enforcement
+status: PASS | FAIL | CONDITIONAL
+scope:
+artifacts_reviewed:
+rules_loaded:
+summary:
+  total_names:
+  violations:
+  critical:
+  high:
+  medium:
+  low:
+findings:
+  - name:
+    rule:
+    severity:
+    evidence:
+    impact:
+    recommendation:
+    action: AUTO_FIXABLE | REQUIRES_REVIEW | BLOCKED
+    rationale:
+pending_questions:
+final_recommendation: APPROVE | BLOCK | REQUIRES_REVIEW
 ```
 
 ---
 
-## Checkpoints de validação
+## Checkpoints
 
-Antes de concluir, o agente SHOULD validar:
+Antes de concluir, validar:
 
-- [ ] Todas as violações foram detectadas?
-- [ ] Classificação de severidade está correta?
-- [ ] Auto-fixes são determinísticos?
-- [ ] Casos ambíguos foram sinalizados?
-- [ ] Racional técnico foi documentado?
-- [ ] Relatório é estruturado e auditável?
-
----
-
-## Guardrails operacionais
-
-### Guardrail 1: Não inventar semântica
-
-Se unidade, tipo ou significado é ambíguo:
-
-- NÃO auto-fix
-- Sinalizar para revisão
-- Sugerir alternativas
-
-### Guardrail 2: Não quebrar contratos
-
-Se rename pode quebrar:
-
-- queries em produção
-- APIs externas
-- documentação
-- linhagem de dados
-
-Então: **NÃO auto-fix**
-
-### Guardrail 3: Documentar racional
-
-Toda renomeação MUST ser documentada com:
-
-- nome anterior
-- nome novo
-- tipo de transformação
-- risco avaliado
-- razão técnica
-
-### Guardrail 4: Exigir confirmação para ambiguidade
-
-Se múltiplas interpretações são possíveis:
-
-- Solicitar confirmação explícita
-- Listar alternativas
-- Documentar ambiguidade
-
-### Guardrail 5: Bloquear renomeações perigosas
-
-Se rename pode quebrar contrato externo:
-
-- Bloquear auto-fix
-- Sinalizar para revisão humana
-- Explicar risco
+- [ ] O contexto carregado foi minimo e rastreavel?
+- [ ] Cada regra aplicada foi selecionada por necessidade?
+- [ ] Severidade veio de `reference-severity.md`?
+- [ ] Unidades vieram de `reference-units.md`?
+- [ ] Casos ambiguos nao receberam auto-fix?
+- [ ] Contratos externos foram preservados?
+- [ ] Cada achado tem evidencia, impacto e recomendacao?
 
 ---
 
-## Exemplo de execução completa
+## Exemplos e regressao
 
-### Input
+Exemplos completos ficam fora do contexto padrao:
 
-```
-Schema:
-CREATE TABLE orders (
-    id_order INT,
-    fk_customer INT,
-    vlr_total DECIMAL(10,2),
-    data_criacao TIMESTAMP,
-    ativo BOOLEAN
-);
+- `../../docs/examples/semantic-naming-examples.md`
 
-Scope: Todas as colunas
+Casos minimos de regressao:
 
-Contexto: Tabela de pedidos em domínio de e-commerce
-```
-
-### Execução
-
-**Fase 1: Detecção**
-
-```
-Violações encontradas:
-1. id_order: formato invertido
-2. fk_customer: prefixo técnico
-3. vlr_total: abreviação + unidade faltante
-4. data_criacao: abreviação + idioma misto
-5. ativo: booleano sem prefixo
-```
-
-**Fase 2: Análise**
-
-```
-id_order:
-  - Tipo: formato invertido
-  - Severidade: MEDIUM
-  - Risco: BAIXO
-  - Auto-fix: SIM
-  - Sugestão: order_id
-
-fk_customer:
-  - Tipo: prefixo técnico
-  - Severidade: HIGH
-  - Risco: ALTO (pode quebrar referências)
-  - Auto-fix: NÃO
-  - Sugestão: customer_id
-  - Razão: Requer validação de contrato externo
-
-vlr_total:
-  - Tipo: abreviação + unidade faltante
-  - Severidade: HIGH
-  - Risco: MÉDIO (unidade ambígua)
-  - Auto-fix: NÃO
-  - Sugestão: total_amount_brl (ou total_amount_usd?)
-  - Razão: Unidade é ambígua
-
-data_criacao:
-  - Tipo: abreviação + idioma misto
-  - Severidade: HIGH
-  - Risco: BAIXO
-  - Auto-fix: SIM
-  - Sugestão: created_at
-
-ativo:
-  - Tipo: booleano sem prefixo
-  - Severidade: MEDIUM
-  - Risco: MÉDIO (tipo deve ser confirmado)
-  - Auto-fix: CONDICIONAL
-  - Sugestão: is_active
-  - Razão: Requer confirmação de tipo BOOLEAN
-```
-
-**Fase 3: Correção**
-
-```
-Auto-fixes aplicados:
-✓ id_order → order_id
-✓ data_criacao → created_at
-
-Casos pendentes de revisão:
-⚠ fk_customer → customer_id (BLOQUEADO: risco alto)
-⚠ vlr_total → total_amount_brl (PENDENTE: unidade ambígua)
-⚠ ativo → is_active (PENDENTE: tipo deve ser confirmado)
-```
-
-**Fase 4: Relatório**
-
-```json
-{
-  "schema": "orders",
-  "violations_detected": 5,
-  "auto_fixed": 2,
-  "requires_review": 2,
-  "blocked": 1,
-  "summary": {
-    "critical": 0,
-    "high": 3,
-    "medium": 2,
-    "low": 0
-  },
-  "details": [
-    {
-      "name": "id_order",
-      "violation": "format_inverted",
-      "severity": "MEDIUM",
-      "suggestion": "order_id",
-      "status": "AUTO_FIXED",
-      "risk": "LOW"
-    },
-    {
-      "name": "fk_customer",
-      "violation": "technical_prefix",
-      "severity": "HIGH",
-      "suggestion": "customer_id",
-      "status": "BLOCKED",
-      "risk": "HIGH",
-      "reason": "Pode quebrar referências externas"
-    },
-    {
-      "name": "vlr_total",
-      "violation": "abbreviation + missing_unit",
-      "severity": "HIGH",
-      "suggestion": "total_amount_brl (ou total_amount_usd?)",
-      "status": "REQUIRES_REVIEW",
-      "risk": "MEDIUM",
-      "reason": "Unidade é ambígua"
-    },
-    {
-      "name": "data_criacao",
-      "violation": "abbreviation + mixed_language",
-      "severity": "HIGH",
-      "suggestion": "created_at",
-      "status": "AUTO_FIXED",
-      "risk": "LOW"
-    },
-    {
-      "name": "ativo",
-      "violation": "boolean_without_prefix",
-      "severity": "MEDIUM",
-      "suggestion": "is_active",
-      "status": "REQUIRES_REVIEW",
-      "risk": "MEDIUM",
-      "reason": "Tipo deve ser confirmado como BOOLEAN"
-    }
-  ]
-}
-```
+- `../../evals/manual-regression-suite.md` (`EVAL-004`, `EVAL-005`, `EVAL-006`)
 
 ---
 
 ## Limites
 
-Este prompt define ponto de entrada para enforcement de naming.
+Este prompt nao substitui:
 
-Este prompt não substitui:
-
-- política de naming
-- regras específicas
-- procedimentos de validação
-- procedimentos de detecção
-- procedimentos de auto-fix
-
----
-
-## Relação com demais artefatos
-
-- usa `../../governance/composition/semantic-naming-governance.md`
-- usa `../../agents/data-engineering/semantic-naming-enforcement-agent.md`
-- usa `../../rules/naming/README.md`
-- usa `../../rules/naming/reference-units.md`
-- usa `../../rules/naming/reference-severity.md`
-- usa `../../skills/review/semantic-naming-validation.md`
-- usa `../../skills/review/semantic-naming-detection.md`
-- usa `../../skills/review/semantic-naming-autofix.md`
+- `../../rules/naming/README.md`
+- `../../rules/naming/reference-severity.md`
+- `../../rules/naming/reference-units.md`
+- `../../skills/review/semantic-naming-validation.md`
+- `../../skills/review/semantic-naming-detection.md`
+- `../../skills/review/semantic-naming-autofix.md`

@@ -73,3 +73,20 @@ Consulte, respectivamente:
 Este README roteia prompts de geração.
 
 Este README não substitui `./generate-data-solution.md`.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["prompts/generation/"]
+    current --> n1["generate-data-solution.md"]
+    current -. "governado por" .-> n2["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

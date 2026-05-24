@@ -80,3 +80,23 @@ Consulte, respectivamente:
 Este README roteia hooks de validação.
 
 Este README não substitui hooks específicos deste diretório.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["prompts/hooks/"]
+    current --> n1["validate-context-and-output.md"]
+    current --> n2["validate-growth-proposal.md"]
+    current --> n3["validate-operational-safety.md"]
+    current --> n4["validate-semantic-naming-conformance.md"]
+    current -. "governado por" .-> n5["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

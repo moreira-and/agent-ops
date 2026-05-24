@@ -166,3 +166,25 @@ Esses artefatos devem ser usados para:
 - revisar conformidade antes ou depois de execução
 
 `./hooks/` MUST NOT conter scripts, automações ou hooks executáveis.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["prompts/"]
+    current --> n1["discovery/"]
+    current --> n2["generation/"]
+    current --> n3["hooks/"]
+    current --> n4["planning/"]
+    current --> n5["review/"]
+    current --> n6["grow-from-execution.md"]
+    current -. "governado por" .-> n7["../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

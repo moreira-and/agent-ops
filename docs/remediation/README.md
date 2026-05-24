@@ -46,6 +46,7 @@ Consulte, respectivamente:
 ## Arquivos
 
 - `./audit-remediation-orchestration.md`
+- `./v0.1-readiness-spec.md`
 
 ---
 
@@ -54,3 +55,34 @@ Consulte, respectivamente:
 Este diretorio registra controle humano de remediacao.
 
 Ele nao altera a precedencia normativa do repositorio e nao entra na composicao padrao.
+
+---
+
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["docs/remediation/"]
+    current --> n1["audit-remediation-orchestration.md"]
+    current --> n2["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n3["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n4["../../governance/composition/context-composition.md"]
+```
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["docs/remediation/"]
+    current --> n1["audit-remediation-orchestration.md"]
+    current --> n2["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n3["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n4["../../governance/composition/context-composition.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

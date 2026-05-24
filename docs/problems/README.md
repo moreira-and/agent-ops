@@ -41,3 +41,54 @@ Nao use `problems/` como:
 Depois de ler um guia, volte para os artefatos operacionais indicados.
 
 `docs/problems/` orienta humanos; nao entra na composicao padrao.
+
+---
+
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["docs/problems/"]
+    current --> n1["avoiding-duplication.md"]
+    current --> n2["choosing-an-agent.md"]
+    current --> n3["choosing-a-prompt.md"]
+    current --> n4["creating-new-artifact.md"]
+    current --> n5["reducing-token-usage.md"]
+    current --> n6["selecting-rules.md"]
+    current --> n7["selecting-skills.md"]
+    current --> n8["troubleshooting-context-selection.md"]
+    current --> n9["using-grow.md"]
+    current --> n10["using-hooks.md"]
+    current --> n11["using-simple-models.md"]
+    current --> n12["validating-responsibility.md"]
+    current -. "governado por" .-> n13["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n14["../../governance/composition/context-composition.md"]
+```
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["docs/problems/"]
+    current --> n1["avoiding-duplication.md"]
+    current --> n2["choosing-an-agent.md"]
+    current --> n3["choosing-a-prompt.md"]
+    current --> n4["creating-new-artifact.md"]
+    current --> n5["reducing-token-usage.md"]
+    current --> n6["selecting-rules.md"]
+    current --> n7["selecting-skills.md"]
+    current --> n8["troubleshooting-context-selection.md"]
+    current --> n9["using-grow.md"]
+    current --> n10["using-hooks.md"]
+    current --> n11["using-simple-models.md"]
+    current --> n12["validating-responsibility.md"]
+    current -. "governado por" .-> n13["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n14["../../governance/composition/context-composition.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

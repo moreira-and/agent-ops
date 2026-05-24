@@ -72,3 +72,21 @@ Consulte, respectivamente:
 Este README roteia regras de composição.
 
 Este README não substitui `./context-composition.md`.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["governance/composition/"]
+    current --> n1["context-composition.md"]
+    current --> n2["semantic-naming-governance.md"]
+    current -. "governado por" .-> n3["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

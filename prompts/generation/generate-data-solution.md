@@ -6,7 +6,7 @@ prompt
 
 ## Finalidade
 
-Iniciar a geração de uma solução ou artefato de engenharia de dados com composição contextual controlada.
+Iniciar a geracao de uma solucao ou artefato de engenharia de dados com composicao contextual controlada.
 
 ---
 
@@ -14,21 +14,21 @@ Iniciar a geração de uma solução ou artefato de engenharia de dados com comp
 
 Use este prompt quando precisar:
 
-- gerar uma solução nova
-- estruturar uma implementação
-- produzir um artefato técnico com base em contexto selecionado
-- conduzir geração com aderência ao `agent-ops`
+- gerar uma solucao nova
+- estruturar uma implementacao
+- produzir um artefato tecnico com base em contexto selecionado
+- conduzir geracao com aderencia ao `agent-ops`
 
 ---
 
-## Quando não usar
+## Quando nao usar
 
-Não use este prompt quando o objetivo principal for:
+Nao use este prompt quando o objetivo principal for:
 
-- descobrir contexto necessário
+- descobrir contexto necessario
 - planejar antes de executar
-- revisar uma solução existente
-- validar conformidade de contexto ou saída
+- revisar uma solucao existente
+- validar conformidade de contexto ou saida
 
 Consulte, nesses casos:
 
@@ -39,7 +39,7 @@ Consulte, nesses casos:
 
 ---
 
-## Dependências relacionadas
+## Dependencias relacionadas
 
 - `../../MANIFEST.md`
 - `../../governance/composition/context-composition.md`
@@ -47,19 +47,24 @@ Consulte, nesses casos:
 
 ---
 
-## Composição recomendada
+## Composicao recomendada
 
 ### Base
+
 - `../../governance/principles/core-principles.md`
 - `../../governance/composition/context-composition.md`
 
 ### Agente
+
 Selecionar um em:
+
 - `../../agents/data-engineering/`
 - `../../agents/data-architecture/`
 
 ### Regras
+
 Selecionar conforme o objetivo em:
+
 - `../../rules/architecture/`
 - `../../rules/coding/`
 - `../../rules/modeling/`
@@ -67,57 +72,82 @@ Selecionar conforme o objetivo em:
 - `../../rules/quality/`
 - `../../rules/generation/`
 
-### Segurança
-Carregar `../../rules/generation/operational-safety-guardrails.md` quando houver execução, SQL, manipulação de arquivos, dados sensíveis ou ação destrutiva.
+### Seguranca
+
+Carregar `../../rules/generation/operational-safety-guardrails.md` quando houver execucao, SQL, manipulacao de arquivos, dados sensiveis ou acao destrutiva.
 
 ### Skills
-Selecionar apenas as necessárias em:
+
+Selecionar apenas as necessarias em:
+
 - `../../skills/`
 
 ---
 
-## Instrução operacional
+## Instrucao operacional
 
 Ao usar este prompt, o agente MUST:
 
-1. identificar o objetivo da geração
-2. selecionar o agente adequado
-3. carregar `governance/` como base
-4. carregar `rules/` relevantes ao tipo de output
-5. carregar apenas `skills/` necessárias
-6. explicitar lacunas críticas antes de gerar
-7. produzir saída clara, rastreável e aderente ao contexto carregado
+1. identificar o objetivo da geracao
+2. validar entradas minimas antes de gerar
+3. selecionar o agente adequado
+4. carregar `governance/` como base
+5. carregar `rules/` relevantes ao tipo de output
+6. carregar apenas `skills/` necessarias
+7. explicitar lacunas criticas antes de gerar
+8. produzir saida clara, rastreavel e aderente ao contexto carregado
 
 ---
 
-## Entradas mínimas
+## Entradas minimas
 
 O agente MUST identificar antes de gerar:
 
 - objetivo
 - artefato esperado
-- contexto de domínio disponível
-- restrições operacionais ou de segurança
-- critérios mínimos de aceite
+- contexto de dominio disponivel
+- fonte de dados, sistema ou arquivo de entrada
+- destino esperado, consumidor ou sistema de saida
+- formato de entrada e saida
+- schema, contrato ou campos conhecidos
+- volume, latencia ou janela de execucao quando relevante
+- restricoes operacionais ou de seguranca
+- ferramentas, runtime ou stack permitida quando houver restricao
+- criterios minimos de aceite
 
-Se uma entrada crítica faltar, o agente MUST declarar a lacuna antes de produzir a solução.
+Se fonte, destino, formato, schema/contrato, qualidade esperada ou restricoes operacionais forem desconhecidos, o agente MUST declarar a lacuna antes de produzir a solucao.
+
+O agente MUST NOT inventar dominio, schema, ferramenta, arquitetura, fonte ou destino para preencher lacuna critica.
 
 ---
 
-## Saída esperada
+## Saida esperada
 
-A saída MUST:
+A saida MUST:
 
 - atender ao objetivo declarado
-- respeitar a ordem oficial de composição
-- evitar duplicação desnecessária
+- respeitar a ordem oficial de composicao
+- evitar duplicacao desnecessaria
 - respeitar normas carregadas
-- não inventar estrutura ausente
+- nao inventar estrutura ausente
+- listar lacunas bloqueantes antes de qualquer solucao quando o contexto for insuficiente
+
+Quando houver lacunas bloqueantes, a saida MUST usar:
+
+```txt
+generation_readiness
+status: CONDITIONAL
+blocking_gaps:
+  - gap:
+    why_it_matters:
+    required_input:
+safe_next_step:
+```
 
 ---
 
 ## Limites
 
-Este prompt inicia geração controlada.
+Este prompt inicia geracao controlada.
 
-Este prompt não substitui discovery, planejamento, regras, skills ou agentes.
+Este prompt nao substitui discovery, planejamento, regras, skills ou agentes.

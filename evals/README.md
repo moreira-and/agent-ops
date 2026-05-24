@@ -68,6 +68,7 @@ Consulte, respectivamente:
 Eval ID:
 Data:
 Executor:
+Modo de validacao:
 Artefatos carregados:
 Entrada usada:
 Saida observada:
@@ -81,6 +82,7 @@ Acao recomendada:
 ## Suite inicial
 
 - `./manual-regression-suite.md`
+- `./v0.1-manual-results.md`
 
 ---
 
@@ -89,3 +91,34 @@ Acao recomendada:
 Esta suite inicial e manual por decisao de v0.1.
 
 Automacao so deve ser adicionada quando reduzir ambiguidade sem introduzir dependencia pesada, vendor lock-in ou manutencao desproporcional.
+
+---
+
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["evals/"]
+    current --> n1["manual-regression-suite.md"]
+    current --> n2["v0.1-manual-results.md"]
+    current -. "governado por" .-> n3["../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n4["../governance/composition/context-composition.md"]
+```
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["evals/"]
+    current --> n1["manual-regression-suite.md"]
+    current --> n2["v0.1-manual-results.md"]
+    current -. "governado por" .-> n3["../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n4["../governance/composition/context-composition.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

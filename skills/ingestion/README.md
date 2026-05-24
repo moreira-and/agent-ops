@@ -71,3 +71,20 @@ Consulte, respectivamente:
 Este README roteia skills de ingestão.
 
 Este README não substitui `./ingestion-design.md`.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["skills/ingestion/"]
+    current --> n1["ingestion-design.md"]
+    current -. "governado por" .-> n2["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

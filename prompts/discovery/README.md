@@ -71,3 +71,20 @@ Consulte, respectivamente:
 Este README roteia prompts de discovery.
 
 Este README não substitui `./discover-required-context.md`.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["prompts/discovery/"]
+    current --> n1["discover-required-context.md"]
+    current -. "governado por" .-> n2["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

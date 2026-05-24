@@ -6,7 +6,9 @@ rule
 
 ## Finalidade
 
-Definir obrigatoriedade de unidades explícitas para valores mensuráveis.
+Definir a obrigacao de declarar unidade explicita em nomes de valores mensuraveis.
+
+Esta regra define a obrigacao. O catalogo de unidades validas fica em `./reference-units.md`.
 
 ---
 
@@ -14,315 +16,99 @@ Definir obrigatoriedade de unidades explícitas para valores mensuráveis.
 
 Use esta regra quando precisar:
 
-- validar se valores mensuráveis têm unidade
-- identificar ambiguidade de unidades
-- revisar conformidade de nomes de medidas
-- implementar linter de unidades
+- validar nomes de medidas, moedas, quantidades, duracoes ou grandezas fisicas
+- identificar ambiguidade causada por unidade ausente
+- revisar conformidade de campos mensuraveis
 
 ---
 
-## Quando não usar
+## Quando nao usar
 
-Não use esta regra como fonte primária para:
+Nao use esta regra como fonte primaria para:
 
-- padrão fundamental
-- formato de nomes
-- consistência semântica
-- abreviações
+- catalogo de unidades validas
+- severidade
+- procedimento de deteccao
+- procedimento de auto-fix
 
-Consulte, respectivamente:
+Consulte:
 
-- `./_core-pattern.md`
-- `./rule-01-format.md`
-- `./rule-02-consistency.md`
-- `./rule-04-abbreviations.md`
-
----
-
-## Dependências relacionadas
-
-- `./_core-pattern.md`
+- `./reference-units.md`
+- `./reference-severity.md`
+- `../../skills/review/semantic-naming-detection.md`
+- `../../skills/review/semantic-naming-autofix.md`
 
 ---
 
 ## Regra
 
-**Princípio:** Toda coluna representando quantidade, peso, volume, temperatura, moeda, etc. MUST declarar unidade explicitamente.
+Valores mensuraveis MUST incluir unidade explicita no nome.
 
-### Aplicação
+Exemplos de conceitos que exigem unidade:
 
-Valores mensuráveis MUST incluir unidade no nome.
+- peso ou massa
+- volume
+- temperatura
+- distancia
+- moeda ou valor monetario
+- duracao
+- percentual
+- velocidade
+- pressao
+- densidade
+- concentracao
 
----
-
-## Conceitos mensuráveis
-
-| Conceito | Exemplos | Unidades válidas |
-|----------|----------|------------------|
-| Peso | weight, mass | kg, g, lb, oz |
-| Volume | volume, capacity | l, ml, m3, gallon |
-| Temperatura | temperature, temp | celsius, fahrenheit, kelvin |
-| Distância | distance, length | m, km, cm, mile |
-| Moeda | amount, price, cost | brl, usd, eur, gbp |
-| Tempo | duration, elapsed | seconds, minutes, hours, days |
-| Percentual | percentage, ratio | percent, pct |
-| Velocidade | speed, velocity | kmh, mph, ms |
-| Pressão | pressure | pa, bar, psi |
-| Densidade | density | kgm3, gcm3 |
-| Concentração | concentration | ppm, percent |
+Unidades validas MUST ser consultadas em `./reference-units.md`.
 
 ---
 
-## Exemplos de conformidade
+## Criterio de conformidade
 
-### Exemplo 1: Correto
+Um nome esta conforme quando:
 
-**Conceito:** weight (peso)
+- representa valor mensuravel
+- declara unidade ou moeda explicitamente
+- a unidade existe em `./reference-units.md` ou foi documentada como extensao de dominio
+- a unidade nao contradiz o contexto semantico
 
-```
-weight_kg           ✅ (unidade explícita)
-weight_g            ✅ (unidade explícita)
-weight_lb           ✅ (unidade explícita)
-```
+Um nome nao esta conforme quando:
 
-**Validação:**
-- Valor mensurável? ✅
-- Unidade presente? ✅
-- Unidade válida? ✅
-
-**Resultado:** ✅ VÁLIDO
-
----
-
-### Exemplo 2: Incorreto
-
-**Conceito:** weight (peso)
-
-```
-weight              ❌ (qual unidade?)
-peso                ❌ (qual unidade?)
-weight_value        ❌ (qual unidade?)
-```
-
-**Validação:**
-- Valor mensurável? ✅
-- Unidade presente? ❌
-
-**Resultado:** ❌ VIOLAÇÃO
-
-**Sugestão:** weight_kg (ou weight_g, weight_lb)
-
----
-
-### Exemplo 3: Correto
-
-**Conceito:** amount (valor monetário)
-
-```
-amount_brl          ✅ (moeda explícita)
-amount_usd          ✅ (moeda explícita)
-amount_eur          ✅ (moeda explícita)
-```
-
-**Validação:**
-- Valor mensurável? ✅
-- Unidade presente? ✅
-- Unidade válida? ✅
-
-**Resultado:** ✅ VÁLIDO
-
----
-
-### Exemplo 4: Incorreto
-
-**Conceito:** amount (valor monetário)
-
-```
-amount              ❌ (qual moeda?)
-vlr_total           ❌ (qual moeda?)
-total               ❌ (qual moeda?)
-```
-
-**Validação:**
-- Valor mensurável? ✅
-- Unidade presente? ❌
-
-**Resultado:** ❌ VIOLAÇÃO
-
-**Sugestão:** amount_brl (ou amount_usd, amount_eur)
+- representa valor mensuravel sem unidade
+- usa unidade ambigua ou nao documentada
+- usa sufixo generico como `value`, `amount` ou `total` sem unidade/moeda quando o dominio exige precisao
 
 ---
 
 ## Severidade
 
-**Severidade:** HIGH
-
-Falta de unidade causa:
-- Ambiguidade semântica
-- Impossibilidade de raciocínio automatizado
-- Erros de conversão
-- Confusão em análises
+A severidade desta regra MUST ser consultada em `./reference-severity.md`.
 
 ---
 
-## Auto-fix bloqueado
+## Auto-fix
 
-Adicionar unidade automaticamente é BLOQUEADO.
+Unidade ausente MUST NOT receber auto-fix por suposicao.
 
-**Razão:** Unidade pode ser ambígua (weight pode ser kg, lb, oz).
+Auto-fix so pode ser considerado quando a unidade estiver explicitamente presente no input, contrato, schema, metadado confiavel ou decisao humana registrada.
 
-**Procedimento:**
-1. Detectar valor mensurável sem unidade
-2. Sinalizar para revisão humana
-3. Sugerir alternativas
-4. Solicitar confirmação
+Procedimento de decisao: `../../skills/review/semantic-naming-autofix.md`.
 
 ---
 
-## Procedimento de validação
+## Saida minima esperada em validacao
 
-### Passo 1: Identificar valores mensuráveis
-
-Listar todas as colunas que representam medidas:
-
-```
-Colunas mensuráveis:
-- weight
-- temperature
-- distance
-- amount
-- duration
-- pressure
-```
-
----
-
-### Passo 2: Para cada coluna, verificar unidade
-
-```
-Validação:
-- weight: tem unidade? ❌
-- temperature: tem unidade? ❌
-- distance: tem unidade? ❌
-- amount: tem unidade? ❌
-- duration: tem unidade? ❌
-- pressure: tem unidade? ❌
-```
-
----
-
-### Passo 3: Se falta unidade, sinalizar
-
-```
-Violações encontradas:
-1. weight (deveria ser weight_kg ou weight_lb ou weight_oz)
-2. temperature (deveria ser temperature_celsius ou temperature_fahrenheit)
-3. distance (deveria ser distance_m ou distance_km ou distance_mile)
-4. amount (deveria ser amount_brl ou amount_usd ou amount_eur)
-5. duration (deveria ser duration_seconds ou duration_minutes ou duration_hours)
-6. pressure (deveria ser pressure_pa ou pressure_bar ou pressure_psi)
-```
-
----
-
-## Exemplo de detecção
-
-### Input
-
-```sql
-CREATE TABLE products (
-    product_id INT,
-    weight DECIMAL(10,2),
-    volume DECIMAL(10,2),
-    price DECIMAL(10,2),
-    temperature DECIMAL(10,2)
-);
-```
-
-### Detecção
-
-```
-Colunas mensuráveis sem unidade:
-1. weight (qual unidade? kg? lb? oz?)
-2. volume (qual unidade? l? ml? gallon?)
-3. price (qual moeda? brl? usd? eur?)
-4. temperature (qual escala? celsius? fahrenheit?)
-
-Severidade: HIGH
-Ação: REQUER REVISÃO
-```
-
----
-
-## Unidades comuns por conceito
-
-### Peso
-```
-kg      (quilograma)
-g       (grama)
-lb      (libra)
-oz      (onça)
-```
-
-### Volume
-```
-l       (litro)
-ml      (mililitro)
-m3      (metro cúbico)
-gallon  (galão)
-```
-
-### Temperatura
-```
-celsius     (Celsius)
-fahrenheit  (Fahrenheit)
-kelvin      (Kelvin)
-```
-
-### Distância
-```
-m       (metro)
-km      (quilômetro)
-cm      (centímetro)
-mile    (milha)
-```
-
-### Moeda
-```
-brl     (Real Brasileiro)
-usd     (Dólar Americano)
-eur     (Euro)
-gbp     (Libra Esterlina)
-```
-
-### Tempo
-```
-seconds     (segundos)
-minutes     (minutos)
-hours       (horas)
-days        (dias)
+```txt
+name:
+rule: rule-03-units.md
+evidence:
+severity_source: ./reference-severity.md
+unit_source: ./reference-units.md
+decision: PASS | REQUIRES_REVIEW | BLOCKED
+rationale:
 ```
 
 ---
 
 ## Limites
 
-Esta regra governa unidades em valores mensuráveis.
-
-Esta regra não governa:
-
-- padrão fundamental
-- formato de nomes
-- consistência semântica
-- abreviações
-- tipos
-- casos especiais
-
----
-
-## Relação com demais artefatos
-
-- referencia `./_core-pattern.md`
-- é validada por `../../skills/review/semantic-naming-validation.md`
-- é detectada por `../../skills/review/semantic-naming-detection.md` (padrão 3)
-- é bloqueada por `../../skills/review/semantic-naming-autofix.md` (não auto-fix)
+Esta regra governa a obrigacao de unidade. Ela nao governa formato geral, consistencia, abreviacoes, tipos, booleanos ou chaves estrangeiras.

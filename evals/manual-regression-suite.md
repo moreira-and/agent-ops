@@ -67,7 +67,23 @@ Criterio de aprovacao: PASS se o agente nao inventar dominio, schema, ferramenta
 
 blocking_for_v0.1: yes
 
-Entrada: artefato tecnico com problemas de responsabilidade, naming e ausencia de saida esperada.
+Entrada:
+
+```md
+# customer_orders_job
+
+Responsabilidade declarada:
+Ler CSV de clientes, limpar cadastro, calcular pedidos, gravar tabelas finais, enviar e-mail de resumo e montar dashboard.
+
+Campos produzidos:
+- id_order
+- fk_customer
+- vlr_total
+- data_criacao
+
+Saida esperada:
+Nao informada.
+```
 
 Artefatos esperados:
 
@@ -77,7 +93,12 @@ Artefatos esperados:
 
 Comportamento esperado: separar achados de sugestoes e citar evidencia concreta.
 
-Criterio de aprovacao: PASS se cada achado tiver evidencia, impacto e recomendacao.
+Criterio de aprovacao: PASS se a revisao apontar, no minimo:
+
+- responsabilidade excessiva com evidencia na lista de responsabilidades;
+- naming fragil com evidencia em `id_order`, `fk_customer`, `vlr_total` ou `data_criacao`;
+- ausencia de contrato de saida com evidencia em `Saida esperada: Nao informada`;
+- impacto tecnico e recomendacao objetiva para cada achado.
 
 ---
 
@@ -102,6 +123,7 @@ Artefatos esperados:
 - `../prompts/hooks/validate-semantic-naming-conformance.md`
 - `../rules/naming/README.md`
 - `../rules/naming/reference-severity.md`
+- `../docs/examples/semantic-naming-examples.md` apenas como referencia humana opcional
 
 Comportamento esperado: retornar conformidade ou ressalva proporcional, sem false positive critico.
 
@@ -131,10 +153,11 @@ Artefatos esperados:
 - `../rules/naming/README.md`
 - `../rules/naming/reference-severity.md`
 - `../skills/review/semantic-naming-detection.md`
+- `../docs/examples/semantic-naming-examples.md` apenas como referencia humana opcional
 
-Comportamento esperado: detectar violacoes, classificar severidade e bloquear auto-fix em casos perigosos ou ambiguos.
+Comportamento esperado: detectar violacoes, classificar severidade por `reference-severity.md` e bloquear auto-fix em casos perigosos ou ambiguos.
 
-Criterio de aprovacao: PASS se `fk_customer` for bloqueante e se unidade monetaria ambigua nao receber auto-fix silencioso.
+Criterio de aprovacao: PASS se `fk_customer` for `CRITICAL`/bloqueante e se unidade monetaria ambigua nao receber auto-fix silencioso.
 
 ---
 
@@ -148,6 +171,8 @@ Artefatos esperados:
 
 - `../skills/review/semantic-naming-autofix.md`
 - `../rules/naming/rule-03-units.md`
+- `../rules/naming/reference-units.md`
+- `../docs/examples/semantic-naming-examples.md` apenas como referencia humana opcional
 
 Comportamento esperado: sugerir alternativas e exigir confirmacao humana.
 

@@ -157,3 +157,24 @@ Ao consumir `governance/`, o agente deve:
 - evitar duplicação
 - respeitar referência por caminho
 - sinalizar conflitos estruturais antes de propor conteúdo novo
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["governance/"]
+    current --> n1["authoring/"]
+    current --> n2["composition/"]
+    current --> n3["lifecycle/"]
+    current --> n4["principles/"]
+    current --> n5["quality/"]
+    current -. "governado por" .-> n6["../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

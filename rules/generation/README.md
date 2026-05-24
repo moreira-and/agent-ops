@@ -80,3 +80,21 @@ Consulte, respectivamente:
 Este README roteia guardrails de geração.
 
 Este README não substitui guardrails específicos deste diretório.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["rules/generation/"]
+    current --> n1["generation-guardrails.md"]
+    current --> n2["operational-safety-guardrails.md"]
+    current -. "governado por" .-> n3["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

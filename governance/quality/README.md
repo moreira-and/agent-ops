@@ -72,3 +72,20 @@ Consulte, respectivamente:
 Este README roteia padrões de qualidade de artefato.
 
 Este README não substitui `./artifact-quality-standard.md`.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["governance/quality/"]
+    current --> n1["artifact-quality-standard.md"]
+    current -. "governado por" .-> n2["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.

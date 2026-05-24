@@ -67,8 +67,8 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-03 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-04 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-05 | PASS | PASS | PASS | PASS | PASS | PASS |
-| ORQ-06 | CONDITIONAL | CONDITIONAL | PASS | PENDING | CONDITIONAL | PENDING |
-| ORQ-07 | CONDITIONAL | PASS | PASS | PENDING | CONDITIONAL | PENDING |
+| ORQ-06 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-07 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-08 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-09 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-10 | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -108,16 +108,15 @@ Proxima etapa:
 - ORQ-11: diretorios vazios nao oficiais foram removidos da raiz local.
 - ORQ-12: `../../README.md` reescrito como mapa humano do sistema e workflows.
 
-### Itens condicionais
+### Itens fechados nesta execucao
 
-ORQ-06 permanece CONDITIONAL porque a contradicao de severidade foi corrigida, mas a duplicidade de exemplos extensos em naming ainda existe.
-
-ORQ-07 permanece CONDITIONAL porque a regra de `evals/` fora da composicao padrao foi criada, mas exemplos longos ainda nao foram movidos de prompts/skills para docs ou evals.
+- ORQ-06: naming foi consolidado; `reference-severity.md` permanece fonte primaria de severidade, `reference-units.md` permanece fonte primaria de unidades e `rule-08-foreign-keys.md` foi alinhada a `CRITICAL`.
+- ORQ-07: prompts e skills de naming foram compactados; exemplos completos foram movidos para `../../docs/examples/semantic-naming-examples.md`; suite manual foi registrada em `../../evals/v0.1-manual-results.md`.
 
 ### Veredito do orquestrador
 
-Status geral: CONDITIONAL.
+Status geral: PASS.
 
-O repositorio ficou mais alinhado para uso profissional, mas ainda nao deve ser chamado de pronto para producao sem resolver ORQ-06 e ORQ-07.
+Liberado para tag v0.1 como base de governanca operacional para piloto profissional controlado.
 
-Proxima execucao recomendada: reduzir duplicidade e peso cognitivo do conjunto de naming.
+Restricao: producao critica ainda requer execucao real dos controles de plataforma fora deste repositorio.

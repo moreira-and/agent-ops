@@ -24,6 +24,38 @@ A fonte normativa de maior precedencia e:
 
 ---
 
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    manifest["MANIFEST.md"] --> governance["governance/"]
+    governance --> prompts["prompts/"]
+    prompts --> agents["agents/"]
+    prompts --> rules["rules/"]
+    prompts --> skills["skills/"]
+    prompts --> hooks["prompts/hooks/"]
+    docs["docs/"] -. "humano; fora do contexto padrao" .-> prompts
+    evals["evals/"] -. "validacao; fora do contexto padrao" .-> prompts
+```
+
+## Status v0.1
+
+Status atual: liberado para tag v0.1 como base de governanca operacional para piloto profissional controlado.
+
+Escopo aprovado:
+
+- descoberta e composicao seletiva de contexto
+- prompts, agents, rules, skills e hooks em Markdown
+- guardrails de geracao, seguranca operacional, naming e crescimento
+- suite manual minima de regressao em `./evals/`
+
+Restricao explicita: producao critica ainda requer controles externos de runtime, autorizacao, observabilidade, auditoria, segredo, isolamento e enforcement fora deste repositorio.
+
+Este repositorio governa contexto e comportamento esperado. Ele nao substitui plataforma de execucao, controle de acesso, monitoramento ou aprovacao operacional.
+
+---
+
 ## Principio de uso
 
 Use apenas o contexto necessario.
@@ -167,9 +199,9 @@ evals/manual-regression-suite.md
 
 ---
 
-## Diretórios nao oficiais em v1
+## Diretórios nao oficiais na v0.1
 
-`tasks/`, `workflows/` e `policies/` nao sao diretorios oficiais da v1.
+`tasks/`, `workflows/` e `policies/` nao sao diretorios oficiais da v0.1.
 
 Nesta versao:
 

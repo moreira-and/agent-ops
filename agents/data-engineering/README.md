@@ -79,3 +79,21 @@ Consulte, respectivamente:
 Este README roteia perfis de engenharia de dados.
 
 Este README não substitui os arquivos de agente deste diretório nem as skills em `../../skills/`.
+
+---
+
+## Diagrama
+
+```mermaid
+flowchart TD
+    current["agents/data-engineering/"]
+    current --> n1["semantic-naming-enforcement-agent.md"]
+    current --> n2["solid-data-engineer.md"]
+    current -. "governado por" .-> n3["../../MANIFEST.md"]
+```
+
+## Status v0.1
+
+Este diretorio faz parte da base v0.1 no escopo descrito neste README.
+
+Uso aprovado: piloto profissional controlado. Producao critica exige controles externos de runtime, autorizacao, observabilidade e enforcement fora deste repositorio.
