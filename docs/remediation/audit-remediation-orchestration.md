@@ -26,7 +26,7 @@ implementacao do especialista
 - Nenhum item deve ser marcado como concluido sem evidencia de revisao.
 - Mudancas normativas devem citar a fonte primaria afetada.
 - Mudancas documentais devem atualizar os roteadores humanos quando necessario.
-- Mudancas em prompts, rules, agents, skills ou hooks devem preservar `find -> select -> inject`.
+- Mudancas em prompts, rules, agents, skills ou hooks devem preservar `intake -> find -> select -> inject -> execute`.
 
 ## Definicao das etapas
 
@@ -56,6 +56,7 @@ implementacao do especialista
 | 11 | ORQ-11 | F12 | Resolver diretorios vazios nao governados | Maintainer | estrutura raiz local | PASS |
 | 12 | ORQ-12 | F12 complementar | Atualizar arvores e roteadores que nao refletem a estrutura real | Documentacao | `README.md`, `MANIFEST.md`, `docs/README.md` | PASS |
 | 13 | ORQ-13 | Root index | Criar `INDEX.md` como roteador barato para discovery por LLM | Context engineer | `INDEX.md`, `README.md`, `MANIFEST.md`, `governance/composition/`, `evals/` | PASS |
+| 14 | ORQ-14 | Intake Governance | Criar camada barata de triagem antes de discovery | PromptOps / Governanca | `rules/quality/`, `prompts/hooks/`, `skills/orchestration/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -76,6 +77,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-11 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-12 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-13 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-14 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -111,6 +113,20 @@ Decisao: PASS
 Proxima etapa: Manter sincronizado apenas quando roteadores raiz mudarem.
 ```
 
+```txt
+ID: ORQ-14
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / PromptOps
+Escopo: Implementar Intake Governance como camada barata antes de find.
+Arquivos avaliados: docs/remediation/intake-governance-spec.md, MANIFEST.md, README.md, INDEX.md, governance/composition/context-composition.md, rules/quality/README.md, prompts/hooks/README.md, skills/orchestration/README.md, evals/manual-regression-suite.md
+Arquivos alterados: rules/quality/user-input-quality.md, prompts/hooks/validate-user-intent.md, skills/orchestration/intake-governance.md, MANIFEST.md, README.md, INDEX.md, governance/composition/context-composition.md, rules/README.md, rules/quality/README.md, prompts/README.md, prompts/hooks/README.md, skills/README.md, skills/orchestration/README.md, evals/manual-regression-suite.md, evals/intake-governance-results.md, evals/README.md
+Evidencia: fluxo oficial atualizado para intake -> find -> select -> inject -> execute; rule/hook/skill criados; EVAL-012 registrado com PASS.
+Riscos: intake virar burocracia ou ser usado para carregar contexto antes de find.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Executar regressao manual quando prompts de entrada forem alterados.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -126,6 +142,7 @@ Proxima etapa: Manter sincronizado apenas quando roteadores raiz mudarem.
 - ORQ-11: diretorios vazios nao oficiais foram removidos da raiz local.
 - ORQ-12: `../../README.md` reescrito como mapa humano do sistema e workflows.
 - ORQ-13: criado `../../INDEX.md` como roteador barato de discovery inicial por LLM e registrado em manifesto, composicao e evals.
+- ORQ-14: criado Intake Governance com `../../rules/quality/user-input-quality.md`, `../../prompts/hooks/validate-user-intent.md` e `../../skills/orchestration/intake-governance.md`.
 
 ### Itens fechados nesta execucao
 

@@ -46,6 +46,7 @@ Consulte, respectivamente:
 ## Arquivos
 
 - `./audit-remediation-orchestration.md`
+- `./intake-governance-spec.md`
 - `./root-index-spec.md`
 - `./v0.1-readiness-spec.md`
 
@@ -65,10 +66,11 @@ Ele nao altera a precedencia normativa do repositorio e nao entra na composicao 
 flowchart TD
     current["docs/remediation/"]
     current --> n1["audit-remediation-orchestration.md"]
-    current --> n2["root-index-spec.md"]
-    current --> n3["v0.1-readiness-spec.md"]
-    current -. "governado por" .-> n4["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n5["../../governance/composition/context-composition.md"]
+    current --> n2["intake-governance-spec.md"]
+    current --> n3["root-index-spec.md"]
+    current --> n4["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n5["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n6["../../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

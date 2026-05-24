@@ -95,13 +95,21 @@ Se um artefato não for contexto injetável em Markdown, ele MUST NOT existir no
 
 O diretório MUST suportar o fluxo:
 
-**find -> select -> inject**
+**intake -> find -> select -> inject -> execute**
 
 Onde:
 
+- **intake** = validar intenção, risco e ambiguidade do pedido humano
 - **find** = descobrir contexto disponível
 - **select** = escolher apenas o contexto relevante
 - **inject** = carregar apenas o contexto necessário
+- **execute** = executar dentro dos limites definidos pelo intake e pelo contexto injetado
+
+`intake` MUST ocorrer antes de discovery quando a entrada humana estiver vaga, arriscada, contraditória ou sem critério mínimo de sucesso.
+
+`intake` MUST NOT carregar o repositório por padrão.
+
+Quando `intake` liberar a tarefa, o fluxo de composição continua por `find -> select -> inject`.
 
 O `agent-ops` MUST ser projetado para injeção seletiva.
 
@@ -162,7 +170,7 @@ Isso significa:
 - substituição previsível entre artefatos da mesma categoria
 - segregação de contexto para evitar carregamento desnecessário
 - dependências explícitas por caminho
-- injeção seletiva via `find -> select -> inject`
+- injeção seletiva via `intake -> find -> select -> inject -> execute`
 
 A fonte primária detalhada desse princípio é:
 
@@ -282,6 +290,8 @@ Define normas para a saída produzida pelos agentes.
 
 `rules/` MUST governar output.
 
+`rules/` MAY governar qualidade da entrada humana quando a regra for explicitamente sobre intake.
+
 `rules/` MUST NOT governar a estrutura do `agent-ops`.
 
 ### 7.7 `skills/`
@@ -320,11 +330,21 @@ Nesta versão:
 - tarefas pertencem a `prompts/`
 - workflows são compostos por `prompts/`, `skills/` e `prompts/hooks/`
 - políticas estruturais pertencem a `governance/`
-- restrições de output e guardrails pertencem a `rules/`
+- restrições de output, qualidade de entrada humana e guardrails pertencem a `rules/`
 
 ---
 
 ## 8. Ordem oficial de composição
+
+O fluxo operacional completo é:
+
+```txt
+intake -> find -> select -> inject -> execute
+```
+
+`intake` valida a entrada humana antes da descoberta de contexto.
+
+`execute` só deve ocorrer depois que o contexto mínimo tiver sido selecionado e injetado.
 
 A ordem oficial de composição é:
 
@@ -337,10 +357,12 @@ Interpretação:
 1. `prompt` inicia a tarefa
 2. `governance` injeta a base padrão
 3. `agent` define o perfil executor
-4. `rules` impõe as restrições de output
+4. `rules` impõe restrições de output e regras de intake quando aplicável
 5. `skills` acrescenta conhecimento operacional
 
 `prompts/hooks/` MAY ser acionado como checkpoint ao longo do fluxo.
+
+`prompts/hooks/validate-user-intent.md` MAY ser acionado antes de `find` quando o pedido humano estiver ambíguo, arriscado ou incompleto.
 
 `prompts/hooks/` NÃO integra a base obrigatória padrão.
 
@@ -472,7 +494,7 @@ Os demais arquivos MUST passar a referenciá-la por caminho.
 ### 11.5 Evoluir sem quebrar composição
 Novos conhecimentos SHOULD ser adicionados como artefatos plugáveis.
 
-Mudanças em arquivos centrais SHOULD ocorrer apenas quando preservarem o contrato `find -> select -> inject`.
+Mudanças em arquivos centrais SHOULD ocorrer apenas quando preservarem o contrato `intake -> find -> select -> inject -> execute`.
 
 Prompts MUST NOT embutir regras indevidas.
 

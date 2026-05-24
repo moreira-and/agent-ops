@@ -17,6 +17,7 @@ Este diretório deve concentrar artefatos como:
 - prompts de revisão
 - prompts de discovery
 - prompts de planejamento
+- checkpoints de intake antes de discovery
 - checkpoints de validação em `./hooks/`
 
 A norma de maior precedência continua sendo:
@@ -42,6 +43,7 @@ Consulte `prompts/` quando precisar:
 - conduzir revisão
 - organizar discovery ou planejamento
 - executar checkpoint de validação
+- validar entrada humana antes de discovery quando houver ambiguidade ou risco
 
 ---
 
@@ -161,6 +163,7 @@ Ao consumir `prompts/`, o agente deve:
 
 Esses artefatos devem ser usados para:
 
+- validar intenção, ambiguidade e risco da entrada humana antes de discovery
 - validar aderência a `../governance/`
 - validar aderência a `../rules/`
 - revisar conformidade antes ou depois de execução

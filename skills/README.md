@@ -14,6 +14,7 @@ Este diretório deve concentrar conteúdos como:
 
 - procedimentos transversais de evolução do `agent-ops`
 - procedimentos
+- triagem operacional de intake
 - heurísticas
 - estratégias
 - técnicas reutilizáveis
@@ -39,6 +40,7 @@ Consulte `skills/` quando precisar:
 - adicionar conhecimento operacional à execução
 - orientar como realizar um tipo de trabalho
 - aplicar técnica reutilizável em múltiplos contextos
+- aplicar triagem de intake sem duplicar rules ou hooks
 - complementar a atuação de um agente com capacidade especializada
 
 ---

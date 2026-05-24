@@ -6,7 +6,7 @@ governance
 
 ## Finalidade
 
-Definir o padrão oficial de descoberta, seleção, composição e injeção de contexto no `agent-ops`.
+Definir o padrão oficial de intake, descoberta, seleção, composição, injeção e execução de contexto no `agent-ops`.
 
 ---
 
@@ -51,7 +51,12 @@ Consulte, respectivamente:
 
 O `agent-ops` MUST operar no modelo:
 
-**find -> select -> inject**
+**intake -> find -> select -> inject -> execute**
+
+### intake
+Validar a entrada humana antes de descobrir contexto.
+
+`intake` MUST classificar intenção, ambiguidade, risco, necessidade de aprovação e critério mínimo de sucesso quando o pedido não estiver claramente seguro.
 
 ### find
 Descobrir quais artefatos existem e quais são relevantes.
@@ -62,9 +67,14 @@ Escolher apenas os artefatos necessários para a tarefa.
 ### inject
 Carregar apenas o contexto mínimo necessário para execução confiável.
 
+### execute
+Executar a tarefa dentro dos limites definidos pelo intake e pelos artefatos injetados.
+
 Esse modelo é a forma oficial de injeção de dependências em Markdown.
 
 O agente MUST montar contexto por arquivos declarados e selecionados, não por leitura indiscriminada do repositório.
+
+`intake` MUST NOT ser usado como justificativa para carregar mais contexto antes de `find`.
 
 ---
 
@@ -78,6 +88,8 @@ prompt -> governance -> agent -> rules -> skills
 
 ### Interpretação
 
+Esta ordem se aplica depois que a tarefa estiver liberada para `find`.
+
 #### 1. prompt
 Define o ponto de entrada da tarefa.
 
@@ -88,7 +100,7 @@ Carrega a base estrutural padrão.
 Define o perfil executor.
 
 #### 4. rules
-Define restrições de output.
+Define restrições de output e regras de intake quando aplicável.
 
 #### 5. skills
 Adiciona conhecimento operacional especializado.
@@ -99,6 +111,7 @@ Adiciona conhecimento operacional especializado.
 
 `../../prompts/hooks/` MAY ser acionado em pontos específicos do fluxo para validar:
 
+- intenção, ambiguidade e risco do pedido humano antes de `find`
 - aderência a `governance/`
 - aderência a `rules/`
 - conformidade antes da conclusão
@@ -109,48 +122,65 @@ Adiciona conhecimento operacional especializado.
 
 ## Regras de seleção
 
-### 0. Índice raiz para discovery inicial
+### 0. Intake antes do discovery
+
+`../../prompts/hooks/validate-user-intent.md` MAY ser usado antes de `find` quando o pedido humano estiver vago, amplo, contraditório, arriscado ou sem critério mínimo de sucesso.
+
+O intake MUST terminar em uma das saídas:
+
+- `READY_TO_FIND`
+- `NEEDS_CLARIFICATION`
+- `NEEDS_APPROVAL`
+- `REFUSE_OR_REDIRECT`
+
+Somente `READY_TO_FIND` libera o fluxo normal de `find -> select -> inject -> execute`.
+
+Intake MUST NOT carregar `../../docs/`, `../../evals/` ou contexto especializado por hábito.
+
+### 1. Índice raiz para discovery inicial
 `../../INDEX.md` MAY ser consultado no início de uma tarefa quando o agente ainda não souber qual roteador usar.
 
 `../../INDEX.md` MUST ser descartado depois que o ponto de partida específico for escolhido.
 
 `../../INDEX.md` MUST NOT substituir `../../MANIFEST.md`, roteadores locais, rules, skills, agents ou prompts.
 
-### 1. Base padrão
+### 2. Base padrão
 `governance/` é a base padrão do ecossistema.
 
-### 2. Relevância antes de injeção
+### 3. Relevância antes de injeção
 Nenhum artefato SHOULD ser injetado sem relevância clara para a tarefa.
 
-### 3. Especialização sob demanda
+### 4. Especialização sob demanda
 `skills/` SHOULD ser carregado apenas quando a tarefa exigir capacidade especializada.
 
-### 4. Regras por tipo de output
+### 5. Regras por tipo de output ou intake
 `rules/` SHOULD ser selecionado conforme o tipo de saída esperada.
 
-### 5. Prompts como entrada
+`../../rules/quality/user-input-quality.md` SHOULD ser selecionado quando o intake precisar validar entrada humana.
+
+### 6. Prompts como entrada
 `prompts/` SHOULD iniciar a composição, e não substituir as fontes primárias das demais áreas.
 
-### 6. Dependências explícitas
+### 7. Dependências explícitas
 Prompts e agents MUST declarar quais tipos de artefatos precisam consumir.
 
 Skills MUST declarar quais rules ou governance afetam seu uso.
 
 Rules MUST declarar escopo e condição de aplicação.
 
-### 7. Documentação humana fora da composição padrão
+### 8. Documentação humana fora da composição padrão
 `../../docs/` MUST NOT ser injetado por padrão.
 
 `../../docs/` MAY ser consultado apenas quando a tarefa for explicitamente sobre documentação humana, integração ou orientação operacional.
 
 `../../LICENSE` MUST NOT ser tratado como contexto operacional.
 
-### 8. Validação fora da composição padrão
+### 9. Validação fora da composição padrão
 `../../evals/` MUST NOT ser injetado por padrão.
 
 `../../evals/` MAY ser consultado apenas quando a tarefa for explicitamente sobre validação, regressão, auditoria ou critério de aceite.
 
-### 9. Checkpoints obrigatórios por risco
+### 10. Checkpoints obrigatórios por risco
 Hooks continuam condicionais para tarefas comuns.
 
 Um checkpoint de validação MUST ser acionado quando a tarefa envolver:
@@ -183,6 +213,7 @@ Uma composição de contexto é aceitável quando:
 - cada artefato carregado tem motivo explícito
 - cada dependência crítica está declarada por caminho
 - nenhum artefato é carregado apenas por hábito
+- pedidos humanos ambíguos ou arriscados passam por intake antes de `find`
 - a ordem `prompt -> governance -> agent -> rules -> skills` é preservada
 - hooks são acionados apenas como checkpoints relevantes
 - `../../docs/`, `../../evals/` e `../../LICENSE` ficam fora da composição padrão

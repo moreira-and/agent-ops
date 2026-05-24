@@ -6,7 +6,7 @@ discovery
 
 ## Finalidade
 
-O diretório `rules/` define as normas e restrições que governam a saída produzida pelos agentes.
+O diretório `rules/` define as normas e restrições que governam a saída produzida pelos agentes e, quando aplicável, a qualidade da entrada humana antes da execução.
 
 `rules/` é a fonte primária para padrões de output.
 
@@ -18,6 +18,7 @@ Este diretório deve concentrar normas sobre:
 - modelagem
 - nomenclatura
 - qualidade
+- qualidade da entrada humana
 - guardrails de geração
 
 A norma de maior precedência continua sendo:
@@ -43,6 +44,7 @@ Consulte `rules/` quando precisar:
 - seguir convenções de naming
 - aplicar padrões de modelagem
 - validar qualidade obrigatória
+- validar se um pedido humano pode seguir para discovery
 - restringir comportamento de geração
 
 ---
@@ -69,13 +71,15 @@ Esses conteúdos pertencem, respectivamente, a:
 
 `rules/` MUST governar a saída produzida pelos agentes.
 
+`rules/` MAY governar a entrada humana quando isso reduzir ambiguidade, risco ou execução insegura.
+
 `rules/` MUST NOT governar a estrutura e a evolução do diretório `agent-ops`.
 
 ---
 
 ## Limites
 
-Este README roteia a seleção de normas de output.
+Este README roteia a seleção de normas de output e de entrada humana quando aplicável.
 
 Este README não substitui:
 

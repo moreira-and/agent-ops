@@ -28,9 +28,10 @@ Em caso de conflito, este indice perde para:
 ## Ordem de uso
 
 1. Ler este indice somente quando o ponto de partida ainda nao estiver claro.
-2. Escolher um roteador por caminho.
-3. Carregar apenas os artefatos necessarios.
-4. Descartar este indice quando o contexto especifico estiver escolhido.
+2. Se o pedido humano estiver vago ou arriscado, iniciar por intake.
+3. Escolher um roteador por caminho.
+4. Carregar apenas os artefatos necessarios.
+5. Descartar este indice quando o contexto especifico estiver escolhido.
 
 ---
 
@@ -48,6 +49,7 @@ Em caso de conflito, este indice perde para:
 |---|---|
 | resolver conflito estrutural | `./MANIFEST.md` |
 | entender uso humano geral | `./README.md` |
+| validar pedido humano vago ou arriscado | `./prompts/hooks/validate-user-intent.md` |
 | compor contexto | `./governance/composition/context-composition.md` |
 | escolher agente | `./agents/README.md` |
 | escolher rule | `./rules/README.md` |

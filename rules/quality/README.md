@@ -6,7 +6,7 @@ discovery
 
 ## Finalidade
 
-O diretório `quality/` define critérios normativos de qualidade para a saída produzida pelos agentes.
+O diretório `quality/` define critérios normativos de qualidade para a saída produzida pelos agentes e para entradas humanas que precisam de triagem antes de execução.
 
 Este diretório é a fonte primária para qualidade de output.
 
@@ -28,6 +28,7 @@ A norma de maior precedência continua sendo:
 Consulte `quality/` quando precisar:
 
 - validar se uma saída está aceitável
+- avaliar se um pedido humano está claro, seguro e acionável
 - reforçar completude e consistência
 - revisar risco de ambiguidade
 - impor critérios mínimos de qualidade de entrega
@@ -54,15 +55,16 @@ Consulte, respectivamente:
 
 ---
 
-## Arquivo primário
+## Arquivos
 
 - `./quality-rules.md`
+- `./user-input-quality.md`
 
 ---
 
 ## Responsabilidade desta pasta
 
-`quality/` MUST definir critérios normativos de qualidade da saída.
+`quality/` MUST definir critérios normativos de qualidade da saída e da entrada humana quando aplicável.
 
 `quality/` MUST NOT substituir governança estrutural nem padrões especializados de outras áreas.
 
@@ -70,9 +72,9 @@ Consulte, respectivamente:
 
 ## Limites
 
-Este README roteia critérios de qualidade de output.
+Este README roteia critérios de qualidade.
 
-Este README não substitui `./quality-rules.md`.
+Este README não substitui `./quality-rules.md` nem `./user-input-quality.md`.
 
 ## Status v0.1
 

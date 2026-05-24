@@ -28,6 +28,7 @@ A norma de maior precedência continua sendo:
 Consulte `orchestration/` quando precisar:
 
 - estruturar execução em etapas
+- aplicar triagem de intake antes de discovery
 - organizar dependências entre fluxos
 - desenhar encadeamento operacional
 - revisar clareza da coordenação entre componentes
@@ -52,9 +53,10 @@ Consulte, respectivamente:
 
 ---
 
-## Arquivo primário
+## Arquivos
 
 - `./orchestration-design.md`
+- `./intake-governance.md`
 
 ---
 
@@ -70,7 +72,7 @@ Consulte, respectivamente:
 
 Este README roteia skills de orquestração.
 
-Este README não substitui `./orchestration-design.md`.
+Este README não substitui `./orchestration-design.md` nem `./intake-governance.md`.
 
 ## Status v0.1
 

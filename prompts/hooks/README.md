@@ -29,6 +29,7 @@ Consulte `hooks/` quando precisar:
 
 - validar aderência a `governance/`
 - validar aderência a `rules/`
+- validar intenção, ambiguidade e risco do pedido humano antes de discovery
 - revisar conformidade antes de concluir
 - aplicar checkpoint de controle em geração ou revisão
 
@@ -61,6 +62,7 @@ Consulte, respectivamente:
 ## Hooks disponíveis
 
 - `./validate-context-and-output.md`
+- `./validate-user-intent.md`
 - `./validate-semantic-naming-conformance.md`
 - `./validate-growth-proposal.md`
 - `./validate-operational-safety.md`
@@ -89,10 +91,11 @@ Este README não substitui hooks específicos deste diretório.
 flowchart TD
     current["prompts/hooks/"]
     current --> n1["validate-context-and-output.md"]
-    current --> n2["validate-growth-proposal.md"]
-    current --> n3["validate-operational-safety.md"]
-    current --> n4["validate-semantic-naming-conformance.md"]
-    current -. "governado por" .-> n5["../../MANIFEST.md"]
+    current --> n2["validate-user-intent.md"]
+    current --> n3["validate-growth-proposal.md"]
+    current --> n4["validate-operational-safety.md"]
+    current --> n5["validate-semantic-naming-conformance.md"]
+    current -. "governado por" .-> n6["../../MANIFEST.md"]
 ```
 
 ## Status v0.1

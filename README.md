@@ -15,7 +15,7 @@ O projeto nao e uma pasta de prompts. Ele e uma camada leve de governanca para s
 O modelo oficial e:
 
 ```txt
-find -> select -> inject
+intake -> find -> select -> inject -> execute
 ```
 
 A fonte normativa de maior precedencia e:
@@ -36,12 +36,14 @@ Para descoberta inicial barata por LLM, use:
 flowchart TD
     manifest["MANIFEST.md"] --> index["INDEX.md"]
     manifest --> governance["governance/"]
+    index -. "intake quando pedido e vago ou arriscado" .-> intake["validate-user-intent"]
     index -. "descoberta barata" .-> prompts["prompts/"]
     governance --> prompts
     prompts --> agents["agents/"]
     prompts --> rules["rules/"]
     prompts --> skills["skills/"]
     prompts --> hooks["prompts/hooks/"]
+    hooks --> intake
     docs["docs/"] -. "humano; fora do contexto padrao" .-> index
     evals["evals/"] -. "validacao; fora do contexto padrao" .-> index
 ```
@@ -68,6 +70,12 @@ Este repositorio governa contexto e comportamento esperado. Ele nao substitui pl
 Use apenas o contexto necessario.
 
 O agente deve descobrir artefatos, selecionar os relevantes e injetar o minimo suficiente para executar com seguranca.
+
+```txt
+intake -> find -> select -> inject -> execute
+```
+
+Depois que o intake libera a tarefa, a composicao de contexto segue:
 
 ```txt
 prompt -> governance -> agent -> rules -> skills
@@ -104,7 +112,7 @@ agent-ops/
 | `INDEX.md` | Roteia descoberta inicial barata para LLM. | Quando o ponto de partida ainda nao estiver claro. |
 | `governance/` | Governa estrutura, composicao, autoria, qualidade e lifecycle do proprio `agent-ops`. | Quando for criar, alterar, mover, dividir ou validar artefatos do repositorio. |
 | `agents/` | Define perfis executores com missao, escopo, limites e dependencias. | Quando precisar escolher quem executa uma tarefa. |
-| `rules/` | Define normas de output, guardrails e restricoes de comportamento. | Quando precisar validar ou limitar a saida do agente. |
+| `rules/` | Define normas de output, qualidade de entrada humana, guardrails e restricoes de comportamento. | Quando precisar validar ou limitar entrada, saida ou risco do agente. |
 | `skills/` | Define procedimentos e conhecimento operacional reutilizavel. | Quando a tarefa exigir tecnica especializada. |
 | `prompts/` | Define pontos de entrada para tarefas e fluxos. | Quando houver uma solicitacao concreta a executar. |
 | `prompts/hooks/` | Define checkpoints de validacao. | Quando houver risco, conclusao, conformidade ou gate de revisao. |
@@ -114,6 +122,20 @@ agent-ops/
 ---
 
 ## Workflows principais
+
+### 0. Validar entrada humana
+
+Use quando o pedido estiver vago, amplo, contraditorio, arriscado ou sem criterio minimo de sucesso.
+
+```txt
+prompts/hooks/validate-user-intent.md
+-> rules/quality/user-input-quality.md
+-> skills/orchestration/intake-governance.md
+```
+
+Saida esperada: `READY_TO_FIND`, `NEEDS_CLARIFICATION`, `NEEDS_APPROVAL` ou `REFUSE_OR_REDIRECT`.
+
+Somente `READY_TO_FIND` libera `find -> select -> inject -> execute`.
 
 ### 1. Descobrir contexto
 
@@ -175,6 +197,7 @@ Use antes de concluir, aprovar, aplicar grow ou executar tarefa de risco.
 
 ```txt
 prompts/hooks/validate-context-and-output.md
+prompts/hooks/validate-user-intent.md
 prompts/hooks/validate-growth-proposal.md
 prompts/hooks/validate-operational-safety.md
 prompts/hooks/validate-semantic-naming-conformance.md
@@ -217,7 +240,7 @@ Nesta versao:
 - tarefas ficam em `prompts/`
 - workflows sao composicoes de `prompts/`, `skills/` e `prompts/hooks/`
 - politicas estruturais ficam em `governance/`
-- guardrails e restricoes de output ficam em `rules/`
+- guardrails, qualidade de entrada humana e restricoes de output ficam em `rules/`
 
 ---
 
@@ -229,6 +252,7 @@ Nesta versao:
 - Conteudo duplicado deve ser extraido para fonte primaria.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - O agente deve sinalizar lacunas antes de inventar contexto.
+- Pedidos ambiguos ou arriscados passam por intake antes de discovery.
 - Operacoes de alto risco exigem guardrail operacional e checkpoint.
 
 ---
@@ -249,9 +273,10 @@ Em caso de conflito:
 
 Ao consumir este repositorio, o agente deve:
 
-- preservar `find -> select -> inject`
+- preservar `intake -> find -> select -> inject -> execute`
 - evitar leitura indiscriminada
 - escolher contexto minimo suficiente
+- validar intencao humana antes de agir quando houver ambiguidade ou risco
 - respeitar fonte primaria
 - aplicar guardrails em situacoes criticas
 - validar antes de concluir quando houver risco
