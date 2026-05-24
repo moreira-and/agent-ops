@@ -1,5 +1,8 @@
 # stable-preferences
 
+Artifact ID: memory.stable-preferences
+Kind: governed-memory
+
 ## Tipo do artefato
 
 governed memory

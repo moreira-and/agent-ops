@@ -1,5 +1,8 @@
 # _memory
 
+Artifact ID: memory.root
+Kind: governed-memory / discovery
+
 ## Tipo do artefato
 
 discovery / governed memory

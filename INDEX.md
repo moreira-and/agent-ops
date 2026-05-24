@@ -1,5 +1,8 @@
 # INDEX
 
+Artifact ID: root.index
+Kind: discovery / llm-index
+
 ## Tipo do artefato
 
 discovery / llm-index
@@ -51,6 +54,8 @@ Em caso de conflito, este indice perde para:
 | entender uso humano geral | `./README.md` |
 | validar pedido humano vago ou arriscado | `./prompts/hooks/validate-user-intent.md` |
 | consultar memoria governada sob demanda | `./_memory/README.md` |
+| sincronizar artefatos apos mudanca | `./governance/lifecycle/artifact-synchronization-policy.md` |
+| consultar sync targets | `./governance/authoring/artifact-registry.md` |
 | compor contexto | `./governance/composition/context-composition.md` |
 | escolher agente | `./agents/README.md` |
 | escolher rule | `./rules/README.md` |

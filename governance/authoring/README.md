@@ -30,6 +30,7 @@ Consulte `authoring/` quando precisar:
 - criar novo arquivo `.md`
 - revisar estrutura de um arquivo existente
 - padronizar seções e linguagem
+- consultar registry leve de artefatos criticos
 - melhorar legibilidade para humanos e agentes
 - declarar dependências e limites de forma correta
 
@@ -53,15 +54,18 @@ Consulte, respectivamente:
 
 ---
 
-## Arquivo primário
+## Arquivos
 
 - `./markdown-authoring-standard.md`
+- `./artifact-registry.md`
 
 ---
 
 ## Responsabilidade desta pasta
 
 `authoring/` MUST definir como escrever artefatos.
+
+`authoring/` MAY manter registry leve para sync targets de artefatos criticos.
 
 `authoring/` MUST NOT definir regras primárias de composição, lifecycle ou qualidade.
 
@@ -71,7 +75,7 @@ Consulte, respectivamente:
 
 Este README roteia padrões de autoria.
 
-Este README não substitui `./markdown-authoring-standard.md`.
+Este README não substitui `./markdown-authoring-standard.md` nem `./artifact-registry.md`.
 
 ## Status v0.1
 

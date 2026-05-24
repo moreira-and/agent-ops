@@ -1,5 +1,8 @@
 # artifact-lifecycle-policy
 
+Artifact ID: governance.artifact-lifecycle-policy
+Kind: governance
+
 ## Tipo do artefato
 
 governance
@@ -103,7 +106,7 @@ Quando conteúdo equivalente surgir em múltiplos arquivos:
 
 ## Regras de extensão plugável
 
-A evolução do `agent-ops` MUST preservar o padrão `find -> select -> inject`.
+A evolução do `agent-ops` MUST preservar o padrão `intake -> find -> select -> inject -> execute`.
 
 Ao adicionar novo conhecimento:
 
@@ -114,6 +117,8 @@ Ao adicionar novo conhecimento:
 - evite reescrever arquivos centrais sem necessidade
 
 A capacidade de crescimento só é válida quando novos artefatos podem ser selecionados e injetados de forma independente.
+
+Mudancas relevantes SHOULD classificar impacto conforme `./artifact-synchronization-policy.md`.
 
 ### Critério para `grow`
 

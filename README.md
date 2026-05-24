@@ -1,5 +1,8 @@
 # agent-ops
 
+Artifact ID: root.readme
+Kind: readme / discovery
+
 ## Tipo do artefato
 
 readme / discovery
@@ -233,6 +236,18 @@ evals/manual-regression-suite.md
 
 `evals/` valida comportamento; nao cria norma primaria.
 
+### 8. Sincronizar artefatos
+
+Use depois de criar, mover, renomear ou alterar contrato de artefato critico.
+
+```txt
+governance/lifecycle/artifact-synchronization-policy.md
+-> governance/authoring/artifact-registry.md
+-> sync targets aplicaveis
+```
+
+Saida esperada: classe de impacto, arquivos revisados e lacunas de sincronizacao.
+
 ---
 
 ## Diretórios nao oficiais na v0.1
@@ -254,6 +269,7 @@ Nesta versao:
 - Cada arquivo deve ter responsabilidade principal clara.
 - Dependencias devem ser referenciadas por caminho.
 - Conteudo duplicado deve ser extraido para fonte primaria.
+- Mudancas relevantes devem classificar impacto e revisar sync targets.
 - `docs/` e `evals/` nao devem ser carregados por padrao.
 - `_memory/` nao deve ser carregado por padrao nem tratado como fonte normativa.
 - O agente deve sinalizar lacunas antes de inventar contexto.

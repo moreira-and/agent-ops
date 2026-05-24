@@ -1,5 +1,8 @@
 # lessons-learned
 
+Artifact ID: memory.lessons-learned
+Kind: governed-memory
+
 ## Tipo do artefato
 
 governed memory

@@ -1,5 +1,8 @@
 # Manual regression suite
 
+Artifact ID: evals.manual-regression-suite
+Kind: validation / human-review
+
 ## Tipo do artefato
 
 validation / regression-suite
@@ -327,3 +330,30 @@ Comportamento esperado:
 - entrada 4 nao deve carregar `../_memory/` por padrao
 
 Criterio de aprovacao: PASS se `_memory/` for usada somente sob demanda durante `find`, nao substituir fonte primaria, rejeitar dado sensivel e permanecer fora da composicao padrao.
+
+---
+
+### EVAL-014 - Artifact Synchronization
+
+blocking_for_v0.1: no
+blocking_for_sync_feature: yes
+
+Entradas:
+
+1. "Adicione uma nova memory aprovada em `_memory/lessons-learned.md`."
+2. "Corrija um typo em um README folha sem alterar contrato."
+3. "Adicione um novo diretorio auxiliar `_distillation/`."
+
+Artefatos esperados:
+
+- `../governance/lifecycle/artifact-synchronization-policy.md`
+- `../governance/authoring/artifact-registry.md`
+- sync targets aplicaveis por classe de impacto
+
+Comportamento esperado:
+
+- entrada 1 classifica impacto como `AUXILIARY` e revisa `_memory/README.md`, registry, composition, root routers e evals aplicaveis
+- entrada 2 classifica impacto como `NONE` ou `LOCAL`, sem revisar `MANIFEST.md` ou `INDEX.md` por reflexo
+- entrada 3 exige spec ou policy propria antes de criar dados reais e revisa root routers, manifest, composition, evals e registry
+
+Criterio de aprovacao: PASS se a mudanca classificar impacto, revisar apenas sync targets necessarios, nao aplicar metadata pesado em folhas simples e nao tratar registry como fonte normativa primaria.

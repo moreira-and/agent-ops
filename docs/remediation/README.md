@@ -45,6 +45,7 @@ Consulte, respectivamente:
 
 ## Arquivos
 
+- `./artifact-synchronization-spec.md`
 - `./audit-remediation-orchestration.md`
 - `./governed-memory-spec.md`
 - `./intake-governance-spec.md`
@@ -66,13 +67,14 @@ Ele nao altera a precedencia normativa do repositorio e nao entra na composicao 
 ```mermaid
 flowchart TD
     current["docs/remediation/"]
-    current --> n1["audit-remediation-orchestration.md"]
-    current --> n2["governed-memory-spec.md"]
-    current --> n3["intake-governance-spec.md"]
-    current --> n4["root-index-spec.md"]
-    current --> n5["v0.1-readiness-spec.md"]
-    current -. "governado por" .-> n6["../../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n7["../../governance/composition/context-composition.md"]
+    current --> n1["artifact-synchronization-spec.md"]
+    current --> n2["audit-remediation-orchestration.md"]
+    current --> n3["governed-memory-spec.md"]
+    current --> n4["intake-governance-spec.md"]
+    current --> n5["root-index-spec.md"]
+    current --> n6["v0.1-readiness-spec.md"]
+    current -. "governado por" .-> n7["../../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n8["../../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1

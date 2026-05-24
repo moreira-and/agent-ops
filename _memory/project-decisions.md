@@ -1,5 +1,8 @@
 # project-decisions
 
+Artifact ID: memory.project-decisions
+Kind: governed-memory
+
 ## Tipo do artefato
 
 governed memory

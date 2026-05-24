@@ -1,5 +1,8 @@
 # MANIFEST.md
 
+Artifact ID: root.manifest
+Kind: manifest
+
 ## Tipo do artefato
 
 manifest
@@ -283,6 +286,10 @@ Define regras sobre estrutura, evolução, composição, autoria, qualidade e li
 
 `governance/` MUST NOT definir regra técnica primária de saída.
 
+`governance/authoring/artifact-registry.md` MAY registrar artefatos criticos e sync targets.
+
+`governance/lifecycle/artifact-synchronization-policy.md` MUST orientar sincronizacao por impacto quando uma mudanca puder afetar roteadores, contratos, evals ou diretorios auxiliares.
+
 ### 7.5 `agents/`
 Define perfis de agentes, seu escopo, limites, forma de atuação e dependências contextuais.
 
@@ -562,6 +569,8 @@ São proibidos:
 - contexto especializado sempre carregado sem critério
 - memory carregada por padrão
 - memory tratada como fonte normativa
+- metadata pesado aplicado em massa
+- registry tratado como fonte normativa primaria
 - dependência contextual implícita
 - acoplamento forte entre artefatos `.md`
 - leitura indiscriminada do repositório como estratégia padrão

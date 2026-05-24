@@ -1,5 +1,8 @@
 # context-composition
 
+Artifact ID: governance.context-composition
+Kind: governance
+
 ## Tipo do artefato
 
 governance

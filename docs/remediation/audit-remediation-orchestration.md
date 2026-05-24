@@ -58,6 +58,7 @@ implementacao do especialista
 | 13 | ORQ-13 | Root index | Criar `INDEX.md` como roteador barato para discovery por LLM | Context engineer | `INDEX.md`, `README.md`, `MANIFEST.md`, `governance/composition/`, `evals/` | PASS |
 | 14 | ORQ-14 | Intake Governance | Criar camada barata de triagem antes de discovery | PromptOps / Governanca | `rules/quality/`, `prompts/hooks/`, `skills/orchestration/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
 | 15 | ORQ-15 | Governed Memory | Criar `_memory/` como memoria governada auxiliar e seletiva | Governanca / Context engineer | `_memory/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `governance/composition/`, `evals/` | PASS |
+| 16 | ORQ-16 | Artifact Synchronization | Criar registry e policy leve de sync targets | Governanca / Lifecycle | `governance/authoring/`, `governance/lifecycle/`, `MANIFEST.md`, `README.md`, `INDEX.md`, `evals/` | PASS |
 
 ## Registro de passagem por gates
 
@@ -80,6 +81,7 @@ Use esta tabela para controlar a execucao. Cada celula deve receber `PENDING`, `
 | ORQ-13 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-14 | PASS | PASS | PASS | PASS | PASS | PASS |
 | ORQ-15 | PASS | PASS | PASS | PASS | PASS | PASS |
+| ORQ-16 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Contrato de registro por item
 
@@ -143,6 +145,20 @@ Decisao: PASS
 Proxima etapa: Revisar memories em 2026-08-24 ou quando fonte primaria mudar.
 ```
 
+```txt
+ID: ORQ-16
+Etapa atual: Atualizacao das documentacoes
+Responsavel: Orquestrador / Governanca de lifecycle
+Escopo: Implementar Artifact Synchronization com registry central leve e policy de impacto.
+Arquivos avaliados: docs/remediation/artifact-synchronization-spec.md, governance/authoring/README.md, governance/lifecycle/README.md, MANIFEST.md, README.md, INDEX.md, evals/manual-regression-suite.md
+Arquivos alterados: governance/authoring/artifact-registry.md, governance/lifecycle/artifact-synchronization-policy.md, governance/authoring/README.md, governance/lifecycle/README.md, governance/lifecycle/artifact-lifecycle-policy.md, MANIFEST.md, README.md, INDEX.md, evals/manual-regression-suite.md, evals/artifact-synchronization-results.md, evals/README.md
+Evidencia: registry criado com sync targets; policy criada com classes de impacto; EVAL-014 registrado com PASS.
+Riscos: registry virar catalogo total ou metadata inline virar custo recorrente.
+Pendencias: Nenhuma bloqueante.
+Decisao: PASS
+Proxima etapa: Revisar registry trimestralmente e quando artefato critico mudar.
+```
+
 ## Registro consolidado desta execucao
 
 ### Itens aprovados
@@ -160,6 +176,7 @@ Proxima etapa: Revisar memories em 2026-08-24 ou quando fonte primaria mudar.
 - ORQ-13: criado `../../INDEX.md` como roteador barato de discovery inicial por LLM e registrado em manifesto, composicao e evals.
 - ORQ-14: criado Intake Governance com `../../rules/quality/user-input-quality.md`, `../../prompts/hooks/validate-user-intent.md` e `../../skills/orchestration/intake-governance.md`.
 - ORQ-15: criado `../../_memory/` como memoria governada auxiliar, seletiva e fora da composicao padrao.
+- ORQ-16: criado `../../governance/authoring/artifact-registry.md` e `../../governance/lifecycle/artifact-synchronization-policy.md`.
 
 ### Itens fechados nesta execucao
 

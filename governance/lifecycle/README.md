@@ -31,6 +31,7 @@ Consulte `lifecycle/` quando precisar:
 - dividir um artefato
 - consolidar conteúdo
 - mover ou remover arquivos
+- classificar impacto de mudança e revisar sync targets
 - controlar crescimento do repositório
 
 ---
@@ -53,15 +54,18 @@ Consulte, respectivamente:
 
 ---
 
-## Arquivo primário
+## Arquivos
 
 - `./artifact-lifecycle-policy.md`
+- `./artifact-synchronization-policy.md`
 
 ---
 
 ## Responsabilidade desta pasta
 
 `lifecycle/` MUST governar a evolução dos artefatos.
+
+`lifecycle/` MUST definir como sincronizar artefatos impactados por mudanças relevantes.
 
 `lifecycle/` MUST NOT duplicar padrão de autoria, composição ou qualidade.
 
@@ -71,7 +75,7 @@ Consulte, respectivamente:
 
 Este README roteia política de lifecycle.
 
-Este README não substitui `./artifact-lifecycle-policy.md`.
+Este README não substitui `./artifact-lifecycle-policy.md` nem `./artifact-synchronization-policy.md`.
 
 ## Status v0.1
 

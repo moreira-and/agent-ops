@@ -84,6 +84,7 @@ Acao recomendada:
 - `./index-feature-results.md`
 - `./intake-governance-results.md`
 - `./governed-memory-results.md`
+- `./artifact-synchronization-results.md`
 - `./manual-regression-suite.md`
 - `./v0.1-manual-results.md`
 
@@ -105,10 +106,11 @@ flowchart TD
     current --> n1["index-feature-results.md"]
     current --> n2["intake-governance-results.md"]
     current --> n3["governed-memory-results.md"]
-    current --> n4["manual-regression-suite.md"]
-    current --> n5["v0.1-manual-results.md"]
-    current -. "governado por" .-> n6["../MANIFEST.md"]
-    current -. "fora da composicao padrao" .-> n7["../governance/composition/context-composition.md"]
+    current --> n4["artifact-synchronization-results.md"]
+    current --> n5["manual-regression-suite.md"]
+    current --> n6["v0.1-manual-results.md"]
+    current -. "governado por" .-> n7["../MANIFEST.md"]
+    current -. "fora da composicao padrao" .-> n8["../governance/composition/context-composition.md"]
 ```
 
 ## Status v0.1
